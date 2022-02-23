@@ -22,12 +22,12 @@ import com.example.wordle.wordsList2
 /**
  * This is the game screen of the Wordle app
  */
-class GameFragment : Fragment(R.layout.fragment_game) {
+class GameFragment : Fragment() {
 
     // Binding object instance corresponding to the game_fragment.xml layout
     private var binding: FragmentGameBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,34 +46,17 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = gameViewModel
             // Assign the fragment
             gameFragment = this@GameFragment
         }
     }
 
-    // handles logic for text input and backspaces
-    fun setText(char: Char) {
-        Log.d("GameFragment", "setText(${char}) called")
-        //viewModel.updateLetters(char)
-        //Log.d("GameFragment", "textView1A.text = ${binding!!.textView1A.text}")
 
-    if (char == ' ' && viewModel.currentTile.value!! % 6 != 1) {
-            viewModel.lastTile()
-            viewModel.updateCurrentWord(char)
-            type(char)
-        } else if (char != ' ' && viewModel.currentTile.value!! % 6 != 0) {
-            viewModel.updateCurrentWord(char)
-            type(char)
-            viewModel.nextTile()
-        } else {
-            Log.d("setText", "nothing happened")
-        }
-    }
 
     // retrieves the MotionLayout corresponding to the currently active row
     private fun getRow(): MotionLayout {
-        return binding!!.gameLayout[viewModel.tries.value!! + 1] as MotionLayout
+        return binding!!.gameLayout[gameViewModel.tries.value!! + 1] as MotionLayout
     }
 
     // retrieves the TextView corresponding to the index value passed in
@@ -84,9 +67,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     // inputs text into textView when called by setText()
     private fun type(char: Char) {
         Log.d("GameFragment", "type($char) called")
-        binding!!.textView1A.text = viewModel.letters.value
-        //val tile = getTile(viewModel.currentTile.value!!.rem(6) - 1)
-        //tile.text = char.toString()
+        val tile = getTile(gameViewModel.currentTile.value!!.rem(6) - 1)
+        tile.text = char.toString()
     }
 
     private fun disableButtons() {
@@ -99,11 +81,30 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         binding!!.deleteButton.isEnabled = true
     }
 
+    // handles logic for text input and backspaces
+    fun setText(char: Char) {
+        Log.d("GameFragment", "setText(${char}) called")
+        gameViewModel.updateLetters(char)
+        Log.d("GameFragment", "textView1A.text = ${binding!!.textView1A.text}")
+        /*
+        if (char == ' ' && gameViewModel.currentTile.value!! % 6 != 1) {
+                gameViewModel.lastTile()
+                gameViewModel.updateCurrentWord(char)
+                type(char)
+            } else if (char != ' ' && gameViewModel.currentTile.value!! % 6 != 0) {
+                gameViewModel.updateCurrentWord(char)
+                type(char)
+                gameViewModel.nextTile()
+            } else {
+                Log.d("setText", "nothing happened")
+            }*/
+    }
+
     // checks if the word is a valid word from the list
     fun isAWord() {
         Log.d("GameFragment", "isAWord() called")
         disableButtons()
-        val str = viewModel.currentWord.value
+        val str = gameViewModel.currentWord.value
         if (str?.length == 5) {
             if (str in wordsList1 || str in wordsList2) {
                 isLetterCorrect(str)
@@ -122,8 +123,8 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         val colors = mutableListOf<Int>()
         for (i in (0..4)) {
             when {
-                str[i] == viewModel.answer.value!![i] -> colors.add(R.color.green)
-                str[i] in viewModel.answer.value!! -> colors.add(R.color.yellow)
+                str[i] == gameViewModel.answer.value!![i] -> colors.add(R.color.green)
+                str[i] in gameViewModel.answer.value!! -> colors.add(R.color.yellow)
                 else -> colors.add(R.color.darkGray)
             }
         }
@@ -134,10 +135,10 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     private fun isCorrect(str: String) {
         Log.d("GameFragment", "isCorrect called")
         when {
-            str == viewModel.answer.value -> winner()
-            viewModel.tries.value!! >= 5 -> gameOver()
+            str == gameViewModel.answer.value -> winner()
+            gameViewModel.tries.value!! >= 5 -> gameOver()
             else -> {
-                viewModel.nextRow()
+                gameViewModel.nextRow()
                 enableButtons()
             }
         }

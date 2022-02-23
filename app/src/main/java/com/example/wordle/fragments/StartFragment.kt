@@ -15,12 +15,12 @@ import com.example.wordle.model.GameViewModel
 /**
  * This is the first screen of the Wordle app.
  */
-class StartFragment : Fragment(R.layout.fragment_start) {
+class StartFragment : Fragment() {
 
     // Binding object instance corresponding to the start_fragment.xml layout
     private var binding: FragmentStartBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = gameViewModel
 
             // Assign the fragment
             startFragment = this@StartFragment
@@ -52,7 +52,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
     fun newGame() {
         Log.d("StartFragment", "newGame() called")
         // Start a new game
-        viewModel.newGame()
+        gameViewModel.newGame()
 
         // Navigate to the game screen
         findNavController().navigate(R.id.action_startFragment_to_gameFragment)

@@ -42,8 +42,8 @@
 
             <TextView
                 android:id="@+id/textView_1A"
-                android:text="@{viewModel.currentWord}"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:text="@{viewModel.letters}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -314,7 +314,7 @@
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> gameFragment.setText('Q')}"
+            android:onClick="@{() -> viewModel.updateLetters('Q')}"
             android:text="@string/q"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
             app:layout_constraintHorizontal_chainStyle="packed"

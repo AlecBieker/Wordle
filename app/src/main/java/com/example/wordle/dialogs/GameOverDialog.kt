@@ -12,7 +12,7 @@ import com.example.wordle.R
 import com.example.wordle.databinding.DialogGameOverBinding
 import com.example.wordle.model.GameViewModel
 
-class GameOverDialog : DialogFragment(R.layout.dialog_game_over) {
+class GameOverDialog : DialogFragment() {
 
     // Binding object instance corresponding to the start_fragment.xml layout
     private var binding: DialogGameOverBinding? = null

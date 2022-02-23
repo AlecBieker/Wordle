@@ -12,7 +12,7 @@ import com.example.wordle.R
 import com.example.wordle.databinding.DialogWinnerBinding
 import com.example.wordle.model.GameViewModel
 
-class WinnerDialog : DialogFragment(R.layout.dialog_winner) {
+class WinnerDialog : DialogFragment() {
 
     // Binding object instance corresponding to the start_fragment.xml layout
     private var binding: DialogWinnerBinding? = null

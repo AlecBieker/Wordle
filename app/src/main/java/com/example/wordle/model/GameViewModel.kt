@@ -11,7 +11,6 @@ class GameViewModel : ViewModel() {
 
     private val _letters = MutableLiveData<String>()
     val letters: LiveData<String> = _letters
-
     // Generated word to be guessed
     private val _answer = MutableLiveData<String>()
     val answer: LiveData<String> = _answer
@@ -31,18 +30,20 @@ class GameViewModel : ViewModel() {
     // resets all game parameters to the default values
     fun newGame() {
         Log.d("GameViewModel", "newGame() called")
-        _letters.value = "H"
         _answer.value = generate()
         _currentWord.value = ""
         _currentTile.value = 1
         _tries.value = 0
+        _letters.value = "H"
     }
 
-    // updates the letters variable
     fun updateLetters(char: Char) {
         Log.d("GameViewModel", "updateLetters($char) called")
-        if (char == ' ') letters.value?.dropLast(1)
-        else _letters.value += char.toString()
+        if (char == ' ') {
+            _letters.value?.dropLast(1)
+        } else {
+            _letters.value += char.toString()
+        }
         Log.d("GameViewModel", "_letters.value = ${_letters.value}")
     }
 
