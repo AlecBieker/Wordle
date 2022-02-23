@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.wordle.fragments.StartFragment"
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.wordle.fragments.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/fragment_game">
+        <action
+            android:id="@+id/action_gameFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_gameFragment_to_gameOverDialog"
+            app:destination="@id/gameOverDialog" />
+        <action
+            android:id="@+id/action_gameFragment_to_winnerDialog"
+            app:destination="@id/winnerDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/gameOverDialog"
+        android:name="com.example.wordle.dialogs.GameOverDialog"
+        android:label="GameOverDialog"
+        tools:layout="@layout/dialog_game_over">
+        <action
+            android:id="@+id/action_gameOverDialog_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_gameOverDialog_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/winnerDialog"
+        android:name="com.example.wordle.dialogs.WinnerDialog"
+        android:label="WinnerDialog"
+        tools:layout="@layout/dialog_winner">
+        <action
+            android:id="@+id/action_winnerDialog_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_winnerDialog_to_startFragment"
+            app:destination="@id/startFragment" />
+    </dialog>
+</navigation>

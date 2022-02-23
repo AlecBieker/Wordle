@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default colors-->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <!-- wordle tones -->
+    <color name="color_tone_1">#1a1a1b</color>
+    <color name="color_tone_2">#787c7e</color>
+    <color name="color_tone_3">#878a8c</color>
+    <color name="color_tone_4">#bababa</color>
+    <color name="color_tone_5">#edeff1</color>
+    <color name="color_tone_6">#f6f7f8</color>
+    <color name="color_tone_7">#ffffff</color>
+
+    <!-- Wordle colors-->
+    <color name="green">#538d4e</color>
+    <color name="yellow">#b59f3b</color>
+    <color name="lightGray">#d8d8d8</color>
+    <color name="gray">#939598</color>
+    <color name="darkGray">#86888a</color>
+</resources>

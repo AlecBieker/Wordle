@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.GameFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.wordle.model.GameViewModel" />
+
+        <variable
+            name="gameFragment"
+            type="com.example.wordle.fragments.GameFragment" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/wordle_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/wordle_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_1"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            android:layout_marginTop="32dp"
+            app:layoutDescription="@xml/row_1_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/wordle_textView">
+
+            <TextView
+                android:id="@+id/textView_1A"
+                android:text="@{viewModel.currentWord}"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_1B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_1B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_1C"
+                app:layout_constraintStart_toEndOf="@id/textView_1A" />
+
+            <TextView
+                android:id="@+id/textView_1C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_1D"
+                app:layout_constraintStart_toEndOf="@id/textView_1B" />
+
+            <TextView
+                android:id="@+id/textView_1D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_1E"
+                app:layout_constraintStart_toEndOf="@id/textView_1C" />
+
+            <TextView
+                android:id="@+id/textView_1E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_1D" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_2"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            app:layoutDescription="@xml/row_2_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_1">
+
+            <TextView
+                android:id="@+id/textView_2A"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_2B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_2B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_2C"
+                app:layout_constraintStart_toEndOf="@id/textView_2A" />
+
+            <TextView
+                android:id="@+id/textView_2C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_2D"
+                app:layout_constraintStart_toEndOf="@id/textView_2B" />
+
+            <TextView
+                android:id="@+id/textView_2D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_2E"
+                app:layout_constraintStart_toEndOf="@id/textView_2C"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_2E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_2D"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_3"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            app:layoutDescription="@xml/row_3_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_2">
+
+            <TextView
+                android:id="@+id/textView_3A"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_3B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_3B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_3C"
+                app:layout_constraintStart_toEndOf="@id/textView_3A"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_3C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_3D"
+                app:layout_constraintStart_toEndOf="@id/textView_3B"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_3D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_3E"
+                app:layout_constraintStart_toEndOf="@id/textView_3C" />
+
+            <TextView
+                android:id="@+id/textView_3E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_3D" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_4"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            app:layoutDescription="@xml/row_4_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_3">
+
+            <TextView
+                android:id="@+id/textView_4A"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_4B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_4B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_4C"
+                app:layout_constraintStart_toEndOf="@id/textView_4A"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_4C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_4D"
+                app:layout_constraintStart_toEndOf="@id/textView_4B"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_4D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_4E"
+                app:layout_constraintStart_toEndOf="@id/textView_4C" />
+
+            <TextView
+                android:id="@+id/textView_4E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_4D" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_5"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            app:layoutDescription="@xml/row_5_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_4">
+
+            <TextView
+                android:id="@+id/textView_5A"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_5B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_5B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_5C"
+                app:layout_constraintStart_toEndOf="@id/textView_5A"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_5C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_5D"
+                app:layout_constraintStart_toEndOf="@id/textView_5B"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_5D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/textView_5E"
+                app:layout_constraintStart_toEndOf="@id/textView_5C" />
+
+            <TextView
+                android:id="@+id/textView_5E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_5D"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/row_6"
+            style="@style/Widget.Wordle.MotionLayout.Row"
+            app:layoutDescription="@xml/row_6_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/row_5">
+
+            <TextView
+                android:id="@+id/textView_6A"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_6B"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_6B"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_6C"
+                app:layout_constraintStart_toEndOf="@id/textView_6A"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_6C"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_6D"
+                app:layout_constraintStart_toEndOf="@id/textView_6B"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_6D"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toStartOf="@id/textView_6E"
+                app:layout_constraintStart_toEndOf="@id/textView_6C"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_6E"
+                style="@style/Widget.Wordle.TextView.WordsGrid"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textView_6D"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/q_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('Q')}"
+            android:text="@string/q"
+            app:layout_constraintEnd_toStartOf="@+id/w_button"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/w_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('W')}"
+            android:text="@string/w"
+            app:layout_constraintEnd_toStartOf="@id/e_button"
+            app:layout_constraintStart_toEndOf="@id/q_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/e_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('E')}"
+            android:text="@string/e"
+            app:layout_constraintEnd_toStartOf="@id/r_button"
+            app:layout_constraintStart_toEndOf="@id/w_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/r_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('R')}"
+            android:text="@string/r"
+            app:layout_constraintEnd_toStartOf="@id/t_button"
+            app:layout_constraintStart_toEndOf="@id/e_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/t_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('T')}"
+            android:text="@string/t"
+            app:layout_constraintEnd_toStartOf="@id/y_button"
+            app:layout_constraintStart_toEndOf="@id/r_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/y_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('Y')}"
+            android:text="@string/y"
+            app:layout_constraintEnd_toStartOf="@id/u_button"
+            app:layout_constraintStart_toEndOf="@id/t_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/u_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('U')}"
+            android:text="@string/u"
+            app:layout_constraintEnd_toStartOf="@id/i_button"
+            app:layout_constraintStart_toEndOf="@id/y_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/i_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('I')}"
+            android:text="@string/i"
+            app:layout_constraintEnd_toStartOf="@id/o_button"
+            app:layout_constraintStart_toEndOf="@id/u_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/o_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('O')}"
+            android:text="@string/o"
+            app:layout_constraintEnd_toStartOf="@id/p_button"
+            app:layout_constraintStart_toEndOf="@id/i_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/p_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginTop="64dp"
+            android:onClick="@{() -> gameFragment.setText('P')}"
+            android:text="@string/p"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/o_button"
+            app:layout_constraintTop_toBottomOf="@id/row_6"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/a_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginStart="20dp"
+            android:onClick="@{() -> gameFragment.setText('A')}"
+            android:text="@string/a"
+            app:layout_constraintEnd_toStartOf="@id/s_button"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/q_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/s_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('S')}"
+            android:text="@string/s"
+            app:layout_constraintEnd_toStartOf="@id/d_button"
+            app:layout_constraintStart_toEndOf="@id/a_button"
+            app:layout_constraintTop_toBottomOf="@id/w_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/d_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('D')}"
+            android:text="@string/d"
+            app:layout_constraintEnd_toStartOf="@id/f_button"
+            app:layout_constraintStart_toEndOf="@id/s_button"
+            app:layout_constraintTop_toBottomOf="@id/e_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/f_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('F')}"
+            android:text="@string/f"
+            app:layout_constraintEnd_toStartOf="@id/g_button"
+            app:layout_constraintStart_toEndOf="@id/d_button"
+            app:layout_constraintTop_toBottomOf="@id/r_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/g_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('G')}"
+            android:text="@string/g"
+            app:layout_constraintEnd_toStartOf="@id/h_button"
+            app:layout_constraintStart_toEndOf="@id/f_button"
+            app:layout_constraintTop_toBottomOf="@id/t_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/h_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('H')}"
+            android:text="@string/h"
+            app:layout_constraintEnd_toStartOf="@id/j_button"
+            app:layout_constraintStart_toEndOf="@id/g_button"
+            app:layout_constraintTop_toBottomOf="@id/y_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/j_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('J')}"
+            android:text="@string/j"
+            app:layout_constraintEnd_toStartOf="@id/k_button"
+            app:layout_constraintStart_toEndOf="@id/h_button"
+            app:layout_constraintTop_toBottomOf="@id/u_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/k_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('K')}"
+            android:text="@string/k"
+            app:layout_constraintEnd_toStartOf="@id/l_button"
+            app:layout_constraintStart_toEndOf="@id/j_button"
+            app:layout_constraintTop_toBottomOf="@id/i_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/l_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginEnd="20dp"
+            android:onClick="@{() -> gameFragment.setText('L')}"
+            android:text="@string/l"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/k_button"
+            app:layout_constraintTop_toBottomOf="@id/o_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/enter_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_width="56dp"
+            android:onClick="@{() -> gameFragment.isAWord()}"
+            android:text="@string/enter"
+            app:layout_constraintEnd_toStartOf="@id/z_button"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/a_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/z_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('Z')}"
+            android:text="@string/z"
+            app:layout_constraintEnd_toStartOf="@id/x_button"
+            app:layout_constraintStart_toEndOf="@id/enter_button"
+            app:layout_constraintTop_toBottomOf="@id/s_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/x_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('X')}"
+            android:text="@string/x"
+            app:layout_constraintEnd_toStartOf="@id/c_button"
+            app:layout_constraintStart_toEndOf="@id/z_button"
+            app:layout_constraintTop_toBottomOf="@id/d_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/c_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('C')}"
+            android:text="@string/c"
+            app:layout_constraintEnd_toStartOf="@id/v_button"
+            app:layout_constraintStart_toEndOf="@id/x_button"
+            app:layout_constraintTop_toBottomOf="@id/f_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/v_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('V')}"
+            android:text="@string/v"
+            app:layout_constraintEnd_toStartOf="@id/b_button"
+            app:layout_constraintStart_toEndOf="@id/c_button"
+            app:layout_constraintTop_toBottomOf="@id/g_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/b_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('B')}"
+            android:text="@string/b"
+            app:layout_constraintEnd_toStartOf="@id/n_button"
+            app:layout_constraintStart_toEndOf="@id/v_button"
+            app:layout_constraintTop_toBottomOf="@id/h_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/n_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('N')}"
+            android:text="@string/n"
+            app:layout_constraintEnd_toStartOf="@id/m_button"
+            app:layout_constraintStart_toEndOf="@id/b_button"
+            app:layout_constraintTop_toBottomOf="@id/j_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/m_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:onClick="@{() -> gameFragment.setText('M')}"
+            android:text="@string/m"
+            app:layout_constraintEnd_toStartOf="@id/delete_button"
+            app:layout_constraintStart_toEndOf="@id/n_button"
+            app:layout_constraintTop_toBottomOf="@id/k_button"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete_button"
+            style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_width="56dp"
+            android:contentDescription="@string/delete"
+            android:onClick="@{() -> gameFragment.setText(' ')}"
+            app:icon="@android:drawable/ic_input_delete"
+            app:iconGravity="textEnd"
+            app:iconPadding="0dp"
+            app:iconTintMode="src_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/m_button"
+            app:layout_constraintTop_toBottomOf="@id/l_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

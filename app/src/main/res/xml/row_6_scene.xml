@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- Wiggle Animation -->
+    <Transition
+        android:id="@+id/wiggle"
+        motion:constraintSetEnd="@id/start"
+        motion:constraintSetStart="@id/start"
+        motion:duration="400">
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="9"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="9"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="9"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="9"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="9"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="25"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="41"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="41"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="41"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="41"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="41"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="57"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="57"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="57"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="57"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="57"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="73"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="73"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="73"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="73"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="5dp"
+                motion:framePosition="73"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationX="-5dp"
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!-- Flip Tiles Animation -->
+    <Transition
+        android:id="@+id/flip_tiles"
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2000"
+        motion:motionInterpolator="linear">
+
+        <KeyFrameSet>
+            <!-- Tile A -->
+            <KeyTrigger
+                motion:framePosition="10"
+                motion:motionTarget="@id/textView_6A"
+                motion:triggerId="@+id/transform_A" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="20"
+                motion:motionTarget="@id/textView_6A" />
+
+            <!-- Tile B -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="20"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyTrigger
+                motion:framePosition="30"
+                motion:motionTarget="@id/textView_6B"
+                motion:triggerId="@+id/transform_B" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="40"
+                motion:motionTarget="@id/textView_6B" />
+
+            <!-- Tile C -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="40"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyTrigger
+                motion:framePosition="50"
+                motion:motionTarget="@id/textView_6C"
+                motion:triggerId="@+id/transform_C" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="60"
+                motion:motionTarget="@id/textView_6C" />
+
+            <!-- Tile D -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="60"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyTrigger
+                motion:framePosition="70"
+                motion:motionTarget="@id/textView_6D"
+                motion:triggerId="@+id/transform_D" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="80"
+                motion:motionTarget="@id/textView_6D" />
+
+            <!-- Tile E -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="80"
+                motion:motionTarget="@id/textView_6E" />
+            <KeyTrigger
+                motion:framePosition="90"
+                motion:motionTarget="@id/textView_6E"
+                motion:triggerId="@+id/transform_E" />
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/bounce"
+        motion:constraintSetEnd="@id/start"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2000"
+        motion:motionInterpolator="linear">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="6"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="18"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="24"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="36"
+                motion:motionTarget="@id/textView_6A" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="10"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="16"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="28"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="34"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="46"
+                motion:motionTarget="@id/textView_6B" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="20"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="26"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="38"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="44"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="56"
+                motion:motionTarget="@id/textView_6C" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="30"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="36"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="48"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="54"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="66"
+                motion:motionTarget="@id/textView_6D" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="40"
+                motion:motionTarget="@id/textView_6E" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="46"
+                motion:motionTarget="@id/textView_6E" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="58"
+                motion:motionTarget="@id/textView_6E" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="64"
+                motion:motionTarget="@id/textView_6E" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="76"
+                motion:motionTarget="@id/textView_6E" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@id/textView_6A" />
+        <Constraint android:id="@id/textView_6B" />
+        <Constraint android:id="@id/textView_6C" />
+        <Constraint android:id="@id/textView_6D" />
+        <Constraint android:id="@id/textView_6E" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@id/textView_6A"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:rotationX="180" />
+        <Constraint
+            android:id="@id/textView_6B"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:rotationX="180" />
+        <Constraint
+            android:id="@id/textView_6C"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:rotationX="180" />
+        <Constraint
+            android:id="@id/textView_6D"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:rotationX="180" />
+        <Constraint
+            android:id="@id/textView_6E"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:rotationX="180" />
+    </ConstraintSet>
+</MotionScene>
