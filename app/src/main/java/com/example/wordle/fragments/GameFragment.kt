@@ -63,13 +63,6 @@ class GameFragment : Fragment() {
         return getRow()[int] as TextView
     }
 
-    // inputs text into textView when called by setText()
-    private fun type(char: Char) {
-        Log.d("GameFragment", "type($char) called")
-        val tile = getTile(gameViewModel.currentTile.value!!.rem(6) - 1)
-        tile.text = char.toString()
-    }
-
     private fun disableButtons() {
         binding!!.enterButton.isEnabled = false
         binding!!.deleteButton.isEnabled = false

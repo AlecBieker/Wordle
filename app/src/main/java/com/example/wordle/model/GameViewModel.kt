@@ -39,12 +39,26 @@ class GameViewModel : ViewModel() {
         _letters.value = listOf()
     }
 
-    fun updateLetters(char: String) {
-        if (char == " "){
-            _letters.value = _letters.value!!.dropLast(1)
-        } else {
-            _letters.value = _letters.value!!.plus(char)
+    // updates the _letters MutableLiveData val to reflect user inputs
+    fun updateLetters(char: Char) {
+        val size = _letters.value!!.size
+        if (char == ' ' && size != _tries.value?.times(5)) {
+            _letters.value = _letters.value?.dropLast(1)
+        } else if (char != ' ' &&
+            (size.rem(5) != 0 || size == 0)){
+            _letters.value = _letters.value?.plus(char.toString())
         }
+    }
+
+    // Clears the contents of the current row
+    fun clearRow(): Boolean {
+        val size = _letters.value!!.size
+        if (tries.value?.times(5) != size) {
+            _letters.value = _letters.value?.dropLast(5)
+        } else {
+            _letters.value = _letters.value?.dropLast(size.rem(5))
+        }
+        return false
     }
 
     // updates the currentWord variable

@@ -345,7 +345,7 @@
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("Q")}'
+            android:onClick="@{() -> viewModel.updateLetters('Q')}"
             android:text="@string/q"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -357,7 +357,7 @@
             android:id="@+id/w_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("W")}'
+            android:onClick="@{() -> viewModel.updateLetters('W')}"
             android:text="@string/w"
             app:layout_constraintEnd_toStartOf="@id/e_button"
             app:layout_constraintStart_toEndOf="@id/q_button"
@@ -368,7 +368,7 @@
             android:id="@+id/e_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("E")}'
+            android:onClick="@{() -> viewModel.updateLetters('E')}"
             android:text="@string/e"
             app:layout_constraintEnd_toStartOf="@id/r_button"
             app:layout_constraintStart_toEndOf="@id/w_button"
@@ -379,7 +379,7 @@
             android:id="@+id/r_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("R")}'
+            android:onClick="@{() -> viewModel.updateLetters('R')}"
             android:text="@string/r"
             app:layout_constraintEnd_toStartOf="@id/t_button"
             app:layout_constraintStart_toEndOf="@id/e_button"
@@ -390,7 +390,7 @@
             android:id="@+id/t_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("T")}'
+            android:onClick="@{() -> viewModel.updateLetters('T')}"
             android:text="@string/t"
             app:layout_constraintEnd_toStartOf="@id/y_button"
             app:layout_constraintStart_toEndOf="@id/r_button"
@@ -401,7 +401,7 @@
             android:id="@+id/y_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("Y")}'
+            android:onClick="@{() -> viewModel.updateLetters('Y')}"
             android:text="@string/y"
             app:layout_constraintEnd_toStartOf="@id/u_button"
             app:layout_constraintStart_toEndOf="@id/t_button"
@@ -412,7 +412,7 @@
             android:id="@+id/u_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("U")}'
+            android:onClick="@{() -> viewModel.updateLetters('U')}"
             android:text="@string/u"
             app:layout_constraintEnd_toStartOf="@id/i_button"
             app:layout_constraintStart_toEndOf="@id/y_button"
@@ -423,7 +423,7 @@
             android:id="@+id/i_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("I")}'
+            android:onClick="@{() -> viewModel.updateLetters('I')}"
             android:text="@string/i"
             app:layout_constraintEnd_toStartOf="@id/o_button"
             app:layout_constraintStart_toEndOf="@id/u_button"
@@ -434,7 +434,7 @@
             android:id="@+id/o_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("O")}'
+            android:onClick="@{() -> viewModel.updateLetters('O')}"
             android:text="@string/o"
             app:layout_constraintEnd_toStartOf="@id/p_button"
             app:layout_constraintStart_toEndOf="@id/i_button"
@@ -445,7 +445,7 @@
             android:id="@+id/p_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick='@{() -> viewModel.updateLetters("P")}'
+            android:onClick="@{() -> viewModel.updateLetters('P')}"
             android:text="@string/p"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/o_button"
@@ -456,7 +456,7 @@
             android:id="@+id/a_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginStart="20dp"
-            android:onClick='@{() -> viewModel.updateLetters("A")}'
+            android:onClick="@{() -> viewModel.updateLetters('A')}"
             android:text="@string/a"
             app:layout_constraintEnd_toStartOf="@id/s_button"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -467,7 +467,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/s_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("S")}'
+            android:onClick="@{() -> viewModel.updateLetters('S')}"
             android:text="@string/s"
             app:layout_constraintEnd_toStartOf="@id/d_button"
             app:layout_constraintStart_toEndOf="@id/a_button"
@@ -477,7 +477,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/d_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("D")}'
+            android:onClick="@{() -> viewModel.updateLetters('D')}"
             android:text="@string/d"
             app:layout_constraintEnd_toStartOf="@id/f_button"
             app:layout_constraintStart_toEndOf="@id/s_button"
@@ -487,7 +487,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/f_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("F")}'
+            android:onClick="@{() -> viewModel.updateLetters('F')}"
             android:text="@string/f"
             app:layout_constraintEnd_toStartOf="@id/g_button"
             app:layout_constraintStart_toEndOf="@id/d_button"
@@ -497,7 +497,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/g_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("G")}'
+            android:onClick="@{() -> viewModel.updateLetters('G')}"
             android:text="@string/g"
             app:layout_constraintEnd_toStartOf="@id/h_button"
             app:layout_constraintStart_toEndOf="@id/f_button"
@@ -507,7 +507,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/h_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("H")}'
+            android:onClick="@{() -> viewModel.updateLetters('H')}"
             android:text="@string/h"
             app:layout_constraintEnd_toStartOf="@id/j_button"
             app:layout_constraintStart_toEndOf="@id/g_button"
@@ -517,7 +517,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/j_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("J")}'
+            android:onClick="@{() -> viewModel.updateLetters('J')}"
             android:text="@string/j"
             app:layout_constraintEnd_toStartOf="@id/k_button"
             app:layout_constraintStart_toEndOf="@id/h_button"
@@ -527,7 +527,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/k_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("K")}'
+            android:onClick="@{() -> viewModel.updateLetters('K')}"
             android:text="@string/k"
             app:layout_constraintEnd_toStartOf="@id/l_button"
             app:layout_constraintStart_toEndOf="@id/j_button"
@@ -538,7 +538,7 @@
             android:id="@+id/l_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginEnd="20dp"
-            android:onClick='@{() -> viewModel.updateLetters("L")}'
+            android:onClick="@{() -> viewModel.updateLetters('L')}"
             android:text="@string/l"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/k_button"
@@ -559,7 +559,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/z_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("Z")}'
+            android:onClick="@{() -> viewModel.updateLetters('Z')}"
             android:text="@string/z"
             app:layout_constraintEnd_toStartOf="@id/x_button"
             app:layout_constraintStart_toEndOf="@id/enter_button"
@@ -569,7 +569,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/x_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("X")}'
+            android:onClick="@{() -> viewModel.updateLetters('X')}"
             android:text="@string/x"
             app:layout_constraintEnd_toStartOf="@id/c_button"
             app:layout_constraintStart_toEndOf="@id/z_button"
@@ -579,7 +579,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/c_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("C")}'
+            android:onClick="@{() -> viewModel.updateLetters('C')}"
             android:text="@string/c"
             app:layout_constraintEnd_toStartOf="@id/v_button"
             app:layout_constraintStart_toEndOf="@id/x_button"
@@ -589,7 +589,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/v_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("V")}'
+            android:onClick="@{() -> viewModel.updateLetters('V')}"
             android:text="@string/v"
             app:layout_constraintEnd_toStartOf="@id/b_button"
             app:layout_constraintStart_toEndOf="@id/c_button"
@@ -599,7 +599,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("B")}'
+            android:onClick="@{() -> viewModel.updateLetters('B')}"
             android:text="@string/b"
             app:layout_constraintEnd_toStartOf="@id/n_button"
             app:layout_constraintStart_toEndOf="@id/v_button"
@@ -609,7 +609,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/n_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("N")}'
+            android:onClick="@{() -> viewModel.updateLetters('N')}"
             android:text="@string/n"
             app:layout_constraintEnd_toStartOf="@id/m_button"
             app:layout_constraintStart_toEndOf="@id/b_button"
@@ -619,7 +619,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/m_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick='@{() -> viewModel.updateLetters("M")}'
+            android:onClick="@{() -> viewModel.updateLetters('M')}"
             android:text="@string/m"
             app:layout_constraintEnd_toStartOf="@id/delete_button"
             app:layout_constraintStart_toEndOf="@id/n_button"
@@ -631,7 +631,8 @@
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_width="56dp"
             android:contentDescription="@string/delete"
-            android:onClick='@{() -> viewModel.updateLetters(" ")}'
+            android:onClick="@{() -> viewModel.updateLetters(' ')}"
+            android:onLongClick="@{() -> viewModel.clearRow()}"
             app:icon="@android:drawable/ic_input_delete"
             app:iconGravity="textEnd"
             app:iconPadding="0dp"
