@@ -49,10 +49,9 @@ class GameFragment : Fragment() {
             viewModel = gameViewModel
             // Assign the fragment
             gameFragment = this@GameFragment
+
         }
     }
-
-
 
     // retrieves the MotionLayout corresponding to the currently active row
     private fun getRow(): MotionLayout {
@@ -79,25 +78,6 @@ class GameFragment : Fragment() {
     private fun enableButtons() {
         binding!!.enterButton.isEnabled = true
         binding!!.deleteButton.isEnabled = true
-    }
-
-    // handles logic for text input and backspaces
-    fun setText(char: Char) {
-        Log.d("GameFragment", "setText(${char}) called")
-        gameViewModel.updateLetters(char)
-        Log.d("GameFragment", "textView1A.text = ${binding!!.textView1A.text}")
-        /*
-        if (char == ' ' && gameViewModel.currentTile.value!! % 6 != 1) {
-                gameViewModel.lastTile()
-                gameViewModel.updateCurrentWord(char)
-                type(char)
-            } else if (char != ' ' && gameViewModel.currentTile.value!! % 6 != 0) {
-                gameViewModel.updateCurrentWord(char)
-                type(char)
-                gameViewModel.nextTile()
-            } else {
-                Log.d("setText", "nothing happened")
-            }*/
     }
 
     // checks if the word is a valid word from the list
