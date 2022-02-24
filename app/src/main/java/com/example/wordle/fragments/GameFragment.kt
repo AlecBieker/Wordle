@@ -79,28 +79,13 @@ class GameFragment : Fragment() {
         val str = gameViewModel.currentWord.value
         if (str?.length == 5) {
             if (str in wordsList1 || str in wordsList2) {
-                isLetterCorrect(str)
+                revealHints(str)
             } else {
                 notAWord()
             }
         } else {
             tooShort()
         }
-    }
-
-    // checks each letter for whether it is correct, present or absent
-    // and creates a list of colors representing each state
-    private fun isLetterCorrect(str: String) {
-        Log.d("GameFragment", "isLetterCorrect() called")
-        val colors = mutableListOf<Int>()
-        for (i in (0..4)) {
-            when {
-                str[i] == gameViewModel.answer.value!![i] -> colors.add(R.color.green)
-                str[i] in gameViewModel.answer.value!! -> colors.add(R.color.yellow)
-                else -> colors.add(R.color.darkGray)
-            }
-        }
-        revealHints(colors, str)
     }
 
     // Checks if the word is the correct word and moves to the next row if not
@@ -116,16 +101,17 @@ class GameFragment : Fragment() {
         }
     }
 
-    // changes textView background color and rotates right side up
-    private fun transform(int: Int, color: Int) {
-        getTile(int).setBackgroundResource(color)
+    // rotates textViews to be right side up
+    private fun transform(int: Int, hint: Int) {
+        gameViewModel.updateColors(hint)
         getTile(int).rotation = 180F
         getTile(int).rotationY = 180F
     }
 
     // changes the colors of the tiles to hint at the answer
-    private fun revealHints(colors: MutableList<Int>, str: String) {
+    private fun revealHints(str: String) {
         Log.d("GameFragment", "revealHints() called")
+        val hints = gameViewModel.isLetterCorrect(str)
         getRow().addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
@@ -136,11 +122,11 @@ class GameFragment : Fragment() {
                 ) {
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
                     when (triggerId) {
-                        R.id.transform_A -> transform(0, colors[0])
-                        R.id.transform_B -> transform(1, colors[1])
-                        R.id.transform_C -> transform(2, colors[2])
-                        R.id.transform_D -> transform(3, colors[3])
-                        R.id.transform_E -> transform(4, colors[4])
+                        R.id.transform_A -> transform(0, hints[0])
+                        R.id.transform_B -> transform(1, hints[1])
+                        R.id.transform_C -> transform(2, hints[2])
+                        R.id.transform_D -> transform(3, hints[3])
+                        R.id.transform_E -> transform(4, hints[4])
                     }
                 }
             }
