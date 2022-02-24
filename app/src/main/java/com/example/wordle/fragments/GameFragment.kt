@@ -49,7 +49,6 @@ class GameFragment : Fragment() {
             viewModel = gameViewModel
             // Assign the fragment
             gameFragment = this@GameFragment
-
         }
     }
 
@@ -75,7 +74,7 @@ class GameFragment : Fragment() {
 
     // checks if the word is a valid word from the list
     fun isAWord() {
-        Log.d("GameFragment", "isAWord() called")
+        Log.d("GameViewModel", "isAWord() called")
         disableButtons()
         val str = gameViewModel.currentWord.value
         if (str?.length == 5) {

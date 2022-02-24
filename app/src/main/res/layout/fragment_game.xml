@@ -5,8 +5,11 @@
     tools:context=".fragments.GameFragment">
 
     <data>
-        <import type="java.util.List"/>
-        <variable name="letters" type="List&lt;String>" />
+
+        <import type="java.util.List" />
+
+        <import type="androidx.core.content.ContextCompat" />
+
         <variable
             name="viewModel"
             type="com.example.wordle.model.GameViewModel" />
@@ -45,6 +48,7 @@
             <TextView
                 android:id="@+id/textView_1A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[0] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1B"
@@ -54,6 +58,7 @@
             <TextView
                 android:id="@+id/textView_1B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[1] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[1]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1C"
@@ -62,6 +67,7 @@
             <TextView
                 android:id="@+id/textView_1C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[2] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[2]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1D"
@@ -70,6 +76,7 @@
             <TextView
                 android:id="@+id/textView_1D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[3] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[3]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1E"
@@ -78,6 +85,7 @@
             <TextView
                 android:id="@+id/textView_1E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[4] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[4]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +104,7 @@
             <TextView
                 android:id="@+id/textView_2A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[5] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[5]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2B"
@@ -105,6 +114,7 @@
             <TextView
                 android:id="@+id/textView_2B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[6] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[6]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2C"
@@ -113,6 +123,7 @@
             <TextView
                 android:id="@+id/textView_2C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[7] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[7]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2D"
@@ -121,18 +132,20 @@
             <TextView
                 android:id="@+id/textView_2D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[8] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[8]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2E"
-                app:layout_constraintStart_toEndOf="@id/textView_2C"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_2C" />
 
             <TextView
                 android:id="@+id/textView_2E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[9] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[9]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_2D"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_2D" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -147,31 +160,35 @@
             <TextView
                 android:id="@+id/textView_3A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[10] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[10]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView_3B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[11] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[11]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3C"
-                app:layout_constraintStart_toEndOf="@id/textView_3A"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_3A" />
 
             <TextView
                 android:id="@+id/textView_3C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[12] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[12]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3D"
-                app:layout_constraintStart_toEndOf="@id/textView_3B"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_3B" />
 
             <TextView
                 android:id="@+id/textView_3D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[13] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[13]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3E"
@@ -180,6 +197,7 @@
             <TextView
                 android:id="@+id/textView_3E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[14] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[14]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -198,31 +216,35 @@
             <TextView
                 android:id="@+id/textView_4A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[15] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[15]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView_4B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[16] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[16]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4C"
-                app:layout_constraintStart_toEndOf="@id/textView_4A"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_4A" />
 
             <TextView
                 android:id="@+id/textView_4C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[17] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[17]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4D"
-                app:layout_constraintStart_toEndOf="@id/textView_4B"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_4B" />
 
             <TextView
                 android:id="@+id/textView_4D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[18] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[18]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4E"
@@ -231,6 +253,7 @@
             <TextView
                 android:id="@+id/textView_4E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[19] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[19]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,31 +272,35 @@
             <TextView
                 android:id="@+id/textView_5A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[20] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[20]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView_5B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[21] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[21]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5C"
-                app:layout_constraintStart_toEndOf="@id/textView_5A"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_5A" />
 
             <TextView
                 android:id="@+id/textView_5C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[22] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[22]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5D"
-                app:layout_constraintStart_toEndOf="@id/textView_5B"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_5B" />
 
             <TextView
                 android:id="@+id/textView_5D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[23] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[23]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5E"
@@ -282,10 +309,11 @@
             <TextView
                 android:id="@+id/textView_5E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[24] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[24]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_5D"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_5D" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -300,43 +328,48 @@
             <TextView
                 android:id="@+id/textView_6A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[25] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[25]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView_6B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[26] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[26]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6C"
-                app:layout_constraintStart_toEndOf="@id/textView_6A"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_6A" />
 
             <TextView
                 android:id="@+id/textView_6C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[27] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[27]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6D"
-                app:layout_constraintStart_toEndOf="@id/textView_6B"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_6B" />
 
             <TextView
                 android:id="@+id/textView_6D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[28] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[28]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6E"
-                app:layout_constraintStart_toEndOf="@id/textView_6C"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_6C" />
 
             <TextView
                 android:id="@+id/textView_6E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
+                android:background="@{ContextCompat.getDrawable(context, viewModel.colors[29] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[29]}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_6D"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@id/textView_6D" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -345,7 +378,7 @@
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('Q')}"
+            android:onClick="@{() -> viewModel.setText('Q')}"
             android:text="@string/q"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -357,7 +390,7 @@
             android:id="@+id/w_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('W')}"
+            android:onClick="@{() -> viewModel.setText('W')}"
             android:text="@string/w"
             app:layout_constraintEnd_toStartOf="@id/e_button"
             app:layout_constraintStart_toEndOf="@id/q_button"
@@ -368,7 +401,7 @@
             android:id="@+id/e_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('E')}"
+            android:onClick="@{() -> viewModel.setText('E')}"
             android:text="@string/e"
             app:layout_constraintEnd_toStartOf="@id/r_button"
             app:layout_constraintStart_toEndOf="@id/w_button"
@@ -379,7 +412,7 @@
             android:id="@+id/r_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('R')}"
+            android:onClick="@{() -> viewModel.setText('R')}"
             android:text="@string/r"
             app:layout_constraintEnd_toStartOf="@id/t_button"
             app:layout_constraintStart_toEndOf="@id/e_button"
@@ -390,7 +423,7 @@
             android:id="@+id/t_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('T')}"
+            android:onClick="@{() -> viewModel.setText('T')}"
             android:text="@string/t"
             app:layout_constraintEnd_toStartOf="@id/y_button"
             app:layout_constraintStart_toEndOf="@id/r_button"
@@ -401,7 +434,7 @@
             android:id="@+id/y_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('Y')}"
+            android:onClick="@{() -> viewModel.setText('Y')}"
             android:text="@string/y"
             app:layout_constraintEnd_toStartOf="@id/u_button"
             app:layout_constraintStart_toEndOf="@id/t_button"
@@ -412,7 +445,7 @@
             android:id="@+id/u_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('U')}"
+            android:onClick="@{() -> viewModel.setText('U')}"
             android:text="@string/u"
             app:layout_constraintEnd_toStartOf="@id/i_button"
             app:layout_constraintStart_toEndOf="@id/y_button"
@@ -423,7 +456,7 @@
             android:id="@+id/i_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('I')}"
+            android:onClick="@{() -> viewModel.setText('I')}"
             android:text="@string/i"
             app:layout_constraintEnd_toStartOf="@id/o_button"
             app:layout_constraintStart_toEndOf="@id/u_button"
@@ -434,7 +467,7 @@
             android:id="@+id/o_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('O')}"
+            android:onClick="@{() -> viewModel.setText('O')}"
             android:text="@string/o"
             app:layout_constraintEnd_toStartOf="@id/p_button"
             app:layout_constraintStart_toEndOf="@id/i_button"
@@ -445,7 +478,7 @@
             android:id="@+id/p_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
-            android:onClick="@{() -> viewModel.updateLetters('P')}"
+            android:onClick="@{() -> viewModel.setText('P')}"
             android:text="@string/p"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/o_button"
@@ -456,7 +489,7 @@
             android:id="@+id/a_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginStart="20dp"
-            android:onClick="@{() -> viewModel.updateLetters('A')}"
+            android:onClick="@{() -> viewModel.setText('A')}"
             android:text="@string/a"
             app:layout_constraintEnd_toStartOf="@id/s_button"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -467,7 +500,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/s_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('S')}"
+            android:onClick="@{() -> viewModel.setText('S')}"
             android:text="@string/s"
             app:layout_constraintEnd_toStartOf="@id/d_button"
             app:layout_constraintStart_toEndOf="@id/a_button"
@@ -477,7 +510,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/d_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('D')}"
+            android:onClick="@{() -> viewModel.setText('D')}"
             android:text="@string/d"
             app:layout_constraintEnd_toStartOf="@id/f_button"
             app:layout_constraintStart_toEndOf="@id/s_button"
@@ -487,7 +520,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/f_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('F')}"
+            android:onClick="@{() -> viewModel.setText('F')}"
             android:text="@string/f"
             app:layout_constraintEnd_toStartOf="@id/g_button"
             app:layout_constraintStart_toEndOf="@id/d_button"
@@ -497,7 +530,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/g_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('G')}"
+            android:onClick="@{() -> viewModel.setText('G')}"
             android:text="@string/g"
             app:layout_constraintEnd_toStartOf="@id/h_button"
             app:layout_constraintStart_toEndOf="@id/f_button"
@@ -507,7 +540,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/h_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('H')}"
+            android:onClick="@{() -> viewModel.setText('H')}"
             android:text="@string/h"
             app:layout_constraintEnd_toStartOf="@id/j_button"
             app:layout_constraintStart_toEndOf="@id/g_button"
@@ -517,7 +550,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/j_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('J')}"
+            android:onClick="@{() -> viewModel.setText('J')}"
             android:text="@string/j"
             app:layout_constraintEnd_toStartOf="@id/k_button"
             app:layout_constraintStart_toEndOf="@id/h_button"
@@ -527,7 +560,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/k_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('K')}"
+            android:onClick="@{() -> viewModel.setText('K')}"
             android:text="@string/k"
             app:layout_constraintEnd_toStartOf="@id/l_button"
             app:layout_constraintStart_toEndOf="@id/j_button"
@@ -538,7 +571,7 @@
             android:id="@+id/l_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginEnd="20dp"
-            android:onClick="@{() -> viewModel.updateLetters('L')}"
+            android:onClick="@{() -> viewModel.setText('L')}"
             android:text="@string/l"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/k_button"
@@ -559,7 +592,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/z_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('Z')}"
+            android:onClick="@{() -> viewModel.setText('Z')}"
             android:text="@string/z"
             app:layout_constraintEnd_toStartOf="@id/x_button"
             app:layout_constraintStart_toEndOf="@id/enter_button"
@@ -569,7 +602,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/x_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('X')}"
+            android:onClick="@{() -> viewModel.setText('X')}"
             android:text="@string/x"
             app:layout_constraintEnd_toStartOf="@id/c_button"
             app:layout_constraintStart_toEndOf="@id/z_button"
@@ -579,7 +612,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/c_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('C')}"
+            android:onClick="@{() -> viewModel.setText('C')}"
             android:text="@string/c"
             app:layout_constraintEnd_toStartOf="@id/v_button"
             app:layout_constraintStart_toEndOf="@id/x_button"
@@ -589,7 +622,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/v_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('V')}"
+            android:onClick="@{() -> viewModel.setText('V')}"
             android:text="@string/v"
             app:layout_constraintEnd_toStartOf="@id/b_button"
             app:layout_constraintStart_toEndOf="@id/c_button"
@@ -599,7 +632,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('B')}"
+            android:onClick="@{() -> viewModel.setText('B')}"
             android:text="@string/b"
             app:layout_constraintEnd_toStartOf="@id/n_button"
             app:layout_constraintStart_toEndOf="@id/v_button"
@@ -609,7 +642,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/n_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('N')}"
+            android:onClick="@{() -> viewModel.setText('N')}"
             android:text="@string/n"
             app:layout_constraintEnd_toStartOf="@id/m_button"
             app:layout_constraintStart_toEndOf="@id/b_button"
@@ -619,7 +652,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/m_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:onClick="@{() -> viewModel.updateLetters('M')}"
+            android:onClick="@{() -> viewModel.setText('M')}"
             android:text="@string/m"
             app:layout_constraintEnd_toStartOf="@id/delete_button"
             app:layout_constraintStart_toEndOf="@id/n_button"
@@ -631,7 +664,7 @@
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_width="56dp"
             android:contentDescription="@string/delete"
-            android:onClick="@{() -> viewModel.updateLetters(' ')}"
+            android:onClick="@{() -> viewModel.setText(' ')}"
             android:onLongClick="@{() -> viewModel.clearRow()}"
             app:icon="@android:drawable/ic_input_delete"
             app:iconGravity="textEnd"
