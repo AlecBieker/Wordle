@@ -64,18 +64,15 @@ class GameViewModel : ViewModel() {
     // Clears the contents of the current row
     fun clearRow(): Boolean {
         Log.d("GameViewModel", "clearRow() called")
-        val size = _letters.value!!.size
-        if (tries.value?.times(5) != size) {
-            _letters.value = _letters.value?.dropLast(5)
-        } else {
-            _letters.value = _letters.value?.dropLast(size.rem(5))
-        }
-        return false
+        val size = _currentWord.value!!.length
+        _letters.value = _letters.value?.dropLast(size)
+        _currentWord.value = ""
+        return true
     }
 
     // updates the colors liveData val to
     fun updateColors(hint: Int) {
-        _colors.value = _colors.value?.plus(hint)
+        _colors.value = _colors.value!!.plus(hint)
     }
 
     // checks each letter for whether it is correct, present or absent

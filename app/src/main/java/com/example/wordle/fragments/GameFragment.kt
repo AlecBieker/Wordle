@@ -18,6 +18,9 @@ import com.example.wordle.databinding.FragmentGameBinding
 import com.example.wordle.model.GameViewModel
 import com.example.wordle.wordsList1
 import com.example.wordle.wordsList2
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
+import kotlin.system.measureNanoTime
 
 /**
  * This is the game screen of the Wordle app
@@ -54,12 +57,7 @@ class GameFragment : Fragment() {
 
     // retrieves the MotionLayout corresponding to the currently active row
     private fun getRow(): MotionLayout {
-        return binding!!.gameLayout[gameViewModel.tries.value!! + 1] as MotionLayout
-    }
-
-    // retrieves the TextView corresponding to the index value passed in
-    private fun getTile(int: Int): TextView {
-        return getRow()[int] as TextView
+        return binding!!.gameLayout[gameViewModel.tries.value!!.plus(1)] as MotionLayout
     }
 
     private fun disableButtons() {
@@ -74,7 +72,7 @@ class GameFragment : Fragment() {
 
     // checks if the word is a valid word from the list
     fun isAWord() {
-        Log.d("GameViewModel", "isAWord() called")
+        Log.d("GameFragment", "isAWord() called")
         disableButtons()
         val str = gameViewModel.currentWord.value
         if (str?.length == 5) {
@@ -102,45 +100,52 @@ class GameFragment : Fragment() {
     }
 
     // rotates textViews to be right side up
-    private fun transform(int: Int, hint: Int) {
-        gameViewModel.updateColors(hint)
-        getTile(int).rotation = 180F
-        getTile(int).rotationY = 180F
+    private fun transform(int: Int, hint: Int, motionLayout: MotionLayout) {
+        measureNanoTime {
+            gameViewModel.updateColors(hint)
+            val textView: TextView = motionLayout[int] as TextView
+            textView.rotation = 180F
+            textView.rotationY = 180F
+        }
     }
 
     // changes the colors of the tiles to hint at the answer
     private fun revealHints(str: String) {
         Log.d("GameFragment", "revealHints() called")
         val hints = gameViewModel.isLetterCorrect(str)
-        getRow().addTransitionListener(
+        val currentRow = getRow()
+        currentRow.addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
-                    motionLayout: MotionLayout?,
+                    motionLayout: MotionLayout,
                     triggerId: Int,
                     positive: Boolean,
                     progress: Float
                 ) {
+                    Log.d("TransitionListener", ".addTransitionListener() called")
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    when (triggerId) {
-                        R.id.transform_A -> transform(0, hints[0])
-                        R.id.transform_B -> transform(1, hints[1])
-                        R.id.transform_C -> transform(2, hints[2])
-                        R.id.transform_D -> transform(3, hints[3])
-                        R.id.transform_E -> transform(4, hints[4])
+                    Log.d("Listener","progress = $progress")
+                    when (progress.times(10).roundToInt()) {
+                        1 -> transform(0, hints[0], motionLayout)
+                        3 -> transform(1, hints[1], motionLayout)
+                        5 -> transform(2, hints[2], motionLayout)
+                        7 -> transform(3, hints[3], motionLayout)
+                        9 -> transform(4, hints[4], motionLayout)
                     }
                 }
             }
         )
-        getRow().setTransition(R.id.flip_tiles)
+        currentRow.setTransition(R.id.flip_tiles)
         getRow().transitionToEnd { isCorrect(str) }
     }
 
     // wiggles the current row to indicate a problem with the users input
     // and re enables buttons
     private fun wiggle() {
-        getRow().setTransition(R.id.wiggle)
-        getRow().transitionToEnd()
-        enableButtons()
+        Log.d("GameFragment", "wiggle() called")
+        val currentRow = getRow()
+        currentRow.setTransition(R.id.wiggle)
+        currentRow.transitionToEnd { enableButtons() }
     }
 
     // creates a toast stating the word is not in the words list and calls wiggle()
