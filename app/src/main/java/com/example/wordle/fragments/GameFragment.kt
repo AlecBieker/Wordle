@@ -19,17 +19,18 @@ import com.example.wordle.model.GameViewModel
 import com.example.wordle.wordsList1
 import com.example.wordle.wordsList2
 import kotlin.math.roundToInt
-import kotlin.math.roundToLong
-import kotlin.system.measureNanoTime
 
 /**
  * This is the game screen of the Wordle app
+ * This file coordinates event handling and the flow of information between the UI layer and the
+ * viewModel using binding references to the UI layer and calls to the viewModel.
  */
 class GameFragment : Fragment() {
 
-    // Binding object instance corresponding to the game_fragment.xml layout
+    // Binding object instance corresponding to the fragment_game.xml layout
     private var binding: FragmentGameBinding? = null
 
+    // reference to the viewModel
     private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -60,11 +61,13 @@ class GameFragment : Fragment() {
         return binding!!.gameLayout[gameViewModel.tries.value!!.plus(1)] as MotionLayout
     }
 
+    // disables enter_button and backspace_button while animations play to prevent errors
     private fun disableButtons() {
         binding!!.enterButton.isEnabled = false
         binding!!.deleteButton.isEnabled = false
     }
 
+    // enables buttons once animations are complete
     private fun enableButtons() {
         binding!!.enterButton.isEnabled = true
         binding!!.deleteButton.isEnabled = true
@@ -99,22 +102,20 @@ class GameFragment : Fragment() {
         }
     }
 
-    // rotates textViews to be right side up
+    // rotates textViews to be right side up and sets the colors
     private fun transform(int: Int, hint: Int, motionLayout: MotionLayout) {
-        measureNanoTime {
-            gameViewModel.updateColors(hint)
-            val textView: TextView = motionLayout[int] as TextView
-            textView.rotation = 180F
-            textView.rotationY = 180F
-        }
+        gameViewModel.updateColors(hint)
+        val textView: TextView = motionLayout[int] as TextView
+        textView.rotation = 180F
+        textView.rotationY = 180F
     }
 
     // changes the colors of the tiles to hint at the answer
     private fun revealHints(str: String) {
         Log.d("GameFragment", "revealHints() called")
         val hints = gameViewModel.isLetterCorrect(str)
-        val currentRow = getRow()
-        currentRow.addTransitionListener(
+        val row = getRow()
+        row.addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
                     motionLayout: MotionLayout,
@@ -124,7 +125,7 @@ class GameFragment : Fragment() {
                 ) {
                     Log.d("TransitionListener", ".addTransitionListener() called")
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    Log.d("Listener","progress = $progress")
+                    Log.d("Listener", "progress = $progress")
                     when (progress.times(10).roundToInt()) {
                         1 -> transform(0, hints[0], motionLayout)
                         3 -> transform(1, hints[1], motionLayout)
@@ -135,8 +136,11 @@ class GameFragment : Fragment() {
                 }
             }
         )
-        currentRow.setTransition(R.id.flip_tiles)
-        getRow().transitionToEnd { isCorrect(str) }
+        row.setTransition(R.id.flip_tiles)
+        row.transitionToEnd {
+            gameViewModel.updateKeyColors(str, hints)
+            isCorrect(str)
+        }
     }
 
     // wiggles the current row to indicate a problem with the users input

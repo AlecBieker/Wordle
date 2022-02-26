@@ -10,7 +10,7 @@ import com.example.wordle.wordsList2
 
 /**
  * [GameViewModel] holds all the variables for reinstating a saved game as well as all the logic
- * behind what will be shown on the screen as the game is played
+ * deciding what will be shown on the screen as the game is played
  */
 
 class GameViewModel : ViewModel() {
@@ -27,8 +27,21 @@ class GameViewModel : ViewModel() {
     private val _colors = MutableLiveData<List<Int>>()
     val colors: LiveData<List<Int>> = _colors
 
+    // color of the textView texts
+    private val _textColors = MutableLiveData<List<Int>>()
+    val textColors: LiveData<List<Int>> = _textColors
+
+    private val _keyColors = MutableLiveData<Map<Char, Int>>()
+    val keyColors: LiveData<Map<Char, Int>> = _keyColors
+
     // border drawable for textViews that don't have a color set yet
     val border = R.drawable.border
+
+    // default color value for keys that don't have a color set yet
+    val keyColor = R.color.key_color
+
+    // default color value for text that doesn't have a color set yet
+    val textColor = R.color.text_color
 
     // Last word to be guessed
     private val _currentWord = MutableLiveData<String>()
@@ -46,6 +59,8 @@ class GameViewModel : ViewModel() {
         _tries.value = 0
         _letters.value = listOf()
         _colors.value = listOf()
+        _textColors.value = listOf()
+        _keyColors.value = mapOf()
     }
 
     // updates the letters and currentWord val
@@ -55,7 +70,7 @@ class GameViewModel : ViewModel() {
         if (char == ' ' && size != 0) {
             _letters.value = _letters.value?.dropLast(1)
             _currentWord.value = _currentWord.value?.dropLast(1)
-        } else if (char != ' ' && size != 5){
+        } else if (char != ' ' && size != 5) {
             _letters.value = _letters.value?.plus(char.toString())
             _currentWord.value += char
         }
@@ -73,6 +88,23 @@ class GameViewModel : ViewModel() {
     // updates the colors liveData val to
     fun updateColors(hint: Int) {
         _colors.value = _colors.value!!.plus(hint)
+        _textColors.value = _textColors.value!!.plus(R.color.hint_text_color)
+    }
+
+    fun updateKeyColors(str: String, hints: List<Int>) {
+        val map = keyColors.value?.toMutableMap()
+        for (i in 0..4) {
+            val char = str[i]
+            val color = hints[i]
+            if (color == R.color.green) {
+                map?.set(char, color)
+            } else if (color == R.color.yellow && map?.get(char) != R.color.green) {
+                map?.set(char, color)
+            } else if (color == R.color.gray && map?.get(char) == null) {
+                map?.set(char, color)
+            }
+        }
+        _keyColors.value = map?.toMap()
     }
 
     // checks each letter for whether it is correct, present or absent
@@ -84,7 +116,7 @@ class GameViewModel : ViewModel() {
             when {
                 str[i] == _answer.value?.get(i) -> hints.add(R.color.green)
                 str[i] in _answer.value!! -> hints.add(R.color.yellow)
-                else -> hints.add(R.color.darkGray)
+                else -> hints.add(R.color.gray)
             }
         }
         return (hints)

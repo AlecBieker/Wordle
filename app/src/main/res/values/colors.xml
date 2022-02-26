@@ -22,7 +22,9 @@
     <!-- Wordle colors-->
     <color name="green">#6aaa64</color>
     <color name="yellow">#c9b458</color>
-    <color name="lightGray">#d8d8d8</color>
-    <color name="gray">#939598</color>
-    <color name="darkGray">#86888a</color>
+    <color name="light_gray">#d8d8d8</color>
+    <color name="gray">#787c7e</color>
+    <color name="key_color">#d3d6da</color>
+    <color name="text_color">#FF000000</color>
+    <color name="hint_text_color">#FFFFFFFF</color>
 </resources>

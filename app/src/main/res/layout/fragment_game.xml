@@ -8,6 +8,8 @@
 
         <import type="java.util.List" />
 
+        <import type="java.util.Map" />
+
         <import type="androidx.core.content.ContextCompat" />
 
         <variable
@@ -32,6 +34,7 @@
             android:fontFamily="sans-serif-black"
             android:text="@string/wordle_header"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,6 +53,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[0] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[0]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[0] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -60,6 +64,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[1] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[1]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[1] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1C"
                 app:layout_constraintStart_toEndOf="@id/textView_1A" />
@@ -69,6 +74,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[2] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[2]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[2] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1D"
                 app:layout_constraintStart_toEndOf="@id/textView_1B" />
@@ -78,6 +84,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[3] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[3]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[3] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1E"
                 app:layout_constraintStart_toEndOf="@id/textView_1C" />
@@ -87,6 +94,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[4] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[4]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[4] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_1D" />
@@ -106,6 +114,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[5] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[5]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[5] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -116,6 +125,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[6] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[6]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[6] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2C"
                 app:layout_constraintStart_toEndOf="@id/textView_2A" />
@@ -125,6 +135,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[7] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[7]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[7] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2D"
                 app:layout_constraintStart_toEndOf="@id/textView_2B" />
@@ -134,6 +145,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[8] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[8]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[8] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2E"
                 app:layout_constraintStart_toEndOf="@id/textView_2C" />
@@ -143,6 +155,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[9] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[9]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[9] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_2D" />
@@ -162,6 +175,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[10] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[10]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[10] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -172,6 +186,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[11] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[11]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[11] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3C"
                 app:layout_constraintStart_toEndOf="@id/textView_3A" />
@@ -181,6 +196,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[12] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[12]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[12] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3D"
                 app:layout_constraintStart_toEndOf="@id/textView_3B" />
@@ -190,6 +206,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[13] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[13]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[13] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3E"
                 app:layout_constraintStart_toEndOf="@id/textView_3C" />
@@ -199,6 +216,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[14] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[14]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[14] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_3D" />
@@ -218,6 +236,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[15] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[15]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[15] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -228,6 +247,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[16] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[16]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[16] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4C"
                 app:layout_constraintStart_toEndOf="@id/textView_4A" />
@@ -237,6 +257,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[17] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[17]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[17] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4D"
                 app:layout_constraintStart_toEndOf="@id/textView_4B" />
@@ -246,6 +267,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[18] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[18]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[18] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4E"
                 app:layout_constraintStart_toEndOf="@id/textView_4C" />
@@ -255,6 +277,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[19] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[19]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[19] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_4D" />
@@ -274,6 +297,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[20] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[20]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[20] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -284,6 +308,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[21] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[21]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[21] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5C"
                 app:layout_constraintStart_toEndOf="@id/textView_5A" />
@@ -293,6 +318,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[22] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[22]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[22] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5D"
                 app:layout_constraintStart_toEndOf="@id/textView_5B" />
@@ -302,6 +328,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[23] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[23]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[23] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5E"
                 app:layout_constraintStart_toEndOf="@id/textView_5C" />
@@ -311,6 +338,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[24] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[24]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[24] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_5D" />
@@ -330,6 +358,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[25] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[25]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[25] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6B"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -340,6 +369,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[26] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[26]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[26] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6C"
                 app:layout_constraintStart_toEndOf="@id/textView_6A" />
@@ -349,6 +379,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[27] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[27]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[27] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6D"
                 app:layout_constraintStart_toEndOf="@id/textView_6B" />
@@ -358,6 +389,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[28] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[28]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[28] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6E"
                 app:layout_constraintStart_toEndOf="@id/textView_6C" />
@@ -367,6 +399,7 @@
                 style="@style/Widget.Wordle.TextView.WordsGrid"
                 android:background="@{ContextCompat.getDrawable(context, viewModel.colors[29] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[29]}"
+                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[29] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_6D" />
@@ -378,6 +411,7 @@
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Q'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('Q')}"
             android:text="@string/q"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
@@ -390,6 +424,7 @@
             android:id="@+id/w_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['W'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('W')}"
             android:text="@string/w"
             app:layout_constraintEnd_toStartOf="@id/e_button"
@@ -401,6 +436,7 @@
             android:id="@+id/e_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['E'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('E')}"
             android:text="@string/e"
             app:layout_constraintEnd_toStartOf="@id/r_button"
@@ -412,6 +448,7 @@
             android:id="@+id/r_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['R'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('R')}"
             android:text="@string/r"
             app:layout_constraintEnd_toStartOf="@id/t_button"
@@ -423,6 +460,7 @@
             android:id="@+id/t_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['T'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('T')}"
             android:text="@string/t"
             app:layout_constraintEnd_toStartOf="@id/y_button"
@@ -434,6 +472,7 @@
             android:id="@+id/y_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Y'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('Y')}"
             android:text="@string/y"
             app:layout_constraintEnd_toStartOf="@id/u_button"
@@ -445,6 +484,7 @@
             android:id="@+id/u_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['U'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('U')}"
             android:text="@string/u"
             app:layout_constraintEnd_toStartOf="@id/i_button"
@@ -456,6 +496,7 @@
             android:id="@+id/i_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['I'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('I')}"
             android:text="@string/i"
             app:layout_constraintEnd_toStartOf="@id/o_button"
@@ -467,6 +508,7 @@
             android:id="@+id/o_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['O'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('O')}"
             android:text="@string/o"
             app:layout_constraintEnd_toStartOf="@id/p_button"
@@ -478,6 +520,7 @@
             android:id="@+id/p_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="64dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['P'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('P')}"
             android:text="@string/p"
             app:layout_constraintEnd_toEndOf="parent"
@@ -489,6 +532,7 @@
             android:id="@+id/a_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginStart="20dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['A'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('A')}"
             android:text="@string/a"
             app:layout_constraintEnd_toStartOf="@id/s_button"
@@ -500,6 +544,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/s_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['S'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('S')}"
             android:text="@string/s"
             app:layout_constraintEnd_toStartOf="@id/d_button"
@@ -510,6 +555,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/d_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['D'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('D')}"
             android:text="@string/d"
             app:layout_constraintEnd_toStartOf="@id/f_button"
@@ -520,6 +566,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/f_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['F'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('F')}"
             android:text="@string/f"
             app:layout_constraintEnd_toStartOf="@id/g_button"
@@ -530,6 +577,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/g_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['G'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('G')}"
             android:text="@string/g"
             app:layout_constraintEnd_toStartOf="@id/h_button"
@@ -540,6 +588,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/h_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['H'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('H')}"
             android:text="@string/h"
             app:layout_constraintEnd_toStartOf="@id/j_button"
@@ -550,6 +599,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/j_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['J'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('J')}"
             android:text="@string/j"
             app:layout_constraintEnd_toStartOf="@id/k_button"
@@ -560,6 +610,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/k_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['K'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('K')}"
             android:text="@string/k"
             app:layout_constraintEnd_toStartOf="@id/l_button"
@@ -571,6 +622,7 @@
             android:id="@+id/l_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginEnd="20dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['L'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('L')}"
             android:text="@string/l"
             app:layout_constraintEnd_toEndOf="parent"
@@ -592,6 +644,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/z_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Z'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('Z')}"
             android:text="@string/z"
             app:layout_constraintEnd_toStartOf="@id/x_button"
@@ -602,6 +655,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/x_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['X'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('X')}"
             android:text="@string/x"
             app:layout_constraintEnd_toStartOf="@id/c_button"
@@ -612,6 +666,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/c_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['C'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('C')}"
             android:text="@string/c"
             app:layout_constraintEnd_toStartOf="@id/v_button"
@@ -622,6 +677,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/v_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['V'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('V')}"
             android:text="@string/v"
             app:layout_constraintEnd_toStartOf="@id/b_button"
@@ -632,6 +688,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['B'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('B')}"
             android:text="@string/b"
             app:layout_constraintEnd_toStartOf="@id/n_button"
@@ -642,6 +699,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/n_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['N'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('N')}"
             android:text="@string/n"
             app:layout_constraintEnd_toStartOf="@id/m_button"
@@ -652,6 +710,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/m_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['M'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> viewModel.setText('M')}"
             android:text="@string/m"
             app:layout_constraintEnd_toStartOf="@id/delete_button"
@@ -663,12 +722,14 @@
             android:id="@+id/delete_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_width="56dp"
+            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors[' '] ?? viewModel.keyColor)}"
             android:contentDescription="@string/delete"
             android:onClick="@{() -> viewModel.setText(' ')}"
             android:onLongClick="@{() -> viewModel.clearRow()}"
             app:icon="@android:drawable/ic_input_delete"
             app:iconGravity="textEnd"
             app:iconPadding="0dp"
+            app:iconTint="@color/text_color"
             app:iconTintMode="src_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/m_button"
