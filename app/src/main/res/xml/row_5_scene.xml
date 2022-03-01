@@ -2,6 +2,18 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
+    <!-- Pop Animation -->
+    <ViewTransition
+        android:id="@+id/pop"
+        motion:duration="100">
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="40"
+                android:scaleX="1.125"
+                android:scaleY="1.125" />
+        </KeyFrameSet>
+    </ViewTransition>
+
     <!-- Wiggle Animation -->
     <Transition
         android:id="@+id/wiggle"
@@ -154,7 +166,7 @@
         <KeyFrameSet>
             <!-- Tile A -->
             <KeyTrigger
-                motion:framePosition="9"
+                motion:framePosition="10"
                 motion:motionTarget="@id/textView_5A"
                 motion:triggerId="@+id/transform_A" />
             <KeyAttribute
@@ -168,7 +180,7 @@
                 motion:framePosition="20"
                 motion:motionTarget="@id/textView_5B" />
             <KeyTrigger
-                motion:framePosition="29"
+                motion:framePosition="30"
                 motion:motionTarget="@id/textView_5B"
                 motion:triggerId="@+id/transform_B" />
             <KeyAttribute
@@ -182,7 +194,7 @@
                 motion:framePosition="40"
                 motion:motionTarget="@id/textView_5C" />
             <KeyTrigger
-                motion:framePosition="49"
+                motion:framePosition="50"
                 motion:motionTarget="@id/textView_5C"
                 motion:triggerId="@+id/transform_C" />
             <KeyAttribute
@@ -196,7 +208,7 @@
                 motion:framePosition="60"
                 motion:motionTarget="@id/textView_5D" />
             <KeyTrigger
-                motion:framePosition="69"
+                motion:framePosition="70"
                 motion:motionTarget="@id/textView_5D"
                 motion:triggerId="@+id/transform_D" />
             <KeyAttribute
@@ -210,7 +222,7 @@
                 motion:framePosition="80"
                 motion:motionTarget="@id/textView_5E" />
             <KeyTrigger
-                motion:framePosition="89"
+                motion:framePosition="90"
                 motion:motionTarget="@id/textView_5E"
                 motion:triggerId="@+id/transform_E" />
         </KeyFrameSet>

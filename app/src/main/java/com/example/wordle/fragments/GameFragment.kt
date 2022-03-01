@@ -61,6 +61,15 @@ class GameFragment : Fragment() {
         return binding!!.gameLayout[gameViewModel.tries.value!!.plus(1)] as MotionLayout
     }
 
+    // retrieves the currently active tile or the last in the row if it is full
+    private fun getTile(): View {
+        return if (gameViewModel.currentWord.value?.length!! == 5) {
+            getRow()[4]
+        } else {
+            getRow()[gameViewModel.currentWord.value?.length!!]
+        }
+    }
+
     // disables enter_button and backspace_button while animations play to prevent errors
     private fun disableButtons() {
         binding!!.enterButton.isEnabled = false
@@ -79,10 +88,17 @@ class GameFragment : Fragment() {
         disableButtons()
         val str = gameViewModel.currentWord.value!!
         when (gameViewModel.isAWord(str)) {
-            0 -> revealHints(str)
-            1 -> notAWord()
-            2 -> tooShort()
+            0 -> tooShort()
+            1 -> revealHints(str)
+            2 -> notAWord()
         }
+    }
+
+    fun setText(char: Char) {
+        if (char != ' ' && gameViewModel.currentWord.value?.length != 5) {
+            getRow().viewTransition(R.id.pop, getTile())
+        }
+        gameViewModel.updateText(char)
     }
 
     // Checks if the word is the correct word and moves to the next row if not
@@ -99,9 +115,9 @@ class GameFragment : Fragment() {
     }
 
     // rotates textViews to be right side up and sets the colors
-    private fun transform(int: Int, hint: Int, motionLayout: MotionLayout) {
-        gameViewModel.updateColors(hint)
-        val textView: TextView = motionLayout[int] as TextView
+    private fun transform(ind: Int, hint: Int, motionLayout: MotionLayout) {
+        gameViewModel.updateColors(ind, hint)
+        val textView: TextView = motionLayout[ind] as TextView
         textView.rotation = 180F
         textView.rotationY = 180F
     }
@@ -121,7 +137,6 @@ class GameFragment : Fragment() {
                 ) {
                     Log.d("TransitionListener", ".addTransitionListener() called")
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    Log.d("Listener", "progress = $progress")
                     when (progress.times(10).roundToInt()) {
                         1 -> transform(0, hints[0], motionLayout)
                         3 -> transform(1, hints[1], motionLayout)

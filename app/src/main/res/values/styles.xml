@@ -10,13 +10,24 @@
 
     <!-- Words Grid Tiles Style -->
     <style name="Widget.Wordle.TextView.WordsGrid" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <!-- Words Grid Tiles Style -->
+    <style name="Widget.Wordle.TextView.Header" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">34sp</item>
     </style>
+
 
     <!-- Keyboard Buttons Style -->
     <style name="Widget.Wordle.Button.Keyboard" parent="Widget.MaterialComponents.Button">

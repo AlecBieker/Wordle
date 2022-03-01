@@ -23,9 +23,9 @@ class GameViewModel : ViewModel() {
     private val _letters = MutableLiveData<List<String>>()
     val letters: LiveData<List<String>> = _letters
 
-    // color of the textView Backgrounds
-    private val _colors = MutableLiveData<List<Int>>()
-    val colors: LiveData<List<Int>> = _colors
+    // colors or drawable resources of the textView Backgrounds
+    private val _backgrounds = MutableLiveData<List<Int>>()
+    val backgrounds: LiveData<List<Int>> = _backgrounds
 
     // color of the textView texts
     private val _textColors = MutableLiveData<List<Int>>()
@@ -61,21 +61,23 @@ class GameViewModel : ViewModel() {
         _currentWord.value = ""
         _tries.value = 0
         _letters.value = listOf()
-        _colors.value = listOf()
+        _backgrounds.value = listOf()
         _textColors.value = listOf()
         _keyColors.value = mapOf()
         _keyTextColors.value = mapOf()
     }
 
     // updates the letters and currentWord val
-    fun setText(char: Char) {
+    fun updateText(char: Char) {
         Log.d("GameViewModel", "setText($char) called")
         val size = _currentWord.value!!.length
         if (char == ' ' && size != 0) {
             _letters.value = _letters.value?.dropLast(1)
+            _backgrounds.value = _backgrounds.value?.dropLast(1)
             _currentWord.value = _currentWord.value?.dropLast(1)
         } else if (char != ' ' && size != 5) {
             _letters.value = _letters.value?.plus(char.toString())
+            _backgrounds.value = _backgrounds.value?.plus(R.drawable.filled_border)
             _currentWord.value += char
         }
     }
@@ -90,43 +92,39 @@ class GameViewModel : ViewModel() {
     }
 
     // updates the colors liveData val to
-    fun updateColors(hint: Int) {
-        _colors.value = _colors.value!!.plus(hint)
+    fun updateColors(ind: Int, hint: Int) {
+        val i: Int = _backgrounds.value!!.size.minus(5).plus(ind)
+        val mutableBackgrounds = _backgrounds.value!!.toMutableList()
+        mutableBackgrounds[i] = hint
+        _backgrounds.value = mutableBackgrounds.toList()
         _textColors.value = _textColors.value!!.plus(R.color.hint_text_color)
     }
 
+    // updates the key background and text colors
     fun updateKeyColors(str: String, hints: List<Int>) {
-        val map = _keyColors.value?.toMutableMap()
-        val textMap = _keyTextColors.value?.toMutableMap()
+        val map = _keyColors.value!!.toMutableMap()
+        val textMap = _keyTextColors.value!!.toMutableMap()
         for (i in 0..4) {
             val char = str[i]
             val color = hints[i]
-            if (color == R.color.green) {
-                map?.set(char, color)
-                textMap?.set(char, R.color.hint_text_color)
-            } else if (color == R.color.yellow && map?.get(char) != R.color.green) {
-                map?.set(char, color)
-                textMap?.set(char, R.color.hint_text_color)
-            } else if (color == R.color.gray && map?.get(char) == null) {
-                map?.set(char, color)
-                textMap?.set(char, R.color.hint_text_color)
+            if (color == R.color.yellow && map[char] == R.color.green) {
+                continue
+            } else {
+                map[char] = color
+                textMap[char] = R.color.hint_text_color
             }
         }
-        _keyColors.value = map?.toMap()
-        _keyTextColors.value = textMap?.toMap()
+        _keyColors.value = map.toMap()
+        _keyTextColors.value = textMap.toMap()
     }
 
     // checks if the word is a valid word from the list
     fun isAWord(str: String): Int {
         Log.d("GameViewModel", "isAWord() called")
-        return if (str.length == 5) {
-            if (str in wordsList1 || str in wordsList2) {
-                0
-            } else {
-                1
-            }
-        } else {
-            2
+        return when {
+            str.length != 5 -> 0
+            str in wordsList1 || str in wordsList2 -> 1
+            else -> 2
         }
     }
 
