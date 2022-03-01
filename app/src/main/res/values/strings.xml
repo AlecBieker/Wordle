@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Wordle</string>
     <string name="wordle_header">WORDLE</string>
     <string name="delete">delete</string>
@@ -36,4 +36,7 @@
     <string name="try_again">TRY AGAIN</string>
     <string name="quit_game">QUIT GAME</string>
     <string name="play_again">PLAY AGAIN</string>
+    <string name="start_new_game">START NEW GAME</string>
+    <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="are_you_sure">ARE YOU SURE?</string>
 </resources>

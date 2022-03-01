@@ -15,35 +15,94 @@
             type="com.example.wordle.fragments.StartFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layoutDescription="@xml/start_fragment_scene">
+
+        <TextView
+            android:id="@+id/w_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:text="@string/w"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/o_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/r_header" />
+
+        <TextView
+            android:id="@+id/o_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:text="@string/o"
+            app:layout_constraintEnd_toStartOf="@id/r_header"
+            app:layout_constraintStart_toEndOf="@id/w_header"
+            app:layout_constraintTop_toTopOf="@id/r_header" />
+
+        <TextView
+            android:id="@+id/r_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:layout_marginBottom="64dp"
+            android:text="@string/r"
+            app:layout_constraintBottom_toTopOf="@id/resume_button"
+            app:layout_constraintEnd_toStartOf="@id/d_header"
+            app:layout_constraintStart_toEndOf="@id/o_header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/d_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:text="@string/d"
+            app:layout_constraintEnd_toStartOf="@id/l_header"
+            app:layout_constraintStart_toEndOf="@id/r_header"
+            app:layout_constraintTop_toTopOf="@id/r_header" />
+
+        <TextView
+            android:id="@+id/l_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:text="@string/l"
+            app:layout_constraintEnd_toStartOf="@id/e_header"
+            app:layout_constraintStart_toEndOf="@id/d_header"
+            app:layout_constraintTop_toTopOf="@id/r_header" />
+
+        <TextView
+            android:id="@+id/e_header"
+            style="@style/Widget.Wordle.TextView.WordsGrid"
+            android:background="@drawable/border"
+            android:text="@string/e"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/l_header"
+            app:layout_constraintTop_toTopOf="@id/r_header" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/resume_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:onClick="@{() -> startFragment.resumeGame()}"
             android:text="@string/resume"
-            android:layout_margin="16dp"
             app:layout_constraintBottom_toTopOf="@id/new_game_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toBottomOf="@id/r_header" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/new_game_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> startFragment.newGame()}"
-            android:text="@string/new_game"
             android:layout_margin="16dp"
+            android:onClick="@{() -> startFragment.newGameDialog()}"
+            android:text="@string/new_game"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resume_button" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

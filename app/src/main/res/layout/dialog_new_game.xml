@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.GameOverDialog">
+    tools:context=".dialogs.NewGameDialog">
 
     <data>
 
@@ -11,8 +12,8 @@
             type="com.example.wordle.model.GameViewModel" />
 
         <variable
-            name="gameOverDialog"
-            type="com.example.wordle.dialogs.GameOverDialog" />
+            name="newGameDialog"
+            type="com.example.wordle.dialogs.NewGameDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,41 +22,39 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/game_over_textView"
+            android:id="@+id/are_you_sure_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/game_over"
+            android:layout_margin="16dp"
+            android:text="@string/are_you_sure"
+            android:textAlignment="center"
             android:textSize="24sp"
-            android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/try_again_button" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/try_again_button"
+            android:id="@+id/start_new_game_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/try_again"
+            android:text="@string/start_new_game"
             android:layout_margin="16dp"
-            android:onClick="@{() -> gameOverDialog.tryAgain()}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> newGameDialog.newGame()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_over_textView"
-            app:layout_constraintBottom_toTopOf="@id/quit_game_button" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/are_you_sure_textView" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/quit_game_button"
+            android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> gameOverDialog.quitGame()}"
-            android:text="@string/quit_game"
+            android:text="@string/cancel"
             android:layout_margin="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> newGameDialog.cancel()}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/try_again_button" />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start_new_game_button"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

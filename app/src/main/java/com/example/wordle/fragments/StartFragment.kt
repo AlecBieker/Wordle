@@ -46,16 +46,9 @@ class StartFragment : Fragment() {
         }
     }
 
-    /**
-     * Start a new game and navigate to the next screen
-     */
-    fun newGame() {
-        Log.d("StartFragment", "newGame() called")
-        // Start a new game
-        gameViewModel.newGame()
-
-        // Navigate to the game screen
-        findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+    // Shows the start new game confirmation dialog
+    fun newGameDialog() {
+        findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
     }
 
     /**

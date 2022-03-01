@@ -56,4 +56,9 @@ class WinnerDialog : DialogFragment() {
     }
 
 
+    override fun onDestroyView() {
+        Log.d("GameFragment", "onDestroyView() called")
+        super.onDestroyView()
+        binding = null
+    }
 }

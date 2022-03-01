@@ -34,6 +34,9 @@ class GameViewModel : ViewModel() {
     private val _keyColors = MutableLiveData<Map<Char, Int>>()
     val keyColors: LiveData<Map<Char, Int>> = _keyColors
 
+    private val _keyTextColors = MutableLiveData<Map<Char, Int>>()
+    val keyTextColors: LiveData<Map<Char, Int>> = _keyTextColors
+
     // border drawable for textViews that don't have a color set yet
     val border = R.drawable.border
 
@@ -61,6 +64,7 @@ class GameViewModel : ViewModel() {
         _colors.value = listOf()
         _textColors.value = listOf()
         _keyColors.value = mapOf()
+        _keyTextColors.value = mapOf()
     }
 
     // updates the letters and currentWord val
@@ -92,19 +96,38 @@ class GameViewModel : ViewModel() {
     }
 
     fun updateKeyColors(str: String, hints: List<Int>) {
-        val map = keyColors.value?.toMutableMap()
+        val map = _keyColors.value?.toMutableMap()
+        val textMap = _keyTextColors.value?.toMutableMap()
         for (i in 0..4) {
             val char = str[i]
             val color = hints[i]
             if (color == R.color.green) {
                 map?.set(char, color)
+                textMap?.set(char, R.color.hint_text_color)
             } else if (color == R.color.yellow && map?.get(char) != R.color.green) {
                 map?.set(char, color)
+                textMap?.set(char, R.color.hint_text_color)
             } else if (color == R.color.gray && map?.get(char) == null) {
                 map?.set(char, color)
+                textMap?.set(char, R.color.hint_text_color)
             }
         }
         _keyColors.value = map?.toMap()
+        _keyTextColors.value = textMap?.toMap()
+    }
+
+    // checks if the word is a valid word from the list
+    fun isAWord(str: String): Int {
+        Log.d("GameViewModel", "isAWord() called")
+        return if (str.length == 5) {
+            if (str in wordsList1 || str in wordsList2) {
+                0
+            } else {
+                1
+            }
+        } else {
+            2
+        }
     }
 
     // checks each letter for whether it is correct, present or absent

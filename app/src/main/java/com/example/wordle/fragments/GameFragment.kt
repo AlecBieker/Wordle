@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.get
@@ -16,9 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 import com.example.wordle.model.GameViewModel
-import com.example.wordle.wordsList1
-import com.example.wordle.wordsList2
 import kotlin.math.roundToInt
+import android.widget.Toast
 
 /**
  * This is the game screen of the Wordle app
@@ -33,14 +31,16 @@ class GameFragment : Fragment() {
     // reference to the viewModel
     private val gameViewModel: GameViewModel by activityViewModels()
 
+    // toast var for use by notAWord() and tooShort()
+    private var toast: Toast? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         Log.d("GameFragment", "onCreateView() called")
-        val fragmentBinding = FragmentGameBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
-        return fragmentBinding.root
+        binding  = FragmentGameBinding.inflate(inflater, container, false)
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,18 +74,14 @@ class GameFragment : Fragment() {
     }
 
     // checks if the word is a valid word from the list
-    fun isAWord() {
-        Log.d("GameFragment", "isAWord() called")
+    fun onEnter() {
+        Log.d("GameFragment", "onEnter() called")
         disableButtons()
-        val str = gameViewModel.currentWord.value
-        if (str?.length == 5) {
-            if (str in wordsList1 || str in wordsList2) {
-                revealHints(str)
-            } else {
-                notAWord()
-            }
-        } else {
-            tooShort()
+        val str = gameViewModel.currentWord.value!!
+        when (gameViewModel.isAWord(str)) {
+            0 -> revealHints(str)
+            1 -> notAWord()
+            2 -> tooShort()
         }
     }
 
@@ -155,14 +151,18 @@ class GameFragment : Fragment() {
     // creates a toast stating the word is not in the words list and calls wiggle()
     private fun notAWord() {
         Log.d("GameFragment", "notAWord() called")
-        Toast.makeText(context, "Not in words list", Toast.LENGTH_SHORT).show()
+        if (toast != null) toast?.cancel()
+        toast = Toast.makeText(context, "Not in words list", Toast.LENGTH_SHORT)
+        toast?.show()
         wiggle()
     }
 
     // creates a toast stating the word is too short and calls wiggle()
     private fun tooShort() {
         Log.d("GameFragment", "tooShort() called")
-        Toast.makeText(context, "Not enough letters", Toast.LENGTH_SHORT).show()
+        if (toast != null) toast?.cancel()
+        toast = Toast.makeText(context, "Not enough letters", Toast.LENGTH_SHORT)
+        toast?.show()
         wiggle()
     }
 

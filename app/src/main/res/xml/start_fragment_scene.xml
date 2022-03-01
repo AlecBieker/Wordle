@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- Flip Tiles Animation -->
+    <Transition
+        android:id="@+id/flip_tiles"
+        motion:constraintSetEnd="@id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2400"
+        motion:motionInterpolator="linear">
+
+        <KeyFrameSet>
+            <!-- Tile W -->
+            <KeyTrigger
+                motion:framePosition="8"
+                motion:motionTarget="@id/w_header"
+                motion:triggerId="@+id/transform_W" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="16"
+                motion:motionTarget="@id/w_header" />
+
+            <!-- Tile O -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="16"
+                motion:motionTarget="@id/o_header" />
+            <KeyTrigger
+                motion:framePosition="24"
+                motion:motionTarget="@id/o_header"
+                motion:triggerId="@+id/transform_O" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="32"
+                motion:motionTarget="@id/o_header" />
+
+            <!-- Tile R -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="32"
+                motion:motionTarget="@id/r_header" />
+            <KeyTrigger
+                motion:framePosition="40"
+                motion:motionTarget="@id/r_header"
+                motion:triggerId="@+id/transform_R" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="48"
+                motion:motionTarget="@id/r_header" />
+
+            <!-- Tile D -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="48"
+                motion:motionTarget="@id/d_header" />
+            <KeyTrigger
+                motion:framePosition="56"
+                motion:motionTarget="@id/d_header"
+                motion:triggerId="@+id/transform_D" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="64"
+                motion:motionTarget="@id/d_header" />
+
+            <!-- Tile L -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="64"
+                motion:motionTarget="@id/l_header" />
+            <KeyTrigger
+                motion:framePosition="72"
+                motion:motionTarget="@id/l_header"
+                motion:triggerId="@+id/transform_L" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="80"
+                motion:motionTarget="@id/l_header" />
+
+            <!-- Tile E -->
+            <KeyAttribute
+                android:rotationX="0"
+                motion:framePosition="80"
+                motion:motionTarget="@id/e_header" />
+            <KeyTrigger
+                motion:framePosition="88"
+                motion:motionTarget="@id/e_header"
+                motion:triggerId="@+id/transform_E" />
+            <KeyAttribute
+                android:rotationX="180"
+                motion:framePosition="96"
+                motion:motionTarget="@id/e_header" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!-- Bounce Animation -->
+    <Transition
+        android:id="@+id/bounce"
+        motion:constraintSetEnd="@id/start"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2000"
+        motion:motionInterpolator="linear">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="6"
+                motion:motionTarget="@id/w_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="18"
+                motion:motionTarget="@id/w_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="24"
+                motion:motionTarget="@id/w_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="36"
+                motion:motionTarget="@id/w_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="10"
+                motion:motionTarget="@id/o_header" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="16"
+                motion:motionTarget="@id/o_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="28"
+                motion:motionTarget="@id/o_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="34"
+                motion:motionTarget="@id/o_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="46"
+                motion:motionTarget="@id/o_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="20"
+                motion:motionTarget="@id/r_header" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="26"
+                motion:motionTarget="@id/r_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="38"
+                motion:motionTarget="@id/r_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="44"
+                motion:motionTarget="@id/r_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="56"
+                motion:motionTarget="@id/r_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="30"
+                motion:motionTarget="@id/d_header" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="36"
+                motion:motionTarget="@id/d_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="48"
+                motion:motionTarget="@id/d_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="54"
+                motion:motionTarget="@id/d_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="66"
+                motion:motionTarget="@id/d_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="40"
+                motion:motionTarget="@id/l_header" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="46"
+                motion:motionTarget="@id/l_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="58"
+                motion:motionTarget="@id/l_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="64"
+                motion:motionTarget="@id/l_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="76"
+                motion:motionTarget="@id/l_header" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/w_header" />
+        <Constraint android:id="@+id/o_header" />
+        <Constraint android:id="@+id/r_header" />
+        <Constraint android:id="@+id/d_header" />
+        <Constraint android:id="@+id/l_header" />
+        <Constraint android:id="@+id/e_header" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@+id/w_header" />
+        <Constraint android:id="@+id/o_header" />
+        <Constraint android:id="@+id/r_header" />
+        <Constraint android:id="@+id/d_header" />
+        <Constraint android:id="@+id/l_header" />
+        <Constraint android:id="@+id/e_header" />
+    </ConstraintSet>
+</MotionScene>

@@ -9,13 +9,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
-import com.example.wordle.databinding.DialogGameOverBinding
+import com.example.wordle.databinding.DialogNewGameBinding
 import com.example.wordle.model.GameViewModel
 
-class GameOverDialog : DialogFragment() {
+class NewGameDialog : DialogFragment() {
 
     // Binding object instance corresponding to the start_fragment.xml layout
-    private var binding: DialogGameOverBinding? = null
+    private var binding: DialogNewGameBinding? = null
 
     private val viewModel: GameViewModel by activityViewModels()
 
@@ -23,13 +23,13 @@ class GameOverDialog : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("GameOverDialog", "onCreateView() called")
-        binding = DialogGameOverBinding.inflate(inflater, container, false)
+        Log.d("NewGameDialog", "onCreateView() called")
+        binding = DialogNewGameBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("GameOverDialog", "onViewCreated() called")
+        Log.d("NewGameDialog", "onViewCreated() called")
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             // Specify the fragment as the lifecycle owner
@@ -39,19 +39,18 @@ class GameOverDialog : DialogFragment() {
             viewModel = viewModel
 
             // Assign the fragment
-            gameOverDialog = this@GameOverDialog
+            newGameDialog = this@NewGameDialog
         }
     }
 
-    // starts a new game and navigates back to GameFragment
-    fun tryAgain() {
+    fun newGame() {
         viewModel.newGame()
-        findNavController().navigate(R.id.action_gameOverDialog_to_gameFragment)
+
+        findNavController().navigate(R.id.action_newGameDialog_to_gameFragment)
     }
 
-    // navigates back to the StartFragment
-    fun quitGame() {
-        findNavController().navigate(R.id.action_gameOverDialog_to_startFragment)
+    fun cancel() {
+        findNavController().navigate(R.id.action_newGameDialog_to_startFragment)
     }
 
 
@@ -60,5 +59,4 @@ class GameOverDialog : DialogFragment() {
         super.onDestroyView()
         binding = null
     }
-
 }
