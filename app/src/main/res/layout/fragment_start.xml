@@ -16,7 +16,7 @@
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/motion_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
@@ -26,7 +26,6 @@
             android:id="@+id/w_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:text="@string/w"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@id/o_header"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +35,6 @@
             android:id="@+id/o_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:text="@string/o"
             app:layout_constraintEnd_toStartOf="@id/r_header"
             app:layout_constraintStart_toEndOf="@id/w_header"
             app:layout_constraintTop_toTopOf="@id/r_header" />
@@ -46,7 +44,6 @@
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
             android:layout_marginBottom="64dp"
-            android:text="@string/r"
             app:layout_constraintBottom_toTopOf="@id/resume_button"
             app:layout_constraintEnd_toStartOf="@id/d_header"
             app:layout_constraintStart_toEndOf="@id/o_header"
@@ -57,7 +54,6 @@
             android:id="@+id/d_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:text="@string/d"
             app:layout_constraintEnd_toStartOf="@id/l_header"
             app:layout_constraintStart_toEndOf="@id/r_header"
             app:layout_constraintTop_toTopOf="@id/r_header" />
@@ -66,7 +62,6 @@
             android:id="@+id/l_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:text="@string/l"
             app:layout_constraintEnd_toStartOf="@id/e_header"
             app:layout_constraintStart_toEndOf="@id/d_header"
             app:layout_constraintTop_toTopOf="@id/r_header" />
@@ -75,7 +70,6 @@
             android:id="@+id/e_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:text="@string/e"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/l_header"
             app:layout_constraintTop_toTopOf="@id/r_header" />

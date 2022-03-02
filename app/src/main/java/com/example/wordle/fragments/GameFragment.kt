@@ -135,7 +135,6 @@ class GameFragment : Fragment() {
                     positive: Boolean,
                     progress: Float
                 ) {
-                    Log.d("TransitionListener", ".addTransitionListener() called")
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
                     when (progress.times(10).roundToInt()) {
                         1 -> transform(0, hints[0], motionLayout)

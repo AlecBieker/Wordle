@@ -167,8 +167,7 @@
             <!-- Tile A -->
             <KeyTrigger
                 motion:framePosition="10"
-                motion:motionTarget="@id/textView_2A"
-                motion:triggerId="@+id/transform_A" />
+                motion:motionTarget="@id/textView_2A" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="20"
@@ -181,8 +180,7 @@
                 motion:motionTarget="@id/textView_2B" />
             <KeyTrigger
                 motion:framePosition="30"
-                motion:motionTarget="@id/textView_2B"
-                motion:triggerId="@+id/transform_B" />
+                motion:motionTarget="@id/textView_2B" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="40"
@@ -195,8 +193,7 @@
                 motion:motionTarget="@id/textView_2C" />
             <KeyTrigger
                 motion:framePosition="50"
-                motion:motionTarget="@id/textView_2C"
-                motion:triggerId="@+id/transform_C" />
+                motion:motionTarget="@id/textView_2C" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="60"
@@ -209,8 +206,7 @@
                 motion:motionTarget="@id/textView_2D" />
             <KeyTrigger
                 motion:framePosition="70"
-                motion:motionTarget="@id/textView_2D"
-                motion:triggerId="@+id/transform_D" />
+                motion:motionTarget="@id/textView_2D" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="80"
@@ -223,8 +219,7 @@
                 motion:motionTarget="@id/textView_2E" />
             <KeyTrigger
                 motion:framePosition="90"
-                motion:motionTarget="@id/textView_2E"
-                motion:triggerId="@+id/transform_E" />
+                motion:motionTarget="@id/textView_2E" />
         </KeyFrameSet>
     </Transition>
 
