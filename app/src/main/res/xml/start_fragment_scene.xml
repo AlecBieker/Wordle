@@ -12,6 +12,7 @@
         <KeyFrameSet>
             <!-- W Header -->
             <KeyTrigger
+                motion:triggerId="@+id/set_w_text"
                 motion:framePosition="0"
                 motion:motionTarget="@id/w_header" />
             <KeyAttribute
@@ -31,6 +32,7 @@
                 motion:motionTarget="@id/o_header"
                 motion:framePosition="16" />
             <KeyTrigger
+                motion:triggerId="@+id/set_o_text"
                 motion:framePosition="16"
                 motion:motionTarget="@id/o_header" />
             <KeyAttribute
@@ -50,6 +52,7 @@
                 motion:motionTarget="@id/r_header"
                 motion:framePosition="32" />
             <KeyTrigger
+                motion:triggerId="@+id/set_r_text"
                 motion:framePosition="32"
                 motion:motionTarget="@id/r_header" />
             <KeyAttribute
@@ -69,6 +72,7 @@
                 motion:motionTarget="@id/d_header"
                 motion:framePosition="48" />
             <KeyTrigger
+                motion:triggerId="@+id/set_d_text"
                 motion:framePosition="48"
                 motion:motionTarget="@id/d_header" />
             <KeyAttribute
@@ -88,6 +92,7 @@
                 motion:motionTarget="@id/l_header"
                 motion:framePosition="64" />
             <KeyTrigger
+                motion:triggerId="@+id/set_l_text"
                 motion:framePosition="64"
                 motion:motionTarget="@id/l_header" />
             <KeyAttribute
@@ -107,6 +112,7 @@
                 motion:motionTarget="@id/e_header"
                 motion:framePosition="80" />
             <KeyTrigger
+                motion:triggerId="@+id/set_e_text"
                 motion:framePosition="80"
                 motion:motionTarget="@id/e_header" />
             <KeyAttribute
@@ -136,7 +142,7 @@
             <KeyTrigger
                 motion:framePosition="8"
                 motion:motionTarget="@id/w_header"
-                motion:triggerId="@+id/transform_W" />
+                motion:triggerId="@+id/transform_w" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="16"
@@ -150,7 +156,7 @@
             <KeyTrigger
                 motion:framePosition="24"
                 motion:motionTarget="@id/o_header"
-                motion:triggerId="@+id/transform_O" />
+                motion:triggerId="@+id/transform_o" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="32"
@@ -164,7 +170,7 @@
             <KeyTrigger
                 motion:framePosition="40"
                 motion:motionTarget="@id/r_header"
-                motion:triggerId="@+id/transform_R" />
+                motion:triggerId="@+id/transform_r" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="48"
@@ -178,7 +184,7 @@
             <KeyTrigger
                 motion:framePosition="56"
                 motion:motionTarget="@id/d_header"
-                motion:triggerId="@+id/transform_D" />
+                motion:triggerId="@+id/transform_d" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="64"
@@ -192,7 +198,7 @@
             <KeyTrigger
                 motion:framePosition="72"
                 motion:motionTarget="@id/l_header"
-                motion:triggerId="@+id/transform_L" />
+                motion:triggerId="@+id/transform_l" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="80"
@@ -206,7 +212,7 @@
             <KeyTrigger
                 motion:framePosition="88"
                 motion:motionTarget="@id/e_header"
-                motion:triggerId="@+id/transform_E" />
+                motion:triggerId="@+id/transform_e" />
             <KeyAttribute
                 android:rotationX="180"
                 motion:framePosition="96"
@@ -222,6 +228,7 @@
         motion:duration="2000"
         motion:motionInterpolator="linear">
         <KeyFrameSet>
+            <!-- W Header -->
             <KeyAttribute
                 android:translationY="-20dp"
                 motion:framePosition="6"
@@ -238,6 +245,7 @@
                 android:translationY="0dp"
                 motion:framePosition="36"
                 motion:motionTarget="@id/w_header" />
+            <!-- O Header -->
             <KeyAttribute
                 android:translationY="0dp"
                 motion:framePosition="10"
@@ -258,6 +266,7 @@
                 android:translationY="0dp"
                 motion:framePosition="46"
                 motion:motionTarget="@id/o_header" />
+            <!-- R Header -->
             <KeyAttribute
                 android:translationY="0dp"
                 motion:framePosition="20"
@@ -278,6 +287,7 @@
                 android:translationY="0dp"
                 motion:framePosition="56"
                 motion:motionTarget="@id/r_header" />
+            <!-- D Header -->
             <KeyAttribute
                 android:translationY="0dp"
                 motion:framePosition="30"
@@ -298,6 +308,7 @@
                 android:translationY="0dp"
                 motion:framePosition="66"
                 motion:motionTarget="@id/d_header" />
+            <!-- L Header -->
             <KeyAttribute
                 android:translationY="0dp"
                 motion:framePosition="40"
@@ -318,6 +329,27 @@
                 android:translationY="0dp"
                 motion:framePosition="76"
                 motion:motionTarget="@id/l_header" />
+            <!-- E Header -->
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="50"
+                motion:motionTarget="@id/e_header" />
+            <KeyAttribute
+                android:translationY="-20dp"
+                motion:framePosition="56"
+                motion:motionTarget="@id/e_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="68"
+                motion:motionTarget="@id/e_header" />
+            <KeyAttribute
+                android:translationY="-8dp"
+                motion:framePosition="74"
+                motion:motionTarget="@id/e_header" />
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="86"
+                motion:motionTarget="@id/e_header"/>
         </KeyFrameSet>
     </Transition>
 

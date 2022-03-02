@@ -136,12 +136,14 @@ class GameFragment : Fragment() {
                     progress: Float
                 ) {
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    when (progress.times(10).roundToInt()) {
-                        1 -> transform(0, hints[0], motionLayout)
-                        3 -> transform(1, hints[1], motionLayout)
-                        5 -> transform(2, hints[2], motionLayout)
-                        7 -> transform(3, hints[3], motionLayout)
-                        9 -> transform(4, hints[4], motionLayout)
+                    if (0.001 < progress && progress < 1) {
+                        when (triggerId) {
+                            R.id.transform_A -> transform(0, hints[0], motionLayout)
+                            R.id.transform_B -> transform(1, hints[1], motionLayout)
+                            R.id.transform_C -> transform(2, hints[2], motionLayout)
+                            R.id.transform_D -> transform(3, hints[3], motionLayout)
+                            R.id.transform_E -> transform(4, hints[4], motionLayout)
+                        }
                     }
                 }
             }

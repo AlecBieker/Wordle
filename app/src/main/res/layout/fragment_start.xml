@@ -43,8 +43,7 @@
             android:id="@+id/r_header"
             style="@style/Widget.Wordle.TextView.Header"
             android:background="@drawable/border"
-            android:layout_marginBottom="64dp"
-            app:layout_constraintBottom_toTopOf="@id/resume_button"
+            android:layout_marginTop="128dp"
             app:layout_constraintEnd_toStartOf="@id/d_header"
             app:layout_constraintStart_toEndOf="@id/o_header"
             app:layout_constraintTop_toTopOf="parent"
@@ -81,10 +80,11 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> startFragment.resumeGame()}"
             android:text="@string/resume"
+            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/new_game_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/r_header" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/new_game_button"

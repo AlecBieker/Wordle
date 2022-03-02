@@ -1,23 +1,21 @@
 package com.example.wordle.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentStartBinding
 import com.example.wordle.model.GameViewModel
-import kotlinx.coroutines.delay
-import kotlin.math.roundToInt
+import java.util.*
+import kotlin.concurrent.schedule
 
 /**
  * This is the first screen of the Wordle app.
@@ -45,21 +43,31 @@ class StartFragment : Fragment() {
                 ) {
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
                     Log.d("TransitionTrigger", "progress = $progress")
-                    when (progress.times(10).roundToInt()) {
-                        0 -> binding!!.wHeader.text = "W"
+                    if (0.001 < progress && progress < 1) {
+                        when (triggerId) {
+                            R.id.set_w_text -> type("W", binding!!.wHeader)
+                            R.id.set_o_text -> type("O", binding!!.oHeader)
+                            R.id.set_r_text -> type("R", binding!!.rHeader)
+                            R.id.set_d_text -> type("D", binding!!.dHeader)
+                            R.id.set_l_text -> type("L", binding!!.lHeader)
+                            R.id.set_e_text -> type("E", binding!!.eHeader)
+                            R.id.transform_w -> transform(binding!!.wHeader)
+                            R.id.transform_o -> transform(binding!!.oHeader)
+                            R.id.transform_r -> transform(binding!!.rHeader)
+                            R.id.transform_d -> transform(binding!!.dHeader)
+                            R.id.transform_l -> transform(binding!!.lHeader)
+                            R.id.transform_e -> transform(binding!!.eHeader)
+                        }
                     }
                 }
             }
         )
-        binding!!.motionLayout.setTransition(R.id.type)
-        binding!!.motionLayout.transitionToEnd()
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d("StartFragment", "onViewCreated() called")
         super.onViewCreated(view, savedInstanceState)
-
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -70,38 +78,33 @@ class StartFragment : Fragment() {
             // Assign the fragment
             startFragment = this@StartFragment
         }
+        Timer().schedule(500) {
+            binding!!.motionLayout.setTransition(R.id.type)
+            binding!!.motionLayout.transitionToEnd {
+                binding!!.motionLayout.setTransition(R.id.flip_tiles)
+                binding!!.motionLayout.transitionToEnd {
+                    binding!!.motionLayout.setTransition(R.id.bounce)
+                    binding!!.motionLayout.transitionToEnd()
+                }
+            }
+        }
     }
 
+    private fun type(letter: String, textView: TextView) {
+        textView.text = letter
+        textView.setBackgroundResource(R.drawable.filled_border)
+    }
+
+    private fun transform(textView: TextView) {
+        textView.rotation = 180F
+        textView.rotationY = 180F
+        textView.setBackgroundResource(R.color.green)
+    }
 
     // Shows the start new game confirmation dialog
     fun newGameDialog() {
-        binding!!.motionLayout.addTransitionListener(
-            object : TransitionAdapter() {
-                override fun onTransitionTrigger(
-                    motionLayout: MotionLayout,
-                    triggerId: Int,
-                    positive: Boolean,
-                    progress: Float
-                ) {
-                    super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    Log.d("TransitionTrigger", "progress = $progress")
-                    when (progress.times(100).roundToInt()) {
-                        0 -> binding!!.wHeader.text = "W"
-                        17 -> binding!!.oHeader.text = "O"
-                        33 -> binding!!.rHeader.text = "R"
-                        49 -> binding!!.dHeader.text = "D"
-                        65 -> binding!!.lHeader.text = "L"
-                        81 -> binding!!.eHeader.text = "E"
-                    }
-                }
-            }
-        )
-        binding!!.motionLayout.setTransition(R.id.type)
-        binding!!.motionLayout.transitionToEnd()
-
-        // findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
+        findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
     }
-
 
     /**
      * Continue the game from before
