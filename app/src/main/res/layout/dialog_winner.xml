@@ -35,10 +35,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/play_again_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Wordle.Button.Dialog"
             android:text="@string/play_again"
-            android:layout_margin="16dp"
             android:onClick="@{() -> winnerDialog.playAgain()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,15 +44,23 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/quit_game_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Wordle.Button.Dialog"
             android:text="@string/quit_game"
-            android:layout_margin="16dp"
             android:onClick="@{() -> winnerDialog.quitGame()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/play_again_button"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/play_again_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/share_button"
+            style="@style/Widget.Wordle.Button.Dialog"
+            android:text="@string/share"
+            android:onClick="@{() -> winnerDialog.share()}"
+            app:icon="@android:drawable/ic_menu_share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/quit_game_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

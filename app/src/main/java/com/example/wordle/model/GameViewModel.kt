@@ -92,7 +92,7 @@ class GameViewModel : ViewModel() {
     }
 
     // updates the colors liveData val to
-    fun updateColors(ind: Int, hint: Int) {
+    fun updateBackgrounds(ind: Int, hint: Int) {
         val i: Int = _backgrounds.value!!.size.minus(5).plus(ind)
         val mutableBackgrounds = _backgrounds.value!!.toMutableList()
         mutableBackgrounds[i] = hint

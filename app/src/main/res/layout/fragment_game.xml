@@ -35,6 +35,7 @@
             android:text="@string/wordle_header"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/text_color"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +47,7 @@
             app:layoutDescription="@xml/row_1_scene"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/wordle_textView">
+            app:layout_constraintTop_toBottomOf="@id/wordle_textView">
 
             <TextView
                 android:id="@+id/textView_1A"

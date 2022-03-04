@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 import com.example.wordle.model.GameViewModel
-import kotlin.math.roundToInt
 import android.widget.Toast
 
 /**
@@ -116,7 +115,7 @@ class GameFragment : Fragment() {
 
     // rotates textViews to be right side up and sets the colors
     private fun transform(ind: Int, hint: Int, motionLayout: MotionLayout) {
-        gameViewModel.updateColors(ind, hint)
+        gameViewModel.updateBackgrounds(ind, hint)
         val textView: TextView = motionLayout[ind] as TextView
         textView.rotation = 180F
         textView.rotationY = 180F

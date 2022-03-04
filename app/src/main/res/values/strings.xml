@@ -39,4 +39,17 @@
     <string name="start_new_game">START NEW GAME</string>
     <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
     <string name="are_you_sure">ARE YOU SURE?</string>
+    <string name="share">SHARE</string>
+    <string name="game_summary">I won on my %1$s try!!</string>
+    <string-array name="ordinals">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+        <item>5th</item>
+        <item>6th</item>
+    </string-array>
+    <string name="green_square">🟩</string>
+    <string name="yellow_square">🟨</string>
+    <string name="black_square">⬛</string>
 </resources>

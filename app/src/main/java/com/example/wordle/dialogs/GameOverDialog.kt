@@ -56,7 +56,7 @@ class GameOverDialog : DialogFragment() {
 
 
     override fun onDestroyView() {
-        Log.d("GameFragment", "onDestroyView() called")
+        Log.d("GameOverDialog", "onDestroyView() called")
         super.onDestroyView()
         binding = null
     }
