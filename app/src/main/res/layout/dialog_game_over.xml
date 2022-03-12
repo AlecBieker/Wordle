@@ -16,41 +16,61 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/game_over_dialog_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
         <TextView
             android:id="@+id/game_over_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Wordle.TextView.Dialog"
             android:text="@string/game_over"
-            android:textSize="24sp"
-            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@id/the_answer_was_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/try_again_button" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/the_answer_was_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/the_answer_was"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/answer_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_over_textView" />
+
+        <TextView
+            android:id="@+id/answer_textView"
+            style="@style/Widget.Wordle.TextView.Dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/try_again_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/the_answer_was_textView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/try_again_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/try_again"
             android:layout_margin="16dp"
             android:onClick="@{() -> gameOverDialog.tryAgain()}"
+            android:text="@string/try_again"
+            app:layout_constraintBottom_toTopOf="@id/quit_game_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_over_textView"
-            app:layout_constraintBottom_toTopOf="@id/quit_game_button" />
+            app:layout_constraintTop_toBottomOf="@id/answer_textView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/quit_game_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:onClick="@{() -> gameOverDialog.quitGame()}"
             android:text="@string/quit_game"
-            android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

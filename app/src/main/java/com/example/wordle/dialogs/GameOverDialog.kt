@@ -41,6 +41,7 @@ class GameOverDialog : DialogFragment() {
             // Assign the fragment
             gameOverDialog = this@GameOverDialog
         }
+        binding!!.answerTextView.text = viewModel.answer.value
     }
 
     // starts a new game and navigates back to GameFragment
@@ -53,7 +54,6 @@ class GameOverDialog : DialogFragment() {
     fun quitGame() {
         findNavController().navigate(R.id.action_gameOverDialog_to_startFragment)
     }
-
 
     override fun onDestroyView() {
         Log.d("GameOverDialog", "onDestroyView() called")

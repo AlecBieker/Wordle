@@ -1,9 +1,12 @@
 package com.example.wordle.model
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.wordle.R
 import com.example.wordle.wordsList1
 import com.example.wordle.wordsList2
@@ -13,27 +16,41 @@ import com.example.wordle.wordsList2
  * deciding what will be shown on the screen as the game is played
  */
 
-class GameViewModel : ViewModel() {
+class GameViewModel(app: Application) : AndroidViewModel(app) {
+
+    // shared preferences handle for saved game state
+    private val gameState: SharedPreferences = getApplication<Application>().getSharedPreferences(
+        "game_state",
+        Context.MODE_PRIVATE
+    )
+
+    // shared preferences handle for game stats
+    private val stats: SharedPreferences = getApplication<Application>().getSharedPreferences(
+        "stats",
+        Context.MODE_PRIVATE
+    )
 
     // Generated word to be guessed
     private val _answer = MutableLiveData<String>()
     val answer: LiveData<String> = _answer
 
     // values of all the keyboard inputs so far
-    private val _letters = MutableLiveData<List<String>>()
-    val letters: LiveData<List<String>> = _letters
+    private val _letters = MutableLiveData<List<Char>>()
+    val letters: LiveData<List<Char>> = _letters
 
     // colors or drawable resources of the textView Backgrounds
     private val _backgrounds = MutableLiveData<List<Int>>()
     val backgrounds: LiveData<List<Int>> = _backgrounds
 
-    // color of the textView texts
+    // colors of the textViews' text
     private val _textColors = MutableLiveData<List<Int>>()
     val textColors: LiveData<List<Int>> = _textColors
 
+    // colors of the keys
     private val _keyColors = MutableLiveData<Map<Char, Int>>()
     val keyColors: LiveData<Map<Char, Int>> = _keyColors
 
+    // colors of the keys' text
     private val _keyTextColors = MutableLiveData<Map<Char, Int>>()
     val keyTextColors: LiveData<Map<Char, Int>> = _keyTextColors
 
@@ -54,9 +71,8 @@ class GameViewModel : ViewModel() {
     private val _tries = MutableLiveData<Int>()
     val tries: LiveData<Int> = _tries
 
-    // resets all game parameters to the default values
-    fun newGame() {
-        Log.d("GameViewModel", "newGame() called")
+    private fun resetVariables() {
+        Log.d("GameViewModel", "resetVariables() called")
         _answer.value = generate()
         _currentWord.value = ""
         _tries.value = 0
@@ -65,6 +81,70 @@ class GameViewModel : ViewModel() {
         _textColors.value = listOf()
         _keyColors.value = mapOf()
         _keyTextColors.value = mapOf()
+    }
+
+    // resets all game parameters to the default values
+    fun newGame() {
+        Log.d("GameViewModel", "newGame() called")
+        resetVariables()
+        with (gameState.edit()) {
+            putString("answer", _answer.value)
+            apply()
+        }
+        updateGameState()
+        with (stats.edit()) {
+            putInt("playCount", stats.getInt("playCount", 0).plus(1))
+        }
+    }
+
+    // sets all LiveData variables using gameState shared preferences file
+    fun resumeGame() {
+        resetVariables()
+        _answer.value = gameState.getString("answer", "")
+        _tries.value = gameState.getInt("tries", 0)
+        val savedLetters = gameState.getString("letters", "")!!.toList()
+        for (item in savedLetters) {
+            _letters.value = _letters.value?.plus(item)
+        }
+        val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
+        for (item in savedBackgrounds) {
+            _backgrounds.value = _backgrounds.value?.plus(item.toInt())
+        }
+        val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
+        for (item in savedTextColors) {
+            _textColors.value = _textColors.value?.plus(item.toInt())
+        }
+        val savedKeyColors = gameState.getStringSet("key_colors", setOf())
+        val map = _keyColors.value!!.toMutableMap()
+        val textMap = _keyTextColors.value!!.toMutableMap()
+        for (item in _letters.value!!) {
+            val color = savedKeyColors!!.find { it.startsWith(item) }?.drop(2)!!.toInt()
+            map[item] = color
+            textMap[item] = R.color.hint_text_color
+        }
+        _keyColors.value = map.toMap()
+        _keyTextColors.value = textMap.toMap()
+    }
+
+    // updates the "game_state" sharedPreferences file
+    private fun updateGameState() {
+        Log.d("GameViewModel", "updateGameState() called")
+        val keyColorsSet: MutableSet<String> = mutableSetOf()
+        val keyTextColorsSet: MutableSet<String> = mutableSetOf()
+        for (item in _keyColors.value!!) keyColorsSet += item.toString()
+        for (item in _keyTextColors.value!!) keyTextColorsSet += item.toString()
+        with (gameState.edit()) {
+            putInt("tries", _tries.value!!)
+            putString("letters", _letters.value?.joinToString(separator = ""))
+            putString("backgrounds", _backgrounds.value?.joinToString())
+            putString("text_colors", _textColors.value?.joinToString())
+            putStringSet("key_colors", keyColorsSet)
+            apply()
+        }
+    }
+
+    fun updateStats() {
+        //TODO implement statistics
     }
 
     // updates the letters and currentWord val
@@ -76,7 +156,7 @@ class GameViewModel : ViewModel() {
             _backgrounds.value = _backgrounds.value?.dropLast(1)
             _currentWord.value = _currentWord.value?.dropLast(1)
         } else if (char != ' ' && size != 5) {
-            _letters.value = _letters.value?.plus(char.toString())
+            _letters.value = _letters.value?.plus(char)
             _backgrounds.value = _backgrounds.value?.plus(R.drawable.filled_border)
             _currentWord.value += char
         }
@@ -148,6 +228,7 @@ class GameViewModel : ViewModel() {
         Log.d("GameViewModel", "nextRow() called")
         _currentWord.value = ""
         _tries.value = _tries.value?.plus(1) ?: 1
+        updateGameState()
     }
 
     // generates a new word at random from wordsList

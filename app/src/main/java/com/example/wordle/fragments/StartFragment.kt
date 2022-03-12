@@ -112,7 +112,9 @@ class StartFragment : Fragment() {
      * Continue the game from before
      */
     fun resumeGame() {
-        Log.d("StartFragment", "continueGame() called")
+        Log.d("StartFragment", "resumeGame() called")
+        gameViewModel.resumeGame()
+
         // Navigate the the game screen
         findNavController().navigate(R.id.action_startFragment_to_gameFragment)
     }

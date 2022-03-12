@@ -102,7 +102,7 @@ class GameFragment : Fragment() {
 
     // Checks if the word is the correct word and moves to the next row if not
     private fun isCorrect(str: String) {
-        Log.d("GameFragment", "isCorrect called")
+        Log.d("GameFragment", "isCorrect() called")
         when {
             str == gameViewModel.answer.value -> winner()
             gameViewModel.tries.value!! >= 5 -> gameOver()

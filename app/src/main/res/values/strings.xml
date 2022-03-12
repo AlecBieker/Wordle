@@ -40,7 +40,7 @@
     <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
     <string name="are_you_sure">ARE YOU SURE?</string>
     <string name="share">SHARE</string>
-    <string name="game_summary">I won on my %1$s try!!</string>
+    <string name="game_summary">I won on my %1$s try!! \n</string>
     <string-array name="ordinals">
         <item>1st</item>
         <item>2nd</item>
@@ -52,4 +52,9 @@
     <string name="green_square">🟩</string>
     <string name="yellow_square">🟨</string>
     <string name="black_square">⬛</string>
+    <string name="the_answer_was">The answer was:</string>
+
+    <!-- sharedPreferences -->
+    <string name="com.example.wordle.GAME_STATE_FILE_KEY">gameState</string>
+    <string name="com.example.wordle.STATS_FILE_KEY">stats</string>
 </resources>
