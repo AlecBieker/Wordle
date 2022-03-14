@@ -19,13 +19,13 @@ import com.example.wordle.wordsList2
 class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     // shared preferences handle for saved game state
-    private val gameState: SharedPreferences = getApplication<Application>().getSharedPreferences(
+    val gameState: SharedPreferences = getApplication<Application>().getSharedPreferences(
         "game_state",
         Context.MODE_PRIVATE
     )
 
     // shared preferences handle for game stats
-    private val stats: SharedPreferences = getApplication<Application>().getSharedPreferences(
+    val stats: SharedPreferences = getApplication<Application>().getSharedPreferences(
         "stats",
         Context.MODE_PRIVATE
     )
@@ -73,7 +73,6 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun resetVariables() {
         Log.d("GameViewModel", "resetVariables() called")
-        _answer.value = generate()
         _currentWord.value = ""
         _tries.value = 0
         _letters.value = listOf()
@@ -87,14 +86,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun newGame() {
         Log.d("GameViewModel", "newGame() called")
         resetVariables()
-        with (gameState.edit()) {
+        _answer.value = generate()
+        with(gameState.edit()) {
             putString("answer", _answer.value)
+            putBoolean("game_in_progress", true)
             apply()
         }
         updateGameState()
-        with (stats.edit()) {
-            putInt("playCount", stats.getInt("playCount", 0).plus(1))
-        }
+        stats.edit().putInt("play_count", stats.getInt("play_count", 0).plus(1)).apply()
     }
 
     // sets all LiveData variables using gameState shared preferences file
@@ -107,12 +106,15 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             _letters.value = _letters.value?.plus(item)
         }
         val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
+        if (savedBackgrounds != listOf(""))
         for (item in savedBackgrounds) {
             _backgrounds.value = _backgrounds.value?.plus(item.toInt())
         }
         val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
-        for (item in savedTextColors) {
-            _textColors.value = _textColors.value?.plus(item.toInt())
+        if (savedTextColors != listOf("")) {
+            for (item in savedTextColors) {
+                _textColors.value = _textColors.value?.plus(item.toInt())
+            }
         }
         val savedKeyColors = gameState.getStringSet("key_colors", setOf())
         val map = _keyColors.value!!.toMutableMap()
@@ -133,7 +135,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val keyTextColorsSet: MutableSet<String> = mutableSetOf()
         for (item in _keyColors.value!!) keyColorsSet += item.toString()
         for (item in _keyTextColors.value!!) keyTextColorsSet += item.toString()
-        with (gameState.edit()) {
+        with(gameState.edit()) {
             putInt("tries", _tries.value!!)
             putString("letters", _letters.value?.joinToString(separator = ""))
             putString("backgrounds", _backgrounds.value?.joinToString())
@@ -141,10 +143,42 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             putStringSet("key_colors", keyColorsSet)
             apply()
         }
+        val backgrounds = gameState.getString("backgrounds", "")
+        Log.d("updateGameState", "backgrounds = $backgrounds")
     }
 
-    fun updateStats() {
-        //TODO implement statistics
+    fun getWinPercentage(plays: Int): String {
+        val wins = stats.getInt("win_count", 0).toDouble()
+        return "%.1f".format(wins.div(plays.toDouble()).times(100))
+    }
+
+    // ends the game and updates stats
+    fun updateStats(winner: Boolean) {
+        gameState.edit().putBoolean("game_in_progress", false).apply()
+        with(stats.edit()) {
+            if (winner) {
+                when (_tries.value) {
+                    0 -> putInt("wins_1", stats.getInt("wins_1", 0).plus(1))
+                    1 -> putInt("wins_2", stats.getInt("wins_2", 0).plus(1))
+                    2 -> putInt("wins_3", stats.getInt("wins_3", 0).plus(1))
+                    3 -> putInt("wins_4", stats.getInt("wins_4", 0).plus(1))
+                    4 -> putInt("wins_5", stats.getInt("wins_5", 0).plus(1))
+                    5 -> putInt("wins_6", stats.getInt("wins_6", 0).plus(1))
+                }
+                putInt("win_count", stats.getInt("win_count", 0).plus(1))
+                putInt("current_streak", stats.getInt("current_streak", 0).plus(1))
+                apply()
+                if (stats.getInt("current_streak", 0) > stats.getInt("max_streak", 0)) {
+                    putInt("max_streak", stats.getInt("current_streak", 0))
+                }
+            } else {
+                putInt("current_streak", 0)
+            }
+            apply()
+        }
+        Log.d("Stats", "win_count = ${stats.getInt("win_count", 0)}")
+        Log.d("Stats", "play_count = ${stats.getInt("play_count", 0)}")
+        Log.d("Stats", "win_percentage = ${stats.getString("win_percentage", "0%")}")
     }
 
     // updates the letters and currentWord val

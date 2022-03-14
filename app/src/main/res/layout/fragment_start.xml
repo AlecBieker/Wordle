@@ -91,12 +91,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:onClick="@{() -> startFragment.newGameDialog()}"
+            android:onClick="@{() -> startFragment.newGame()}"
             android:text="@string/new_game"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view_stats_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resume_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/view_stats_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:onClick="@{() -> startFragment.viewStats()}"
+            android:text="@string/view_stats"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/new_game_button" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

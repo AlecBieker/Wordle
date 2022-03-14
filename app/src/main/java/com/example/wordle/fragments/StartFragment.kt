@@ -34,6 +34,7 @@ class StartFragment : Fragment() {
     ): View {
         Log.d("StartFragment", "onCreateView() called")
         binding = FragmentStartBinding.inflate(inflater, container, false)
+        binding!!.resumeButton.isEnabled = gameViewModel.gameState.getBoolean("game_in_progress", false)
         binding!!.motionLayout.addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
@@ -43,7 +44,6 @@ class StartFragment : Fragment() {
                     progress: Float
                 ) {
                     super.onTransitionTrigger(motionLayout, triggerId, positive, progress)
-                    Log.d("TransitionTrigger", "progress = $progress")
                     if (0.001 < progress && progress < 1) {
                         when (triggerId) {
                             R.id.set_w_text -> type("W", binding!!.wHeader)
@@ -62,7 +62,7 @@ class StartFragment : Fragment() {
                     }
                 }
             }
-        )
+         )
         return binding!!.root
     }
 
@@ -103,9 +103,17 @@ class StartFragment : Fragment() {
         textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.hint_text_color))
     }
 
-    // Shows the start new game confirmation dialog
-    fun newGameDialog() {
-        findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
+    /**
+     * starts a new game or shows the new game dialog if one is already in progress
+     */
+    fun newGame() {
+        when (gameViewModel.gameState.getBoolean("game_in_progress", false)) {
+            true -> findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
+            false -> {
+                gameViewModel.newGame()
+                findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+            }
+        }
     }
 
     /**
@@ -117,6 +125,14 @@ class StartFragment : Fragment() {
 
         // Navigate the the game screen
         findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+    }
+
+    /**
+     * View the Stats dialog
+     */
+    fun viewStats() {
+        Log.d("StartFragment", "viewStats() called")
+        findNavController().navigate(R.id.action_startFragment_to_statsDialog)
     }
 
 

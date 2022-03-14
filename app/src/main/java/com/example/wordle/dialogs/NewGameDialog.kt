@@ -44,13 +44,14 @@ class NewGameDialog : DialogFragment() {
     }
 
     fun newGame() {
+        viewModel.updateStats(false)
         viewModel.newGame()
 
         findNavController().navigate(R.id.action_newGameDialog_to_gameFragment)
     }
 
     fun cancel() {
-        findNavController().navigate(R.id.action_newGameDialog_to_startFragment)
+        dismiss()
     }
 
 

@@ -33,6 +33,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/count_loss_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:text="@string/this_will_count_as_a_loss"
+            app:layout_constraintTop_toBottomOf="@id/are_you_sure_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_new_game_button"
             android:layout_width="wrap_content"
@@ -42,7 +53,7 @@
             android:onClick="@{() -> newGameDialog.newGame()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/are_you_sure_textView" />
+            app:layout_constraintTop_toBottomOf="@id/count_loss_textView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancel_button"

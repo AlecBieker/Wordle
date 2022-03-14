@@ -184,6 +184,7 @@ class GameFragment : Fragment() {
     // plays bouncing animation then navigates to the winner dialog
     private fun winner() {
         Log.d("GameFragment", "winner() called")
+        gameViewModel.updateStats(true)
         getRow().setTransition(R.id.bounce)
         getRow().transitionToEnd {
             findNavController().navigate(R.id.action_gameFragment_to_winnerDialog)
@@ -193,6 +194,7 @@ class GameFragment : Fragment() {
     // navigates to the GameOver dialog
     private fun gameOver() {
         Log.d("GameFragment", "gameOver() called")
+        gameViewModel.updateStats(false)
         findNavController().navigate(R.id.action_gameFragment_to_gameOverDialog)
     }
 

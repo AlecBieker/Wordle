@@ -57,4 +57,12 @@
     <!-- sharedPreferences -->
     <string name="com.example.wordle.GAME_STATE_FILE_KEY">gameState</string>
     <string name="com.example.wordle.STATS_FILE_KEY">stats</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="view_stats">VIEW STATS</string>
+    <string name="close">CLOSE</string>
+    <string name="played">Played</string>
+    <string name="win_percent">Win %</string>
+    <string name="current_streak">Current\nStreak</string>
+    <string name="max_streak">Max\nStreak</string>
+    <string name="this_will_count_as_a_loss">This will count as a loss</string>
 </resources>

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startFragment_to_newGameDialog"
             app:destination="@id/newGameDialog" />
+        <action
+            android:id="@+id/action_startFragment_to_statsDialog"
+            app:destination="@id/statsDialog" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -31,6 +34,9 @@
         <action
             android:id="@+id/action_gameFragment_to_winnerDialog"
             app:destination="@id/winnerDialog" />
+        <action
+            android:id="@+id/action_gameFragment_to_statsDialog"
+            app:destination="@id/statsDialog" />
     </fragment>
 
     <dialog
@@ -66,8 +72,10 @@
         <action
             android:id="@+id/action_newGameDialog_to_gameFragment"
             app:destination="@id/gameFragment" />
-        <action
-            android:id="@+id/action_newGameDialog_to_startFragment"
-            app:destination="@id/startFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/statsDialog"
+        android:name="com.example.wordle.dialogs.StatsDialog"
+        android:label="StatsDialog"
+        tools:layout="@layout/dialog_stats"/>
 </navigation>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".dialogs.WinnerDialog">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.wordle.model.GameViewModel" />
+
+        <variable
+            name="statsDialog"
+            type="com.example.wordle.dialogs.StatsDialog" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/stats_header"
+            style="@style/Widget.Wordle.TextView.Dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/play_count_value"
+            style="@style/Widget.Wordle.Stats.Value"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/win_percentage_value"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stats_header"
+            tools:text="10"/>
+
+        <TextView
+            android:id="@+id/win_percentage_value"
+            style="@style/Widget.Wordle.Stats.Value"
+            app:layout_constraintEnd_toStartOf="@id/current_streak_value"
+            app:layout_constraintStart_toEndOf="@id/play_count_value"
+            app:layout_constraintTop_toBottomOf="@id/stats_header"
+            tools:text="100.0" />
+
+        <TextView
+            android:id="@+id/current_streak_value"
+            style="@style/Widget.Wordle.Stats.Value"
+            app:layout_constraintEnd_toStartOf="@id/max_streak_value"
+            app:layout_constraintStart_toEndOf="@id/win_percentage_value"
+            app:layout_constraintTop_toBottomOf="@id/stats_header"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/max_streak_value"
+            style="@style/Widget.Wordle.Stats.Value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/current_streak_value"
+            app:layout_constraintTop_toBottomOf="@id/stats_header"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/play_count_textView"
+            style="@style/Widget.Wordle.Stats.TextView"
+            android:text="@string/played"
+            app:layout_constraintEnd_toEndOf="@id/play_count_value"
+            app:layout_constraintStart_toStartOf="@id/play_count_value"
+            app:layout_constraintTop_toBottomOf="@id/play_count_value" />
+
+        <TextView
+            android:id="@+id/win_percentage_textView"
+            style="@style/Widget.Wordle.Stats.TextView"
+            android:text="@string/win_percent"
+            app:layout_constraintEnd_toEndOf="@id/win_percentage_value"
+            app:layout_constraintStart_toStartOf="@id/win_percentage_value"
+            app:layout_constraintTop_toBottomOf="@id/win_percentage_value" />
+
+        <TextView
+            android:id="@+id/current_streak_textView"
+            style="@style/Widget.Wordle.Stats.TextView"
+            android:text="@string/current_streak"
+            app:layout_constraintEnd_toEndOf="@id/current_streak_value"
+            app:layout_constraintStart_toStartOf="@id/current_streak_value"
+            app:layout_constraintTop_toBottomOf="@id/current_streak_value" />
+
+        <TextView
+            android:id="@+id/max_streak_textView"
+            style="@style/Widget.Wordle.Stats.TextView"
+            android:text="@string/max_streak"
+            app:layout_constraintEnd_toEndOf="@id/max_streak_value"
+            app:layout_constraintStart_toStartOf="@id/max_streak_value"
+            app:layout_constraintTop_toBottomOf="@id/max_streak_value" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            style="@style/Widget.Wordle.Button.Dialog"
+            android:text="@string/close"
+            android:onClick="@{() -> statsDialog.close()}"
+            app:layout_constraintTop_toBottomOf="@id/current_streak_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
