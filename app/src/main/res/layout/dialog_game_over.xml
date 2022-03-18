@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/game_over_textView"
-            style="@style/Widget.Wordle.TextView.Dialog"
+            style="@style/Widget.Wordle.Dialog.Header"
             android:text="@string/game_over"
             app:layout_constraintBottom_toTopOf="@id/the_answer_was_textView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/answer_textView"
-            style="@style/Widget.Wordle.TextView.Dialog"
+            style="@style/Widget.Wordle.Dialog.Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/try_again_button"

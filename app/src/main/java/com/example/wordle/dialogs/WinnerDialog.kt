@@ -13,9 +13,12 @@ import com.example.wordle.R
 import com.example.wordle.databinding.DialogWinnerBinding
 import com.example.wordle.model.GameViewModel
 
+/**
+ * This is the dialog that displays when you win a game
+ */
 class WinnerDialog : DialogFragment() {
 
-    // Binding object instance corresponding to the start_fragment.xml layout
+    // Binding object instance corresponding to the dialog_winner.xml layout
     private var binding: DialogWinnerBinding? = null
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -58,17 +61,16 @@ class WinnerDialog : DialogFragment() {
     fun share() {
         var gameSummary = getString(
             R.string.game_summary,
-            resources.getStringArray(R.array.ordinals)[viewModel.tries.value!!])
-        val backgrounds = viewModel.backgrounds.value!!
+            resources.getStringArray(R.array.ordinals)[viewModel.tries.value!!]
+        )
         val size = viewModel.letters.value?.size!!.minus(1)
         for (i in 0..size) {
             if (i % 5 == 0 && i != size) gameSummary += "\n"
-            when (backgrounds[i]) {
+            when (viewModel.backgrounds.value!![i]) {
                 R.color.green -> gameSummary += getString(R.string.green_square)
                 R.color.yellow -> gameSummary += getString(R.string.yellow_square)
                 R.color.gray -> gameSummary += getString(R.string.black_square)
             }
-            Log.d("WinnerDialog", "gameSummary = $gameSummary")
         }
 
         // Create an ACTION_SEND implicit intent with game summary in the intent extras
@@ -83,7 +85,6 @@ class WinnerDialog : DialogFragment() {
             startActivity(intent)
         }
     }
-
 
     override fun onDestroyView() {
         Log.d("WinnerDialog", "onDestroyView() called")

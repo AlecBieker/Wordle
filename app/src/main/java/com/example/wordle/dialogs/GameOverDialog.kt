@@ -12,9 +12,12 @@ import com.example.wordle.R
 import com.example.wordle.databinding.DialogGameOverBinding
 import com.example.wordle.model.GameViewModel
 
+/**
+ * This is the dialog that displays when the user loses a game
+ */
 class GameOverDialog : DialogFragment() {
 
-    // Binding object instance corresponding to the start_fragment.xml layout
+    // Binding object instance corresponding to the dialog_game_over.xml layout
     private var binding: DialogGameOverBinding? = null
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -60,5 +63,4 @@ class GameOverDialog : DialogFragment() {
         super.onDestroyView()
         binding = null
     }
-
 }

@@ -23,12 +23,8 @@
 
         <TextView
             android:id="@+id/are_you_sure_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/Widget.Wordle.Dialog.Header"
             android:text="@string/are_you_sure"
-            android:textAlignment="center"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textAlignment="center"
             android:text="@string/this_will_count_as_a_loss"
             app:layout_constraintTop_toBottomOf="@id/are_you_sure_textView"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,20 +42,18 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/start_new_game_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start_new_game"
-            android:layout_margin="16dp"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:onClick="@{() -> newGameDialog.newGame()}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/start_new_game"
+            app:layout_constraintBottom_toTopOf="@+id/cancel_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/count_loss_textView" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:text="@string/cancel"
-            android:layout_margin="16dp"
             android:onClick="@{() -> newGameDialog.cancel()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

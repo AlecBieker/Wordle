@@ -1,5 +1,9 @@
-package com.example.wordle
+package com.example.wordle.data
 
+/**
+ * This is the first of two lists that hold all the possible words that can be chosen
+ * to be the answer for a given game
+ */
 val wordsList1 = listOf(
     "AAHED", "AALII", "AARGH", "ABACA", "ABACI", "ABACK", "ABAFT", "ABAKA", "ABAMP", "ABASE",
     "ABASH", "ABATE", "ABAYA", "ABBAS", "ABBES", "ABBEY", "ABBOT", "ABEAM", "ABELE", "ABETS",

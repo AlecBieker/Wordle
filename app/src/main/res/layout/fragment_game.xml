@@ -25,7 +25,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/game_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/wordle_textView"
@@ -35,15 +36,42 @@
             android:text="@string/wordle_header"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/text_color"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/help_icon"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:onClick="@{() -> gameFragment.viewHelp()}"
+            app:layout_constraintBottom_toBottomOf="@id/wordle_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/wordle_textView"
+            app:iconTint="@color/text_color"
+            app:srcCompat="@drawable/help_icon"
+            android:contentDescription="@string/help_button" />
+
+
+        <ImageView
+            android:id="@+id/stats_icon"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:padding="2dp"
+            android:onClick="@{() -> gameFragment.viewStats()}"
+            app:srcCompat="@drawable/stats_icon"
+            app:layout_constraintTop_toTopOf="@id/wordle_textView"
+            app:layout_constraintBottom_toBottomOf="@id/wordle_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/statistics_button" />
+
+
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/row_1"
             style="@style/Widget.Wordle.MotionLayout.Row"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="0dp"
             app:layoutDescription="@xml/row_1_scene"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -411,11 +439,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Q'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Q')}"
             android:text="@string/q"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Q'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/a_button"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -425,11 +454,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/w_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['W'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('W')}"
             android:text="@string/w"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['W'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/s_button"
             app:layout_constraintEnd_toStartOf="@id/e_button"
             app:layout_constraintStart_toEndOf="@id/q_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -438,11 +468,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/e_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['E'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('E')}"
             android:text="@string/e"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['E'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/d_button"
             app:layout_constraintEnd_toStartOf="@id/r_button"
             app:layout_constraintStart_toEndOf="@id/w_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -451,11 +482,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/r_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['R'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('R')}"
             android:text="@string/r"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['R'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/f_button"
             app:layout_constraintEnd_toStartOf="@id/t_button"
             app:layout_constraintStart_toEndOf="@id/e_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -464,24 +496,26 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/t_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['T'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('T')}"
             android:text="@string/t"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['T'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/g_button"
             app:layout_constraintEnd_toStartOf="@id/y_button"
             app:layout_constraintStart_toEndOf="@id/r_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/y_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Y'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Y')}"
             android:text="@string/y"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Y'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/h_button"
             app:layout_constraintEnd_toStartOf="@id/u_button"
             app:layout_constraintStart_toEndOf="@id/t_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -490,11 +524,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/u_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['U'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('U')}"
             android:text="@string/u"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['U'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/j_button"
             app:layout_constraintEnd_toStartOf="@id/i_button"
             app:layout_constraintStart_toEndOf="@id/y_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -503,24 +538,26 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/i_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['I'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('I')}"
             android:text="@string/i"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['I'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/k_button"
             app:layout_constraintEnd_toStartOf="@id/o_button"
             app:layout_constraintStart_toEndOf="@id/u_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/o_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['O'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('O')}"
             android:text="@string/o"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['O'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/l_button"
             app:layout_constraintEnd_toStartOf="@id/p_button"
             app:layout_constraintStart_toEndOf="@id/i_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
@@ -529,14 +566,15 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="0dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['P'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('P')}"
             android:text="@string/p"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['P'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="@+id/o_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/o_button"
-            app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:layout_constraintTop_toTopOf="@id/o_button"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
@@ -547,6 +585,7 @@
             android:onClick="@{() -> gameFragment.setText('A')}"
             android:text="@string/a"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['A'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/enter_button"
             app:layout_constraintEnd_toStartOf="@id/s_button"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -560,6 +599,7 @@
             android:onClick="@{() -> gameFragment.setText('S')}"
             android:text="@string/s"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['S'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/z_button"
             app:layout_constraintEnd_toStartOf="@id/d_button"
             app:layout_constraintStart_toEndOf="@id/a_button"
             app:layout_constraintTop_toBottomOf="@id/w_button"
@@ -572,6 +612,7 @@
             android:onClick="@{() -> gameFragment.setText('D')}"
             android:text="@string/d"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['D'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/x_button"
             app:layout_constraintEnd_toStartOf="@id/f_button"
             app:layout_constraintStart_toEndOf="@id/s_button"
             app:layout_constraintTop_toBottomOf="@id/e_button"
@@ -584,10 +625,11 @@
             android:onClick="@{() -> gameFragment.setText('F')}"
             android:text="@string/f"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['F'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/c_button"
             app:layout_constraintEnd_toStartOf="@id/g_button"
             app:layout_constraintStart_toEndOf="@id/d_button"
             app:layout_constraintTop_toBottomOf="@id/r_button"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/g_button"
@@ -596,6 +638,7 @@
             android:onClick="@{() -> gameFragment.setText('G')}"
             android:text="@string/g"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['G'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/v_button"
             app:layout_constraintEnd_toStartOf="@id/h_button"
             app:layout_constraintStart_toEndOf="@id/f_button"
             app:layout_constraintTop_toBottomOf="@id/t_button"
@@ -608,10 +651,11 @@
             android:onClick="@{() -> gameFragment.setText('H')}"
             android:text="@string/h"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['H'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/b_button"
             app:layout_constraintEnd_toStartOf="@id/j_button"
             app:layout_constraintStart_toEndOf="@id/g_button"
             app:layout_constraintTop_toBottomOf="@id/y_button"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/j_button"
@@ -620,6 +664,7 @@
             android:onClick="@{() -> gameFragment.setText('J')}"
             android:text="@string/j"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['J'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/n_button"
             app:layout_constraintEnd_toStartOf="@id/k_button"
             app:layout_constraintStart_toEndOf="@id/h_button"
             app:layout_constraintTop_toBottomOf="@id/u_button"
@@ -632,6 +677,7 @@
             android:onClick="@{() -> gameFragment.setText('K')}"
             android:text="@string/k"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['K'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/m_button"
             app:layout_constraintEnd_toStartOf="@id/l_button"
             app:layout_constraintStart_toEndOf="@id/j_button"
             app:layout_constraintTop_toBottomOf="@id/i_button"
@@ -645,17 +691,20 @@
             android:onClick="@{() -> gameFragment.setText('L')}"
             android:text="@string/l"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['L'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toTopOf="@+id/delete_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/k_button"
             app:layout_constraintTop_toBottomOf="@id/o_button"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/enter_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_width="56dp"
+            android:layout_marginBottom="24dp"
             android:onClick="@{() -> gameFragment.onEnter()}"
             android:text="@string/enter"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/z_button"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -664,10 +713,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/z_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Z'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Z')}"
             android:text="@string/z"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Z'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/x_button"
             app:layout_constraintStart_toEndOf="@id/enter_button"
             app:layout_constraintTop_toBottomOf="@id/s_button"
@@ -676,10 +727,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/x_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['X'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('X')}"
             android:text="@string/x"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['X'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/c_button"
             app:layout_constraintStart_toEndOf="@id/z_button"
             app:layout_constraintTop_toBottomOf="@id/d_button"
@@ -688,10 +741,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/c_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['C'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('C')}"
             android:text="@string/c"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['C'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/v_button"
             app:layout_constraintStart_toEndOf="@id/x_button"
             app:layout_constraintTop_toBottomOf="@id/f_button"
@@ -700,10 +755,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/v_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['V'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('V')}"
             android:text="@string/v"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['V'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/b_button"
             app:layout_constraintStart_toEndOf="@id/c_button"
             app:layout_constraintTop_toBottomOf="@id/g_button"
@@ -712,10 +769,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['B'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('B')}"
             android:text="@string/b"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['B'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/n_button"
             app:layout_constraintStart_toEndOf="@id/v_button"
             app:layout_constraintTop_toBottomOf="@id/h_button"
@@ -724,10 +783,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/n_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['N'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('N')}"
             android:text="@string/n"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['N'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/m_button"
             app:layout_constraintStart_toEndOf="@id/b_button"
             app:layout_constraintTop_toBottomOf="@id/j_button"
@@ -736,10 +797,12 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/m_button"
             style="@style/Widget.Wordle.Button.Keyboard"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['M'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('M')}"
             android:text="@string/m"
             android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['M'] ?? viewModel.textColor)}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete_button"
             app:layout_constraintStart_toEndOf="@id/n_button"
             app:layout_constraintTop_toBottomOf="@id/k_button"
@@ -749,18 +812,20 @@
             android:id="@+id/delete_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_width="56dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors[' '] ?? viewModel.keyColor)}"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/key_color"
             android:contentDescription="@string/delete"
             android:onClick="@{() -> gameFragment.setText(' ')}"
             android:onLongClick="@{() -> viewModel.clearRow()}"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors[' '] ?? viewModel.textColor)}"
-            app:icon="@android:drawable/ic_input_delete"
+            app:icon="@drawable/backspace_icon"
             app:iconGravity="textEnd"
             app:iconPadding="0dp"
             app:iconTint="@color/text_color"
             app:iconTintMode="src_in"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/m_button"
             app:layout_constraintTop_toBottomOf="@id/l_button" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

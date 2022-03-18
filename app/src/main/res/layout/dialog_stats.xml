@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.WinnerDialog">
+    tools:context=".dialogs.StatsDialog">
 
     <data>
 
@@ -17,15 +16,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/stats_layout"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_width="360dp">
 
         <TextView
             android:id="@+id/stats_header"
-            style="@style/Widget.Wordle.TextView.Dialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.Wordle.Dialog.Header"
             android:text="@string/statistics"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +31,11 @@
         <TextView
             android:id="@+id/play_count_value"
             style="@style/Widget.Wordle.Stats.Value"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintEnd_toStartOf="@id/win_percentage_value"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/stats_header"
-            tools:text="10"/>
+            tools:text="10" />
 
         <TextView
             android:id="@+id/win_percentage_value"
@@ -96,16 +93,120 @@
             app:layout_constraintStart_toStartOf="@id/max_streak_value"
             app:layout_constraintTop_toBottomOf="@id/max_streak_value" />
 
+        <TextView
+            android:id="@+id/guess_distribution_textView"
+            style="@style/Widget.Wordle.Dialog.Header"
+            android:text="@string/guess_distribution"
+            app:layout_constraintBottom_toTopOf="@+id/bar_one"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/current_streak_textView" />
+
+        <TextView
+            android:id="@+id/one"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/one"
+            app:layout_constraintBottom_toTopOf="@id/two"
+            app:layout_constraintEnd_toStartOf="@id/bar_one"
+            app:layout_constraintTop_toBottomOf="@id/guess_distribution_textView" />
+
+        <TextView
+            android:id="@+id/two"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/two"
+            app:layout_constraintBottom_toTopOf="@id/three"
+            app:layout_constraintEnd_toStartOf="@id/bar_two"
+            app:layout_constraintTop_toBottomOf="@id/one" />
+
+        <TextView
+            android:id="@+id/three"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/three"
+            app:layout_constraintBottom_toTopOf="@id/four"
+            app:layout_constraintEnd_toStartOf="@id/bar_three"
+            app:layout_constraintTop_toBottomOf="@id/two" />
+
+        <TextView
+            android:id="@+id/four"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/four"
+            app:layout_constraintBottom_toTopOf="@id/five"
+            app:layout_constraintEnd_toStartOf="@id/bar_four"
+            app:layout_constraintTop_toBottomOf="@id/three" />
+
+        <TextView
+            android:id="@+id/five"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/five"
+            app:layout_constraintBottom_toTopOf="@id/six"
+            app:layout_constraintEnd_toStartOf="@id/bar_five"
+            app:layout_constraintTop_toBottomOf="@id/four" />
+
+        <TextView
+            android:id="@+id/six"
+            style="@style/Widget.Wordle.Stats.Rows"
+            android:text="@string/six"
+            app:layout_constraintBottom_toTopOf="@id/close_button"
+            app:layout_constraintEnd_toStartOf="@id/bar_six"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/five" />
+
+        <TextView
+            android:id="@+id/bar_one"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/one"
+            app:layout_constraintStart_toEndOf="@id/one"
+            app:layout_constraintTop_toTopOf="@id/one"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/bar_two"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/two"
+            app:layout_constraintStart_toEndOf="@id/two"
+            app:layout_constraintTop_toTopOf="@id/two"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/bar_three"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/three"
+            app:layout_constraintStart_toEndOf="@id/three"
+            app:layout_constraintTop_toTopOf="@id/three"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/bar_four"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/four"
+            app:layout_constraintStart_toEndOf="@id/four"
+            app:layout_constraintTop_toTopOf="@id/four"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/bar_five"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/five"
+            app:layout_constraintStart_toEndOf="@id/five"
+            app:layout_constraintTop_toTopOf="@id/five"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/bar_six"
+            style="@style/Widget.Wordle.Stats.BarGraph"
+            app:layout_constraintBottom_toBottomOf="@id/six"
+            app:layout_constraintStart_toEndOf="@id/six"
+            app:layout_constraintTop_toTopOf="@id/six"
+            tools:text="10" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/close_button"
-            style="@style/Widget.Wordle.Button.Dialog"
-            android:text="@string/close"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:onClick="@{() -> statsDialog.close()}"
-            app:layout_constraintTop_toBottomOf="@id/current_streak_textView"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/close"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bar_six"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

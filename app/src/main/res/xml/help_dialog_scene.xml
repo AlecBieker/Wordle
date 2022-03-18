@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- Flip Tiles Animation -->
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="600"
+        motion:autoTransition="animateToEnd">
+       <KeyFrameSet>
+           <KeyTrigger
+               motion:framePosition="50"
+               motion:motionTarget="@id/example_tile_1"
+               motion:triggerId="@+id/transform_1"/>
+
+           <KeyTrigger
+               motion:framePosition="50"
+               motion:motionTarget="@id/example_tile_7"
+               motion:triggerId="@+id/transform_7"/>
+
+           <KeyTrigger
+               motion:framePosition="50"
+               motion:motionTarget="@id/example_tile_14"
+               motion:triggerId="@+id/transform_14"/>
+       </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@id/example_tile_1" />
+        <Constraint android:id="@id/example_tile_7" />
+        <Constraint android:id="@id/example_tile_14" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@id/example_tile_1"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="8dp"
+            android:rotationX="180"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toStartOf="@id/example_tile_2"/>
+        <Constraint android:id="@id/example_tile_7"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:rotationX="180"
+            motion:layout_constraintStart_toEndOf="@id/example_tile_6"
+            motion:layout_constraintEnd_toStartOf="@id/example_tile_8" />
+        <Constraint android:id="@id/example_tile_14"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:rotationX="180"
+            motion:layout_constraintStart_toEndOf="@id/example_tile_13"
+            motion:layout_constraintEnd_toStartOf="@id/example_tile_15" />
+    </ConstraintSet>
+</MotionScene>

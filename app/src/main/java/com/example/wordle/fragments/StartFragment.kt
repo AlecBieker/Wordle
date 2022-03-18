@@ -23,8 +23,14 @@ import kotlin.concurrent.schedule
  */
 class StartFragment : Fragment() {
 
-    // Binding object instance corresponding to the start_fragment.xml layout
+    // Binding object instance corresponding to the fragment_start.xml layout
     private var binding: FragmentStartBinding? = null
+
+    // input the "WORDLE" letters into the header textViews
+    private fun type(letter: String, textView: TextView) {
+        textView.text = letter
+        textView.setBackgroundResource(R.drawable.filled_border)
+    }
 
     private val gameViewModel: GameViewModel by activityViewModels()
 
@@ -34,7 +40,8 @@ class StartFragment : Fragment() {
     ): View {
         Log.d("StartFragment", "onCreateView() called")
         binding = FragmentStartBinding.inflate(inflater, container, false)
-        binding!!.resumeButton.isEnabled = gameViewModel.gameState.getBoolean("game_in_progress", false)
+        binding!!.resumeButton.isEnabled =
+            gameViewModel.gameState.getBoolean("game_in_progress", false)
         binding!!.motionLayout.addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
@@ -62,7 +69,7 @@ class StartFragment : Fragment() {
                     }
                 }
             }
-         )
+        )
         return binding!!.root
     }
 
@@ -79,23 +86,23 @@ class StartFragment : Fragment() {
             // Assign the fragment
             startFragment = this@StartFragment
         }
-        Timer().schedule(500) {
-            binding!!.motionLayout.setTransition(R.id.type)
-            binding!!.motionLayout.transitionToEnd {
-                binding!!.motionLayout.setTransition(R.id.flip_tiles)
-                binding!!.motionLayout.transitionToEnd {
-                    binding!!.motionLayout.setTransition(R.id.bounce)
-                    binding!!.motionLayout.transitionToEnd()
+        // Animate the WORDLE header textView
+        with(binding!!.motionLayout) {
+            transitionToState(R.id.start, 0)
+            Timer().schedule(500) {
+                setTransition(R.id.type)
+                transitionToEnd {
+                    setTransition(R.id.flip_tiles)
+                    transitionToEnd {
+                        setTransition(R.id.bounce)
+                        transitionToEnd()
+                    }
                 }
             }
         }
     }
 
-    private fun type(letter: String, textView: TextView) {
-        textView.text = letter
-        textView.setBackgroundResource(R.drawable.filled_border)
-    }
-
+    // Set the header textViews to be right side up and with the correct text color and background
     private fun transform(textView: TextView) {
         textView.rotation = 180F
         textView.rotationY = 180F
@@ -103,9 +110,7 @@ class StartFragment : Fragment() {
         textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.hint_text_color))
     }
 
-    /**
-     * starts a new game or shows the new game dialog if one is already in progress
-     */
+    // starts a new game or shows the new game dialog if one is already in progress
     fun newGame() {
         when (gameViewModel.gameState.getBoolean("game_in_progress", false)) {
             true -> findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
@@ -116,9 +121,7 @@ class StartFragment : Fragment() {
         }
     }
 
-    /**
-     * Continue the game from before
-     */
+    // Continues the game from before
     fun resumeGame() {
         Log.d("StartFragment", "resumeGame() called")
         gameViewModel.resumeGame()
@@ -127,14 +130,17 @@ class StartFragment : Fragment() {
         findNavController().navigate(R.id.action_startFragment_to_gameFragment)
     }
 
-    /**
-     * View the Stats dialog
-     */
+    // View the Stats dialog
     fun viewStats() {
         Log.d("StartFragment", "viewStats() called")
         findNavController().navigate(R.id.action_startFragment_to_statsDialog)
     }
 
+    // View the Help dialog
+    fun viewHelp() {
+        Log.d("StartFragment", "viewHelp() called")
+        findNavController().navigate(R.id.action_startFragment_to_helpDialog)
+    }
 
     override fun onDestroyView() {
         Log.d("StartFragment", "onDestroyView() called")

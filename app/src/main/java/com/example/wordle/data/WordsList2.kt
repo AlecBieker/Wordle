@@ -1,5 +1,9 @@
-package com.example.wordle
+package com.example.wordle.data
 
+/**
+ * This is the second of two lists that hold all the possible words that can be chosen
+ * to be the answer for a given game
+ */
 val wordsList2 = listOf(
     "HILUM", "HILUS", "HIMBO", "HINDS", "HINGE", "HINKY", "HINNY", "HINTS", "HIPLY", "HIPPO",
     "HIPPY", "HIRED", "HIREE", "HIRER", "HIRES", "HISSY", "HISTS", "HITCH", "HIVED", "HIVES",

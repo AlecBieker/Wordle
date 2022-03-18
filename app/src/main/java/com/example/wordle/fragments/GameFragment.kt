@@ -38,7 +38,7 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         Log.d("GameFragment", "onCreateView() called")
-        binding  = FragmentGameBinding.inflate(inflater, container, false)
+        binding = FragmentGameBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
@@ -57,7 +57,7 @@ class GameFragment : Fragment() {
 
     // retrieves the MotionLayout corresponding to the currently active row
     private fun getRow(): MotionLayout {
-        return binding!!.gameLayout[gameViewModel.tries.value!!.plus(1)] as MotionLayout
+        return binding!!.gameLayout[gameViewModel.tries.value!!.plus(3)] as MotionLayout
     }
 
     // retrieves the currently active tile or the last in the row if it is full
@@ -81,6 +81,14 @@ class GameFragment : Fragment() {
         binding!!.deleteButton.isEnabled = true
     }
 
+    // does the "pop" animation and calls on viewModel to update text variables
+    fun setText(char: Char) {
+        if (char != ' ' && gameViewModel.currentWord.value?.length != 5) {
+            getRow().viewTransition(R.id.pop, getTile())
+        }
+        gameViewModel.updateText(char)
+    }
+
     // checks if the word is a valid word from the list
     fun onEnter() {
         Log.d("GameFragment", "onEnter() called")
@@ -91,34 +99,6 @@ class GameFragment : Fragment() {
             1 -> revealHints(str)
             2 -> notAWord()
         }
-    }
-
-    fun setText(char: Char) {
-        if (char != ' ' && gameViewModel.currentWord.value?.length != 5) {
-            getRow().viewTransition(R.id.pop, getTile())
-        }
-        gameViewModel.updateText(char)
-    }
-
-    // Checks if the word is the correct word and moves to the next row if not
-    private fun isCorrect(str: String) {
-        Log.d("GameFragment", "isCorrect() called")
-        when {
-            str == gameViewModel.answer.value -> winner()
-            gameViewModel.tries.value!! >= 5 -> gameOver()
-            else -> {
-                gameViewModel.nextRow()
-                enableButtons()
-            }
-        }
-    }
-
-    // rotates textViews to be right side up and sets the colors
-    private fun transform(ind: Int, hint: Int, motionLayout: MotionLayout) {
-        gameViewModel.updateBackgrounds(ind, hint)
-        val textView: TextView = motionLayout[ind] as TextView
-        textView.rotation = 180F
-        textView.rotationY = 180F
     }
 
     // changes the colors of the tiles to hint at the answer
@@ -154,8 +134,29 @@ class GameFragment : Fragment() {
         }
     }
 
-    // wiggles the current row to indicate a problem with the users input
-    // and re enables buttons
+    // rotates textViews to be right side up and sets the colors
+    private fun transform(ind: Int, hint: Int, motionLayout: MotionLayout) {
+        gameViewModel.updateBackgrounds(ind, hint)
+        val textView: TextView = motionLayout[ind] as TextView
+        textView.rotation = 180F
+        textView.rotationY = 180F
+    }
+
+    // Checks if the word is the correct word and moves to the next row if not
+    private fun isCorrect(str: String) {
+        Log.d("GameFragment", "isCorrect() called")
+        when {
+            str == gameViewModel.answer.value -> winner()
+            gameViewModel.tries.value!! >= 5 -> gameOver()
+            else -> {
+                gameViewModel.nextRow()
+                enableButtons()
+            }
+        }
+    }
+
+    /* wiggles the current row to indicate a problem with the users input
+       and re enables buttons */
     private fun wiggle() {
         Log.d("GameFragment", "wiggle() called")
         val currentRow = getRow()
@@ -196,6 +197,14 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "gameOver() called")
         gameViewModel.updateStats(false)
         findNavController().navigate(R.id.action_gameFragment_to_gameOverDialog)
+    }
+
+    fun viewStats() {
+        findNavController().navigate(R.id.action_gameFragment_to_statsDialog)
+    }
+
+    fun viewHelp() {
+        findNavController().navigate(R.id.action_gameFragment_to_helpDialog)
     }
 
     override fun onDestroyView() {

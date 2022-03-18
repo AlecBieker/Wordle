@@ -12,16 +12,23 @@
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable-night/filled_border.xml" value="0.106" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable-v24/green.xml" value="0.169" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3225" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/backspace_icon.xml" value="0.106" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/bar_chart.xml" value="0.347" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/bar_graph.xml" value="0.2315" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/filled_border.xml" value="0.106" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/help_icon.xml" value="0.347" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3225" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/share_icon.xml" value="0.106" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/stats_icon.xml" value="0.3995" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/drawable/transparent_back.xml" value="0.33" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/activity_main.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_game_over.xml" value="0.21041666666666667" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_help.xml" value="0.3240506329113924" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_new_game.xml" value="0.4" />
-        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_stats.xml" value="0.4" />
-        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_winner.xml" value="0.21041666666666667" />
-        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/fragment_game.xml" value="0.2574074074074074" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_stats.xml" value="0.19076923076923077" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/dialog_winner.xml" value="0.264" />
+        <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/fragment_game.xml" value="0.4" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/fragment_game_over.xml" value="0.4" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/fragment_start.xml" value="0.2986111111111111" />
         <entry key="..\:/Users/alecb/OneDrive/AndroidStudioProjects/Wordle/app/src/main/res/layout/fragment_winner.xml" value="0.21041666666666667" />

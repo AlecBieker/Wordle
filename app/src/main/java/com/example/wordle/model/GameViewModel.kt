@@ -8,8 +8,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.wordle.R
-import com.example.wordle.wordsList1
-import com.example.wordle.wordsList2
+import com.example.wordle.data.wordsList1
+import com.example.wordle.data.wordsList2
 
 /**
  * [GameViewModel] holds all the variables for reinstating a saved game as well as all the logic

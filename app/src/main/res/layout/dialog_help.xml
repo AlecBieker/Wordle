@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".dialogs.GameOverDialog">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.wordle.model.GameViewModel" />
+
+        <variable
+            name="helpDialog"
+            type="com.example.wordle.dialogs.HelpDialog" />
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/help_dialog_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        app:layoutDescription="@xml/help_dialog_scene">
+
+        <TextView
+            android:id="@+id/how_to_play_textView"
+            style="@style/Widget.Wordle.Dialog.Header"
+            android:text="@string/how_to_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/instructions_textView"
+            style="@style/Widget.Wordle.Help.Text"
+            android:layout_marginTop="16dp"
+            android:text="@string/instructions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/how_to_play_textView" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            style="@style/Widget.Wordle.Help.Text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/instructions_textView" />
+
+        <TextView
+            android:id="@+id/examples_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/examples"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+        <TextView
+            android:id="@+id/example_tile_1"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="8dp"
+            android:text="@string/w"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/examples_textView" />
+
+        <TextView
+            android:id="@+id/example_tile_2"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/e"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_3"
+            app:layout_constraintStart_toEndOf="@id/example_tile_1"
+            app:layout_constraintTop_toBottomOf="@id/examples_textView" />
+
+        <TextView
+            android:id="@+id/example_tile_3"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/a"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_4"
+            app:layout_constraintStart_toEndOf="@id/example_tile_2"
+            app:layout_constraintTop_toBottomOf="@id/examples_textView" />
+
+        <TextView
+            android:id="@+id/example_tile_4"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/r"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_5"
+            app:layout_constraintStart_toEndOf="@id/example_tile_3"
+            app:layout_constraintTop_toBottomOf="@id/examples_textView" />
+
+        <TextView
+            android:id="@+id/example_tile_5"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="5dp"
+            android:text="@string/y"
+            app:layout_constraintStart_toEndOf="@id/example_tile_4"
+            app:layout_constraintTop_toBottomOf="@id/examples_textView" />
+
+        <TextView
+            android:id="@+id/example_1"
+            style="@style/Widget.Wordle.Help.Text"
+            android:text="@string/example_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_tile_1" />
+
+        <TextView
+            android:id="@+id/example_tile_6"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="8dp"
+            android:text="@string/p"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_1" />
+
+        <TextView
+            android:id="@+id/example_tile_7"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/i"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_8"
+            app:layout_constraintStart_toEndOf="@id/example_tile_6"
+            app:layout_constraintTop_toBottomOf="@id/example_1" />
+
+        <TextView
+            android:id="@+id/example_tile_8"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/l"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_9"
+            app:layout_constraintStart_toEndOf="@id/example_tile_7"
+            app:layout_constraintTop_toBottomOf="@id/example_1" />
+
+        <TextView
+            android:id="@+id/example_tile_9"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/l"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_10"
+            app:layout_constraintStart_toEndOf="@id/example_tile_8"
+            app:layout_constraintTop_toBottomOf="@id/example_1" />
+
+        <TextView
+            android:id="@+id/example_tile_10"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="5dp"
+            android:text="@string/s"
+            app:layout_constraintStart_toEndOf="@id/example_tile_9"
+            app:layout_constraintTop_toBottomOf="@id/example_1" />
+
+        <TextView
+            android:id="@+id/example_2"
+            style="@style/Widget.Wordle.Help.Text"
+            android:text="@string/example_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_tile_6" />
+
+        <TextView
+            android:id="@+id/example_tile_11"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="8dp"
+            android:text="@string/v"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_2" />
+
+        <TextView
+            android:id="@+id/example_tile_12"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/a"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_13"
+            app:layout_constraintStart_toEndOf="@id/example_tile_11"
+            app:layout_constraintTop_toBottomOf="@id/example_2" />
+
+        <TextView
+            android:id="@+id/example_tile_13"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/g"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_14"
+            app:layout_constraintStart_toEndOf="@id/example_tile_12"
+            app:layout_constraintTop_toBottomOf="@id/example_2" />
+
+        <TextView
+            android:id="@+id/example_tile_14"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:text="@string/u"
+            app:layout_constraintEnd_toStartOf="@id/example_tile_15"
+            app:layout_constraintStart_toEndOf="@id/example_tile_13"
+            app:layout_constraintTop_toBottomOf="@id/example_2" />
+
+        <TextView
+            android:id="@+id/example_tile_15"
+            style="@style/Widget.Wordle.Help.Tile"
+            android:layout_marginStart="5dp"
+            android:text="@string/e"
+            app:layout_constraintStart_toEndOf="@id/example_tile_14"
+            app:layout_constraintTop_toBottomOf="@id/example_2" />
+
+        <TextView
+            android:id="@+id/example_3"
+            style="@style/Widget.Wordle.Help.Text"
+            android:text="@string/example_3"
+            app:layout_constraintBottom_toTopOf="@id/close_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_tile_11" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            style="@style/Widget.Wordle.Dialog.Button"
+            android:text="@string/close"
+            android:onClick="@{() -> helpDialog.close()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/example_3"/>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

@@ -42,8 +42,8 @@
         <TextView
             android:id="@+id/r_header"
             style="@style/Widget.Wordle.TextView.Header"
-            android:background="@drawable/border"
             android:layout_marginTop="128dp"
+            android:background="@drawable/border"
             app:layout_constraintEnd_toStartOf="@id/d_header"
             app:layout_constraintStart_toEndOf="@id/o_header"
             app:layout_constraintTop_toTopOf="parent"
@@ -80,11 +80,11 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> startFragment.resumeGame()}"
             android:text="@string/resume"
-            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/new_game_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/r_header"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/new_game_button"
@@ -105,10 +105,22 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> startFragment.viewStats()}"
             android:text="@string/view_stats"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/how_to_play_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/new_game_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/how_to_play_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/how_to_play"
+            android:onClick="@{() -> startFragment.viewHelp()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_stats_button" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

@@ -65,4 +65,25 @@
     <string name="current_streak">Current\nStreak</string>
     <string name="max_streak">Max\nStreak</string>
     <string name="this_will_count_as_a_loss">This will count as a loss</string>
+    <string name="guess_distribution">GUESS DISTRIBUTION</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="bar_graph_one">bar graph one</string>
+    <string name="bar_graph_two">bar graph two</string>
+    <string name="bar_graph_three">bar graph three</string>
+    <string name="bar_graph_four">bar graph four</string>
+    <string name="bar_graph_five">bar graph five</string>
+    <string name="bar_graph_six">bar graph six</string>
+    <string name="help_button">help button</string>
+    <string name="statistics_button">statistics button</string>
+    <string name="how_to_play">HOW TO PLAY</string>
+    <string name="instructions">Guess the WORDLE in six tries.\n\nEach guess must be a valid five-letter word. Hit the enter button to submit.\n\nAfter each guess, the color of the tiles will change to show how close your guess was to the word.</string>
+    <string name="examples">Examples</string>
+    <string name="example_1">The letter W is in the word and in the correct spot.</string>
+    <string name="example_2">The letter I is in the word but in the wrong spot.</string>
+    <string name="example_3">The letter U is not in the word in any spot.</string>
 </resources>

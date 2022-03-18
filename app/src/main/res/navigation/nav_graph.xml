@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_startFragment_to_statsDialog"
             app:destination="@id/statsDialog" />
+        <action
+            android:id="@+id/action_startFragment_to_helpDialog"
+            app:destination="@id/helpDialog" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_gameFragment_to_statsDialog"
             app:destination="@id/statsDialog" />
+        <action
+            android:id="@+id/action_gameFragment_to_helpDialog"
+            app:destination="@id/helpDialog" />
     </fragment>
 
     <dialog
@@ -78,4 +84,9 @@
         android:name="com.example.wordle.dialogs.StatsDialog"
         android:label="StatsDialog"
         tools:layout="@layout/dialog_stats"/>
+    <dialog
+        android:id="@+id/helpDialog"
+        android:name="com.example.wordle.dialogs.HelpDialog"
+        android:label="HelpDialog"
+        tools:layout="@layout/dialog_help"/>
 </navigation>

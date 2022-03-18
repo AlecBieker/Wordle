@@ -24,6 +24,8 @@
     <color name="yellow">#c9b458</color>
     <color name="light_gray">#d8d8d8</color>
     <color name="gray">#787c7e</color>
+    <color name="border">#d3d6da</color>
+    <color name="filled_border">#878a8c</color>
     <color name="key_color">#d3d6da</color>
     <color name="text_color">#FF000000</color>
     <color name="hint_text_color">#FFFFFFFF</color>

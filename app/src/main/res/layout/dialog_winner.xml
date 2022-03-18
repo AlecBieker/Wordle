@@ -23,19 +23,15 @@
 
         <TextView
             android:id="@+id/congratulations_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/Widget.Wordle.Dialog.Header"
             android:text="@string/congratulations"
-            android:textAlignment="center"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/play_again_button"
-            style="@style/Widget.Wordle.Button.Dialog"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:text="@string/play_again"
             android:onClick="@{() -> winnerDialog.playAgain()}"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +40,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/quit_game_button"
-            style="@style/Widget.Wordle.Button.Dialog"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:text="@string/quit_game"
             android:onClick="@{() -> winnerDialog.quitGame()}"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,10 +49,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share_button"
-            style="@style/Widget.Wordle.Button.Dialog"
+            style="@style/Widget.Wordle.Dialog.Button"
             android:text="@string/share"
             android:onClick="@{() -> winnerDialog.share()}"
-            app:icon="@android:drawable/ic_menu_share"
+            app:icon="@drawable/share_icon"
+            app:iconPadding="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
