@@ -67,26 +67,25 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val _currentWord = MutableLiveData<String>()
     val currentWord: LiveData<String> = _currentWord
 
-    // Number of words the user has guess out of 6
+    // Number of words the user has guessed out of 6
     private val _tries = MutableLiveData<Int>()
     val tries: LiveData<Int> = _tries
 
-    private fun resetVariables() {
-        Log.d("GameViewModel", "resetVariables() called")
-        _currentWord.value = ""
-        _tries.value = 0
-        _letters.value = listOf()
-        _backgrounds.value = listOf()
-        _textColors.value = listOf()
-        _keyColors.value = mapOf()
-        _keyTextColors.value = mapOf()
+    // GameFragment's current transition
+    private val _transition = MutableLiveData<String?>()
+    val transition: LiveData<String?> = _transition
+
+    fun updateTransition (transition: String?) {
+        Log.d("GameViewModel", "updateTransition() called")
+        _transition.value = transition
     }
 
-    // resets all game parameters to the default values
+    // initiates a new game
     fun newGame() {
         Log.d("GameViewModel", "newGame() called")
         resetVariables()
         _answer.value = generate()
+        _transition.value = null
         with(gameState.edit()) {
             putString("answer", _answer.value)
             putBoolean("game_in_progress", true)
@@ -96,40 +95,64 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         stats.edit().putInt("play_count", stats.getInt("play_count", 0).plus(1)).apply()
     }
 
+    // resets all game parameters to the default values
+    private fun resetVariables() {
+        Log.d("GameViewModel", "resetVariables() called")
+        _currentWord.value = ""
+        _tries.value = 0
+        _letters.value = listOf()
+        _backgrounds.value = listOf()
+        _textColors.value = listOf()
+        _keyColors.value = mapOf()
+        _keyTextColors.value = mapOf()
+        _transition.value = null
+    }
+
+    // generates a new word at random from wordsList
+    private fun generate(): String {
+        Log.d("GameViewModel", "generate() called")
+        return (wordsList1 + wordsList2).random()
+    }
+
     // sets all LiveData variables using gameState shared preferences file
     fun resumeGame() {
         resetVariables()
         _answer.value = gameState.getString("answer", "")
         _tries.value = gameState.getInt("tries", 0)
+        _currentWord.value = gameState.getString("current_word", "")
+        _transition.value = gameState.getString("transition", null)
         val savedLetters = gameState.getString("letters", "")!!.toList()
+        val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
+        val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
+        val savedKeyColors = gameState.getStringSet("key_colors", setOf(""))
         for (item in savedLetters) {
             _letters.value = _letters.value?.plus(item)
         }
-        val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
-        if (savedBackgrounds != listOf(""))
-        for (item in savedBackgrounds) {
-            _backgrounds.value = _backgrounds.value?.plus(item.toInt())
+        if (savedBackgrounds != listOf("")) {
+            for (item in savedBackgrounds) {
+                _backgrounds.value = _backgrounds.value?.plus(item.toInt())
+            }
         }
-        val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
         if (savedTextColors != listOf("")) {
             for (item in savedTextColors) {
                 _textColors.value = _textColors.value?.plus(item.toInt())
             }
         }
-        val savedKeyColors = gameState.getStringSet("key_colors", setOf())
-        val map = _keyColors.value!!.toMutableMap()
-        val textMap = _keyTextColors.value!!.toMutableMap()
-        for (item in _letters.value!!) {
-            val color = savedKeyColors!!.find { it.startsWith(item) }?.drop(2)!!.toInt()
-            map[item] = color
-            textMap[item] = R.color.hint_text_color
+        val map: MutableMap<Char, Int> = mutableMapOf()
+        val textMap: MutableMap<Char, Int> = mutableMapOf()
+        if (!savedKeyColors.isNullOrEmpty()) {
+            for (item in savedKeyColors) {
+                map[item[0]] = item.drop(2).toInt()
+                textMap[item[0]] = R.color.hint_text_color
+            }
         }
         _keyColors.value = map.toMap()
         _keyTextColors.value = textMap.toMap()
     }
 
+
     // updates the "game_state" sharedPreferences file
-    private fun updateGameState() {
+    fun updateGameState() {
         Log.d("GameViewModel", "updateGameState() called")
         val keyColorsSet: MutableSet<String> = mutableSetOf()
         val keyTextColorsSet: MutableSet<String> = mutableSetOf()
@@ -138,15 +161,16 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         with(gameState.edit()) {
             putInt("tries", _tries.value!!)
             putString("letters", _letters.value?.joinToString(separator = ""))
+            putString("current_word", _currentWord.value)
             putString("backgrounds", _backgrounds.value?.joinToString())
             putString("text_colors", _textColors.value?.joinToString())
             putStringSet("key_colors", keyColorsSet)
+            putString("transition", _transition.value)
             apply()
         }
-        val backgrounds = gameState.getString("backgrounds", "")
-        Log.d("updateGameState", "backgrounds = $backgrounds")
     }
 
+    // retrieves the win percentage
     fun getWinPercentage(plays: Int): String {
         val wins = stats.getInt("win_count", 0).toDouble()
         return "%.1f".format(wins.div(plays.toDouble()).times(100))
@@ -176,9 +200,6 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             }
             apply()
         }
-        Log.d("Stats", "win_count = ${stats.getInt("win_count", 0)}")
-        Log.d("Stats", "play_count = ${stats.getInt("play_count", 0)}")
-        Log.d("Stats", "win_percentage = ${stats.getString("win_percentage", "0%")}")
     }
 
     // updates the letters and currentWord val
@@ -243,7 +264,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // checks each letter for whether it is correct, present or absent
-    // and creates a list of colors representing each state
+// and creates a list of colors representing each state
     fun isLetterCorrect(str: String): List<Int> {
         Log.d("GameViewModel", "isLetterCorrect() called")
         val hints = mutableListOf<Int>()
@@ -261,13 +282,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun nextRow() {
         Log.d("GameViewModel", "nextRow() called")
         _currentWord.value = ""
-        _tries.value = _tries.value?.plus(1) ?: 1
+        _tries.value = _tries.value?.plus(1)
         updateGameState()
-    }
-
-    // generates a new word at random from wordsList
-    private fun generate(): String {
-        Log.d("GameViewModel", "generate() called")
-        return (wordsList1 + wordsList2).random()
     }
 }

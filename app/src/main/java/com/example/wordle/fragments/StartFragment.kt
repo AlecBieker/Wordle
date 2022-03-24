@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -26,13 +27,9 @@ class StartFragment : Fragment() {
     // Binding object instance corresponding to the fragment_start.xml layout
     private var binding: FragmentStartBinding? = null
 
-    // input the "WORDLE" letters into the header textViews
-    private fun type(letter: String, textView: TextView) {
-        textView.text = letter
-        textView.setBackgroundResource(R.drawable.filled_border)
-    }
-
     private val gameViewModel: GameViewModel by activityViewModels()
+
+    private var currentProgress: Float? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,19 +84,69 @@ class StartFragment : Fragment() {
             startFragment = this@StartFragment
         }
         // Animate the WORDLE header textView
-        with(binding!!.motionLayout) {
-            transitionToState(R.id.start, 0)
-            Timer().schedule(500) {
-                setTransition(R.id.type)
-                transitionToEnd {
-                    setTransition(R.id.flip_tiles)
-                    transitionToEnd {
-                        setTransition(R.id.bounce)
-                        transitionToEnd()
-                    }
+        Timer().schedule(500) {
+            typeTransition()
+        }
+    }
+
+    // save the current state of the WORDLE header animation
+    override fun onPause() {
+        super.onPause()
+        Log.d("StartFragment", "onPause() called")
+        currentProgress = binding!!.motionLayout.progress
+    }
+
+    // resume the WORDLE header animation from where it left off
+    override fun onResume() {
+        super.onResume()
+        Log.d("StartFragment", "onResume() called")
+        with (binding!!.motionLayout) {
+            if (currentProgress != null) {
+                progress = currentProgress!!
+                when (transitionName) {
+                    "type" -> typeTransition()
+                    "flip_tiles" -> flipTilesTransition()
+                    "bounce" -> bounceTransition()
                 }
             }
         }
+    }
+
+    // runs the "type" transition, sets the name and calls flipTilesTransition() when its done
+    private fun typeTransition() {
+        with (binding!!.motionLayout) {
+            setTransition(R.id.type)
+            transitionName = "type"
+            transitionToEnd { flipTilesTransition() }
+
+        }
+    }
+
+    // runs the "flip_tiles" transition, sets the name and calls bounceTransition() when its done
+    private fun flipTilesTransition() {
+        with(binding!!.motionLayout) {
+            setTransition(R.id.flip_tiles)
+            transitionName = "flip_tiles"
+            transitionToEnd { bounceTransition() }
+        }
+    }
+
+    // runs the "bounce" transition, sets the name and resets the transition variables when its done
+    private fun bounceTransition() {
+        with(binding!!.motionLayout) {
+            setTransition(R.id.bounce)
+            transitionName = "bounce"
+            transitionToEnd {
+                currentProgress = null
+                transitionName = null
+            }
+        }
+    }
+
+    // input the "WORDLE" letters into the header textViews
+    private fun type(letter: String, textView: TextView) {
+        textView.text = letter
+        textView.setBackgroundResource(R.drawable.filled_border)
     }
 
     // Set the header textViews to be right side up and with the correct text color and background
@@ -145,6 +192,8 @@ class StartFragment : Fragment() {
     override fun onDestroyView() {
         Log.d("StartFragment", "onDestroyView() called")
         super.onDestroyView()
+        binding!!.motionLayout.transitionName = null
+        currentProgress = null
         binding = null
     }
 }

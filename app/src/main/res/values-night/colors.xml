@@ -29,4 +29,5 @@
     <color name="key_color">#818384</color>
     <color name="text_color">#FFFFFFFF</color>
     <color name="hint_text_color">#FFFFFFFF</color>
+    <color name="ic_launcher_background">#3DDC84</color>
 </resources>

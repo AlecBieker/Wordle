@@ -20,6 +20,8 @@ class HelpDialog : DialogFragment() {
     // Binding object instance corresponding to the dialog_help.xml layout
     private var binding: DialogHelpBinding? = null
 
+    private var currentProgress: Float? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +68,25 @@ class HelpDialog : DialogFragment() {
         dialog?.window?.setLayout(width, height)
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d("HelpDialog", "onPause() called")
+        currentProgress = binding!!.helpDialogLayout.progress
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("HelpDialog", "onResume() called")
+        if (currentProgress != null) {
+            with (binding!!.helpDialogLayout) {
+                progress = currentProgress!!
+                transitionToEnd {
+                    currentProgress = null
+                }
+            }
+        }
+    }
+
     private fun transform(textView: TextView, color: Int) {
         textView.rotation = 180F
         textView.rotationY = 180F
@@ -80,6 +101,7 @@ class HelpDialog : DialogFragment() {
     override fun onDestroyView() {
         Log.d("HelpDialog", "onDestroyView() called")
         super.onDestroyView()
+        currentProgress = null
         binding = null
     }
 }
