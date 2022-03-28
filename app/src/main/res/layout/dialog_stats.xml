@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stats_layout"
         android:layout_height="wrap_content"
-        android:layout_width="360dp">
+        android:layout_width="match_parent">
 
         <TextView
             android:id="@+id/stats_header"

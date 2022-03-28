@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.motion.widget.MotionScene
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -30,6 +29,8 @@ class StartFragment : Fragment() {
     private val gameViewModel: GameViewModel by activityViewModels()
 
     private var currentProgress: Float? = null
+
+    private lateinit var timer: TimerTask
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,10 +84,6 @@ class StartFragment : Fragment() {
             // Assign the fragment
             startFragment = this@StartFragment
         }
-        // Animate the WORDLE header textView
-        Timer().schedule(500) {
-            typeTransition()
-        }
     }
 
     // save the current state of the WORDLE header animation
@@ -94,14 +91,15 @@ class StartFragment : Fragment() {
         super.onPause()
         Log.d("StartFragment", "onPause() called")
         currentProgress = binding!!.motionLayout.progress
+        timer.cancel()
     }
 
     // resume the WORDLE header animation from where it left off
     override fun onResume() {
         super.onResume()
         Log.d("StartFragment", "onResume() called")
-        with (binding!!.motionLayout) {
-            if (currentProgress != null) {
+        if (currentProgress != null) {
+            with(binding!!.motionLayout) {
                 progress = currentProgress!!
                 when (transitionName) {
                     "type" -> typeTransition()
@@ -109,16 +107,21 @@ class StartFragment : Fragment() {
                     "bounce" -> bounceTransition()
                 }
             }
+        } else {
+            timer = Timer().schedule(500) {
+                typeTransition()
+            }
         }
     }
 
     // runs the "type" transition, sets the name and calls flipTilesTransition() when its done
-    private fun typeTransition() {
-        with (binding!!.motionLayout) {
+    fun typeTransition() {
+        Log.d("StartFragment", "typeTransitionCalled()")
+        Log.d("StartFragment", "binding = $binding")
+        with(binding!!.motionLayout) {
             setTransition(R.id.type)
             transitionName = "type"
             transitionToEnd { flipTilesTransition() }
-
         }
     }
 
@@ -187,6 +190,11 @@ class StartFragment : Fragment() {
     fun viewHelp() {
         Log.d("StartFragment", "viewHelp() called")
         findNavController().navigate(R.id.action_startFragment_to_helpDialog)
+    }
+
+    // Go to the settings screen
+    fun settings() {
+        findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
     }
 
     override fun onDestroyView() {

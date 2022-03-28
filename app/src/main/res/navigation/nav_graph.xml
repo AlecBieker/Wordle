@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_startFragment_to_helpDialog"
             app:destination="@id/helpDialog" />
+        <action
+            android:id="@+id/action_startFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -89,4 +92,18 @@
         android:name="com.example.wordle.dialogs.HelpDialog"
         android:label="HelpDialog"
         tools:layout="@layout/dialog_help"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.wordle.fragments.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_resetDialog"
+            app:destination="@id/resetDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/resetDialog"
+        android:name="com.example.wordle.dialogs.ResetDialog"
+        android:label="dialog_reset"
+        tools:layout="@layout/dialog_reset" />
 </navigation>

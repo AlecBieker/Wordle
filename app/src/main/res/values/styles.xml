@@ -33,7 +33,7 @@
     </style>
 
     <!-- Help Text Style -->
-    <style name="Widget.Wordle.Help.Text" parent="Widget.MaterialComponents.TextView">
+    <style name="Widget.Wordle.Text.Subtext" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -45,13 +45,22 @@
     </style>
 
     <!-- Start Screen Header Style -->
-    <style name="Widget.Wordle.TextView.Header" parent="Widget.MaterialComponents.TextView">
+    <style name="Widget.Wordle.Start.Header" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:layout_marginEnd">4dp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">34sp</item>
+    </style>
+
+    <!-- Settings Screen big text -->
+    <style name="Widget.Wordle.Settings.BigText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">28sp</item>
     </style>
     
     <!-- Keyboard Buttons Style -->
@@ -124,5 +133,4 @@
         <item name="android:textAlignment">center</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
-
 </resources>

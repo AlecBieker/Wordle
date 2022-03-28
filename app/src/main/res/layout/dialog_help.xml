@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/instructions_textView"
-            style="@style/Widget.Wordle.Help.Text"
+            style="@style/Widget.Wordle.Text.Subtext"
             android:layout_marginTop="16dp"
             android:text="@string/instructions"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"
-            style="@style/Widget.Wordle.Help.Text"
+            style="@style/Widget.Wordle.Text.Subtext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/instructions_textView" />
@@ -100,7 +100,7 @@
 
         <TextView
             android:id="@+id/example_1"
-            style="@style/Widget.Wordle.Help.Text"
+            style="@style/Widget.Wordle.Text.Subtext"
             android:text="@string/example_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/example_tile_1" />
@@ -148,7 +148,7 @@
 
         <TextView
             android:id="@+id/example_2"
-            style="@style/Widget.Wordle.Help.Text"
+            style="@style/Widget.Wordle.Text.Subtext"
             android:text="@string/example_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/example_tile_6" />
@@ -196,7 +196,7 @@
 
         <TextView
             android:id="@+id/example_3"
-            style="@style/Widget.Wordle.Help.Text"
+            style="@style/Widget.Wordle.Text.Subtext"
             android:text="@string/example_3"
             app:layout_constraintBottom_toTopOf="@id/close_button"
             app:layout_constraintStart_toStartOf="parent"

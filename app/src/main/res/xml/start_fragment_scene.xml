@@ -365,27 +365,27 @@
     <ConstraintSet android:id="@+id/end">
         <Constraint
             android:id="@+id/w_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
         <Constraint
             android:id="@+id/o_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
         <Constraint
             android:id="@+id/r_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
         <Constraint
             android:id="@+id/d_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
         <Constraint
             android:id="@+id/l_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
         <Constraint
             android:id="@+id/e_header"
-            style="@style/Widget.Wordle.TextView.Header"
+            style="@style/Widget.Wordle.Start.Header"
             android:rotationX="180"/>
     </ConstraintSet>
 </MotionScene>

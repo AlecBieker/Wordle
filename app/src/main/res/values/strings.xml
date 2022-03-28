@@ -66,6 +66,7 @@
     <string name="max_streak">Max\nStreak</string>
     <string name="this_will_count_as_a_loss">This will count as a loss</string>
     <string name="guess_distribution">GUESS DISTRIBUTION</string>
+    <string name="negative_one">-1</string>
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>
@@ -86,4 +87,13 @@
     <string name="example_1">The letter W is in the word and in the correct spot.</string>
     <string name="example_2">The letter I is in the word but in the wrong spot.</string>
     <string name="example_3">The letter U is not in the word in any spot.</string>
+    <string name="settings">SETTINGS</string>
+    <string name="hard_mode">HARD MODE</string>
+    <string name="hard_mode_description">Any revealed hints must be used in subsequent guesses</string>
+    <string name="reset_statistics">RESET STATISTICS</string>
+    <string name="theme">THEME</string>
+    <string name="system_default">SYSTEM DEFAULT</string>
+    <string name="dark">DARK</string>
+    <string name="light">LIGHT</string>
+    <string name="reset_warning">This will permanently delete all of your statistics and in progress games and make you look like a complete noob!!</string>
 </resources>

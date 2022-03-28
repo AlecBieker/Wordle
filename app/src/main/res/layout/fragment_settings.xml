@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.SettingsFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.wordle.model.GameViewModel" />
+
+        <variable
+            name="settingsFragment"
+            type="com.example.wordle.fragments.SettingsFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/settings_textView"
+            style="@style/Widget.Wordle.Dialog.Header"
+            android:text="@string/settings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/hard_mode"
+            style="@style/Widget.Wordle.Settings.BigText"
+            android:text="@string/hard_mode"
+            app:layout_constraintTop_toBottomOf="@id/settings_textView"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/hard_mode_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:checked='@{viewModel.settings.getBoolean("hard_mode", false)}'
+            android:onCheckedChanged="@{(switch, isChecked) -> viewModel.setHardMode(isChecked)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/hard_mode"
+            app:layout_constraintBottom_toBottomOf="@id/hard_mode" />
+
+        <TextView
+            android:id="@+id/hard_mode_description"
+            style="@style/Widget.Wordle.Text.Subtext"
+            android:text="@string/hard_mode_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hard_mode"/>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_1"
+            style="@style/Widget.Wordle.Text.Subtext"
+            app:layout_constraintTop_toBottomOf="@id/hard_mode_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/theme"
+            style="@style/Widget.Wordle.Settings.BigText"
+            android:text="@string/theme"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/theme">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/system_default_radioButton"
+                style="@style/Widget.Wordle.Text.Subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/system_default"
+                android:onClick="@{() -> viewModel.setTheme(-1)}"
+                android:checked='@{viewModel.settings.getInt("theme", -1) == -1}'/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/light_radioButton"
+                style="@style/Widget.Wordle.Text.Subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/light"
+                android:onClick="@{() -> viewModel.setTheme(1)}"
+                android:checked='@{viewModel.settings.getInt("theme", -1) == 1}' />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/dark_radioButton"
+                style="@style/Widget.Wordle.Text.Subtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/dark"
+                android:onClick="@{() -> viewModel.setTheme(2)}"
+                android:checked='@{viewModel.settings.getInt("theme", -1) == 2}'/>
+        </RadioGroup>
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_2"
+            style="@style/Widget.Wordle.Text.Subtext"
+            app:layout_constraintTop_toBottomOf="@id/radio_group"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/reset_button"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset_statistics"
+            android:onClick="@{() -> settingsFragment.reset()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
