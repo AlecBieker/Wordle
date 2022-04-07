@@ -17,7 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/game_over_dialog_layout"
-        android:layout_width="match_parent"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
@@ -45,8 +45,6 @@
         <TextView
             android:id="@+id/answer_textView"
             style="@style/Widget.Wordle.Dialog.Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/try_again_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

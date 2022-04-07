@@ -68,9 +68,10 @@ class GameFragment : Fragment() {
         super.onResume()
         Log.d("GameFragment", "onResume() called")
         if (gameViewModel.transition.value != null) {
+            disableButtons()
             currentRow?.transitionToState(R.id.start, 0)
             when (gameViewModel.transition.value) {
-                "flip_tiles" -> revealHints(gameViewModel.currentWord.value!!)
+                "flip_tiles" -> revealHints()
                 "wiggle" -> wiggle()
                 "bounce" -> bounce()
             }
@@ -117,18 +118,54 @@ class GameFragment : Fragment() {
     fun onEnter() {
         Log.d("GameFragment", "onEnter() called")
         disableButtons()
-        val str = gameViewModel.currentWord.value!!
-        when (gameViewModel.isAWord(str)) {
+        when (gameViewModel.isAWord()) {
             0 -> tooShort()
-            1 -> revealHints(str)
+            1 -> {
+                if (gameViewModel.settings.getBoolean("hard_mode", false) && gameViewModel.tries.value!! >= 1) {
+                    hardMode()
+                }
+                else revealHints()
+            }
             2 -> notAWord()
         }
     }
 
+    private fun hardMode() {
+        Log.d("GameFragment", "hardMode() called")
+        val triple = gameViewModel.isUsingHints()
+        when (triple.first) {
+            0 -> revealHints()
+            1 -> missedYellowHint(triple.third)
+            2 -> missedGreenHint(triple.second, triple.third)
+        }
+    }
+
+    private fun missedYellowHint(letter: Char) {
+        Log.d("GameFragment", "missedYellowHint() called")
+        val string = getString(R.string.missed_yellow_hint, letter)
+        if (toast != null) toast?.cancel()
+        toast = Toast.makeText(context, string, Toast.LENGTH_SHORT)
+        toast?.show()
+        wiggle()
+    }
+
+    private fun missedGreenHint(index: Int, letter: Char) {
+        Log.d("GameFragment", "missedGreenHint() called")
+        val string = getString(
+            R.string.missed_green_hint,
+            resources.getStringArray(R.array.ordinals)[index],
+            letter
+        )
+        if (toast != null) toast?.cancel()
+        toast = Toast.makeText(context, string, Toast.LENGTH_SHORT)
+        toast?.show()
+        wiggle()
+    }
+
     // changes the colors of the tiles to hint at the answer
-    private fun revealHints(str: String) {
+    private fun revealHints() {
         Log.d("GameFragment", "revealHints() called")
-        val hints = gameViewModel.isLetterCorrect(str)
+        val hints = gameViewModel.isLetterCorrect()
         with(currentRow!!) {
             addTransitionListener(
                 object : TransitionAdapter() {
@@ -155,8 +192,8 @@ class GameFragment : Fragment() {
             gameViewModel.updateTransition("flip_tiles")
             transitionToEnd {
                 gameViewModel.updateTransition(null)
-                gameViewModel.updateKeyColors(str, hints)
-                isCorrect(str)
+                gameViewModel.updateKeyColors(hints)
+                isCorrect()
             }
         }
     }
@@ -170,13 +207,12 @@ class GameFragment : Fragment() {
     }
 
     // Checks if the word is the correct word and moves to the next row if not
-    private fun isCorrect(str: String) {
+    private fun isCorrect() {
         Log.d("GameFragment", "isCorrect() called")
-        when {
-            str == gameViewModel.answer.value -> winner()
-            gameViewModel.tries.value!! >= 5 -> gameOver()
-            else -> {
-                gameViewModel.nextRow()
+        when (gameViewModel.isWordCorrect()) {
+            0 -> winner()
+            1 -> gameOver()
+            2 -> {
                 setCurrentRow()
                 enableButtons()
             }

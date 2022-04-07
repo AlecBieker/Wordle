@@ -95,5 +95,7 @@
     <string name="system_default">SYSTEM DEFAULT</string>
     <string name="dark">DARK</string>
     <string name="light">LIGHT</string>
-    <string name="reset_warning">This will permanently delete all of your statistics and in progress games and make you look like a complete noob!!</string>
+    <string name="reset_warning">This will permanently delete all of your statistics and in progress game!</string>
+    <string name="missed_yellow_hint">Guess must contain %1$s</string>
+    <string name="missed_green_hint">The %1$s letter must be %2$s</string>
 </resources>

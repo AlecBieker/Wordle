@@ -101,7 +101,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun updateTransition (transition: String?) {
+    fun updateTransition(transition: String?) {
         Log.d("ViewModel", "updateTransition() called")
         _transition.value = transition
     }
@@ -150,7 +150,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         val savedLetters = gameState.getString("letters", "")!!.toList()
         val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
         val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
-        val savedKeyColors = gameState.getStringSet("key_colors", setOf(""))
+        val savedKeyColors = gameState.getStringSet("key_colors", setOf())
         for (item in savedLetters) {
             _letters.value = _letters.value?.plus(item)
         }
@@ -166,11 +166,9 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
         val map: MutableMap<Char, Int> = mutableMapOf()
         val textMap: MutableMap<Char, Int> = mutableMapOf()
-        if (!savedKeyColors.isNullOrEmpty()) {
-            for (item in savedKeyColors) {
-                map[item[0]] = item.drop(2).toInt()
-                textMap[item[0]] = R.color.hint_text_color
-            }
+        for (item in savedKeyColors!!) {
+            map[item[0]] = item.drop(2).toInt()
+            textMap[item[0]] = R.color.hint_text_color
         }
         _keyColors.value = map.toMap()
         _keyTextColors.value = textMap.toMap()
@@ -248,11 +246,12 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         Log.d("ViewModel", "clearRow() called")
         val size = _currentWord.value!!.length
         _letters.value = _letters.value?.dropLast(size)
+        _backgrounds.value = _backgrounds.value?.dropLast(size)
         _currentWord.value = ""
         return true
     }
 
-    // updates the colors liveData val to
+    // updates the colors liveData val to show hints
     fun updateBackgrounds(ind: Int, hint: Int) {
         val i: Int = _backgrounds.value!!.size.minus(5).plus(ind)
         val mutableBackgrounds = _backgrounds.value!!.toMutableList()
@@ -262,11 +261,11 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     // updates the key background and text colors
-    fun updateKeyColors(str: String, hints: List<Int>) {
+    fun updateKeyColors(hints: List<Int>) {
         val map = _keyColors.value!!.toMutableMap()
         val textMap = _keyTextColors.value!!.toMutableMap()
         for (i in 0..4) {
-            val char = str[i]
+            val char = _currentWord.value!![i]
             val color = hints[i]
             if (color == R.color.yellow && map[char] == R.color.green) {
                 continue
@@ -279,33 +278,73 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         _keyTextColors.value = textMap.toMap()
     }
 
+    // checks if the word uses the hints from the previous guess
+    fun isUsingHints(): Triple<Int, Int, Char> {
+        Log.d("ViewModel", "isUsingHints() called")
+        val word = _currentWord.value!!
+        val index = _backgrounds.value!!.size.minus(10)
+        for (i in 0..4) {
+            val letter = _letters.value!![index + i]
+            when (_backgrounds.value!![index + i]) {
+                R.color.gray -> continue
+                R.color.yellow -> {
+                    if (letter in word) {
+                        continue
+                    } else {
+                        return Triple(1, 0, letter)
+                    }
+                }
+                R.color.green -> {
+                    if (letter == word[i]) {
+                        continue
+                    } else {
+                        return Triple(2, i, letter)
+                    }
+                }
+            }
+        }
+        return Triple(0, 0, ' ')
+    }
+
     // checks if the word is a valid word from the list
-    fun isAWord(str: String): Int {
+    fun isAWord(): Int {
         Log.d("ViewModel", "isAWord() called")
         return when {
-            str.length != 5 -> 0
-            str in wordsList1 || str in wordsList2 -> 1
+            currentWord.value!!.length != 5 -> 0
+            currentWord.value in wordsList1 || currentWord.value in wordsList2 -> 1
             else -> 2
         }
     }
 
     // checks each letter for whether it is correct, present or absent
 // and creates a list of colors representing each state
-    fun isLetterCorrect(str: String): List<Int> {
+    fun isLetterCorrect(): List<Int> {
         Log.d("ViewModel", "isLetterCorrect() called")
         val hints = mutableListOf<Int>()
         for (i in (0..4)) {
             when {
-                str[i] == _answer.value?.get(i) -> hints.add(R.color.green)
-                str[i] in _answer.value!! -> hints.add(R.color.yellow)
+                _currentWord.value!![i] == _answer.value?.get(i) -> hints.add(R.color.green)
+                _currentWord.value!![i] in _answer.value!! -> hints.add(R.color.yellow)
                 else -> hints.add(R.color.gray)
             }
         }
         return (hints)
     }
 
+    fun isWordCorrect(): Int {
+        Log.d("ViewModel", "isCorrect() called")
+        return when {
+            _currentWord.value == _answer.value -> 0
+            _tries.value!! >= 5 -> 1
+            else -> {
+                nextRow()
+                2
+            }
+        }
+    }
+
     // moves down a row and resets currentWord
-    fun nextRow() {
+    private fun nextRow() {
         Log.d("ViewModel", "nextRow() called")
         _currentWord.value = ""
         _tries.value = _tries.value?.plus(1)

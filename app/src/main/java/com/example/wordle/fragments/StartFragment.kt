@@ -115,9 +115,8 @@ class StartFragment : Fragment() {
     }
 
     // runs the "type" transition, sets the name and calls flipTilesTransition() when its done
-    fun typeTransition() {
+    private fun typeTransition() {
         Log.d("StartFragment", "typeTransitionCalled()")
-        Log.d("StartFragment", "binding = $binding")
         with(binding!!.motionLayout) {
             setTransition(R.id.type)
             transitionName = "type"

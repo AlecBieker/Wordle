@@ -1,6 +1,5 @@
 package com.example.wordle
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
