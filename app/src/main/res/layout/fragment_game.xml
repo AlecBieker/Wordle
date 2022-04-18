@@ -35,7 +35,6 @@
             android:fontFamily="sans-serif-black"
             android:text="@string/wordle_header"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,13 +44,13 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
+            android:contentDescription="@string/help_button"
             android:onClick="@{() -> gameFragment.viewHelp()}"
+            app:iconTint="@color/text_color"
             app:layout_constraintBottom_toBottomOf="@id/wordle_textView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/wordle_textView"
-            app:iconTint="@color/text_color"
-            app:srcCompat="@drawable/help_icon"
-            android:contentDescription="@string/help_button" />
+            app:srcCompat="@drawable/help_icon" />
 
 
         <ImageView
@@ -59,13 +58,13 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginEnd="4dp"
-            android:padding="2dp"
+            android:contentDescription="@string/statistics_button"
             android:onClick="@{() -> gameFragment.viewStats()}"
-            app:srcCompat="@drawable/stats_icon"
-            app:layout_constraintTop_toTopOf="@id/wordle_textView"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="@id/wordle_textView"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/statistics_button" />
+            app:layout_constraintTop_toTopOf="@id/wordle_textView"
+            app:srcCompat="@drawable/stats_icon" />
 
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -80,53 +79,48 @@
             <TextView
                 android:id="@+id/textView_1A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[0] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[0].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[0] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[0]}" />
 
             <TextView
                 android:id="@+id/textView_1B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[1] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[1].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[1] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1C"
-                app:layout_constraintStart_toEndOf="@id/textView_1A" />
+                app:layout_constraintStart_toEndOf="@id/textView_1A"
+                app:tileState="@{viewModel.tilesStates[1]}" />
 
             <TextView
                 android:id="@+id/textView_1C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[2] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[2].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[2] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1D"
-                app:layout_constraintStart_toEndOf="@id/textView_1B" />
+                app:layout_constraintStart_toEndOf="@id/textView_1B"
+                app:tileState="@{viewModel.tilesStates[2]}" />
 
             <TextView
                 android:id="@+id/textView_1D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[3] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[3].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[3] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1E"
-                app:layout_constraintStart_toEndOf="@id/textView_1C" />
+                app:layout_constraintStart_toEndOf="@id/textView_1C"
+                app:tileState="@{viewModel.tilesStates[3]}" />
 
             <TextView
                 android:id="@+id/textView_1E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[4] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[4].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[4] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_1D" />
+                app:layout_constraintStart_toEndOf="@id/textView_1D"
+                app:tileState="@{viewModel.tilesStates[4]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -141,53 +135,48 @@
             <TextView
                 android:id="@+id/textView_2A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[5] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[5].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[5] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[5]}" />
 
             <TextView
                 android:id="@+id/textView_2B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[6] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[6].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[6] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2C"
-                app:layout_constraintStart_toEndOf="@id/textView_2A" />
+                app:layout_constraintStart_toEndOf="@id/textView_2A"
+                app:tileState="@{viewModel.tilesStates[6]}" />
 
             <TextView
                 android:id="@+id/textView_2C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[7] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[7].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[7] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2D"
-                app:layout_constraintStart_toEndOf="@id/textView_2B" />
+                app:layout_constraintStart_toEndOf="@id/textView_2B"
+                app:tileState="@{viewModel.tilesStates[7]}" />
 
             <TextView
                 android:id="@+id/textView_2D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[8] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[8].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[8] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2E"
-                app:layout_constraintStart_toEndOf="@id/textView_2C" />
+                app:layout_constraintStart_toEndOf="@id/textView_2C"
+                app:tileState="@{viewModel.tilesStates[8]}" />
 
             <TextView
                 android:id="@+id/textView_2E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[9] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[9].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[9] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_2D" />
+                app:layout_constraintStart_toEndOf="@id/textView_2D"
+                app:tileState="@{viewModel.tilesStates[9]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -202,53 +191,48 @@
             <TextView
                 android:id="@+id/textView_3A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[10] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[10].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[10] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[10]}" />
 
             <TextView
                 android:id="@+id/textView_3B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[11] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[11].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[11] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3C"
-                app:layout_constraintStart_toEndOf="@id/textView_3A" />
+                app:layout_constraintStart_toEndOf="@id/textView_3A"
+                app:tileState="@{viewModel.tilesStates[11]}" />
 
             <TextView
                 android:id="@+id/textView_3C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[12] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[12].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[12] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3D"
-                app:layout_constraintStart_toEndOf="@id/textView_3B" />
+                app:layout_constraintStart_toEndOf="@id/textView_3B"
+                app:tileState="@{viewModel.tilesStates[12]}" />
 
             <TextView
                 android:id="@+id/textView_3D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[13] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[13].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[13] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3E"
-                app:layout_constraintStart_toEndOf="@id/textView_3C" />
+                app:layout_constraintStart_toEndOf="@id/textView_3C"
+                app:tileState="@{viewModel.tilesStates[13]}" />
 
             <TextView
                 android:id="@+id/textView_3E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[14] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[14].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[14] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_3D" />
+                app:layout_constraintStart_toEndOf="@id/textView_3D"
+                app:tileState="@{viewModel.tilesStates[14]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -263,53 +247,48 @@
             <TextView
                 android:id="@+id/textView_4A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[15] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[15].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[15] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[15]}" />
 
             <TextView
                 android:id="@+id/textView_4B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[16] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[16].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[16] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4C"
-                app:layout_constraintStart_toEndOf="@id/textView_4A" />
+                app:layout_constraintStart_toEndOf="@id/textView_4A"
+                app:tileState="@{viewModel.tilesStates[16]}" />
 
             <TextView
                 android:id="@+id/textView_4C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[17] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[17].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[17] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4D"
-                app:layout_constraintStart_toEndOf="@id/textView_4B" />
+                app:layout_constraintStart_toEndOf="@id/textView_4B"
+                app:tileState="@{viewModel.tilesStates[17]}" />
 
             <TextView
                 android:id="@+id/textView_4D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[18] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[18].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[18] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4E"
-                app:layout_constraintStart_toEndOf="@id/textView_4C" />
+                app:layout_constraintStart_toEndOf="@id/textView_4C"
+                app:tileState="@{viewModel.tilesStates[18]}" />
 
             <TextView
                 android:id="@+id/textView_4E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[19] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[19].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[19] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_4D" />
+                app:layout_constraintStart_toEndOf="@id/textView_4D"
+                app:tileState="@{viewModel.tilesStates[19]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -324,53 +303,48 @@
             <TextView
                 android:id="@+id/textView_5A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[20] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[20].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[20] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[20]}" />
 
             <TextView
                 android:id="@+id/textView_5B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[21] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[21].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[21] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5C"
-                app:layout_constraintStart_toEndOf="@id/textView_5A" />
+                app:layout_constraintStart_toEndOf="@id/textView_5A"
+                app:tileState="@{viewModel.tilesStates[21]}" />
 
             <TextView
                 android:id="@+id/textView_5C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[22] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[22].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[22] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5D"
-                app:layout_constraintStart_toEndOf="@id/textView_5B" />
+                app:layout_constraintStart_toEndOf="@id/textView_5B"
+                app:tileState="@{viewModel.tilesStates[22]}" />
 
             <TextView
                 android:id="@+id/textView_5D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[23] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[23].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[23] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5E"
-                app:layout_constraintStart_toEndOf="@id/textView_5C" />
+                app:layout_constraintStart_toEndOf="@id/textView_5C"
+                app:tileState="@{viewModel.tilesStates[23]}" />
 
             <TextView
                 android:id="@+id/textView_5E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[24] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[24].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[24] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_5D" />
+                app:layout_constraintStart_toEndOf="@id/textView_5D"
+                app:tileState="@{viewModel.tilesStates[24]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -385,53 +359,48 @@
             <TextView
                 android:id="@+id/textView_6A"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[25] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[25].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[25] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6B"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:tileState="@{viewModel.tilesStates[25]}" />
 
             <TextView
                 android:id="@+id/textView_6B"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[26] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[26].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[26] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6C"
-                app:layout_constraintStart_toEndOf="@id/textView_6A" />
+                app:layout_constraintStart_toEndOf="@id/textView_6A"
+                app:tileState="@{viewModel.tilesStates[26]}" />
 
             <TextView
                 android:id="@+id/textView_6C"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[27] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[27].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[27] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6D"
-                app:layout_constraintStart_toEndOf="@id/textView_6B" />
+                app:layout_constraintStart_toEndOf="@id/textView_6B"
+                app:tileState="@{viewModel.tilesStates[27]}" />
 
             <TextView
                 android:id="@+id/textView_6D"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[28] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[28].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[28] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6E"
-                app:layout_constraintStart_toEndOf="@id/textView_6C" />
+                app:layout_constraintStart_toEndOf="@id/textView_6C"
+                app:tileState="@{viewModel.tilesStates[28]}" />
 
             <TextView
                 android:id="@+id/textView_6E"
                 style="@style/Widget.Wordle.TextView.WordsGrid"
-                android:background="@{ContextCompat.getDrawable(context, viewModel.backgrounds[29] ?? viewModel.border)}"
                 android:text="@{viewModel.letters[29].toString()}"
-                android:textColor="@{ContextCompat.getColor(context, viewModel.textColors[29] ?? viewModel.textColor)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textView_6D" />
+                app:layout_constraintStart_toEndOf="@id/textView_6D"
+                app:tileState="@{viewModel.tilesStates[29]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -440,261 +409,242 @@
             android:id="@+id/q_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Q'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Q')}"
             android:text="@string/q"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Q'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/a_button"
             app:layout_constraintEnd_toStartOf="@+id/w_button"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['Q']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/w_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['W'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('W')}"
             android:text="@string/w"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['W'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/s_button"
             app:layout_constraintEnd_toStartOf="@id/e_button"
             app:layout_constraintStart_toEndOf="@id/q_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['W']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/e_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['E'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('E')}"
             android:text="@string/e"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['E'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/d_button"
             app:layout_constraintEnd_toStartOf="@id/r_button"
             app:layout_constraintStart_toEndOf="@id/w_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['E']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/r_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['R'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('R')}"
             android:text="@string/r"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['R'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/f_button"
             app:layout_constraintEnd_toStartOf="@id/t_button"
             app:layout_constraintStart_toEndOf="@id/e_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['R']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/t_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['T'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('T')}"
             android:text="@string/t"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['T'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/g_button"
             app:layout_constraintEnd_toStartOf="@id/y_button"
             app:layout_constraintStart_toEndOf="@id/r_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['T']}"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/y_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Y'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Y')}"
             android:text="@string/y"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Y'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/h_button"
             app:layout_constraintEnd_toStartOf="@id/u_button"
             app:layout_constraintStart_toEndOf="@id/t_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['Y']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/u_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['U'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('U')}"
             android:text="@string/u"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['U'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/j_button"
             app:layout_constraintEnd_toStartOf="@id/i_button"
             app:layout_constraintStart_toEndOf="@id/y_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['U']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/i_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['I'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('I')}"
             android:text="@string/i"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['I'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/k_button"
             app:layout_constraintEnd_toStartOf="@id/o_button"
             app:layout_constraintStart_toEndOf="@id/u_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['I']}"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/o_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['O'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('O')}"
             android:text="@string/o"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['O'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/l_button"
             app:layout_constraintEnd_toStartOf="@id/p_button"
             app:layout_constraintStart_toEndOf="@id/i_button"
             app:layout_constraintTop_toBottomOf="@id/row_6"
+            app:keyState="@{viewModel.keyStates['O']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginTop="0dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['P'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('P')}"
             android:text="@string/p"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['P'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="@+id/o_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/o_button"
             app:layout_constraintTop_toTopOf="@id/o_button"
+            app:keyState="@{viewModel.keyStates['P']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/a_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginStart="20dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['A'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('A')}"
             android:text="@string/a"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['A'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/enter_button"
             app:layout_constraintEnd_toStartOf="@id/s_button"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/q_button"
+            app:keyState="@{viewModel.keyStates['A']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/s_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['S'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('S')}"
             android:text="@string/s"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['S'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/z_button"
             app:layout_constraintEnd_toStartOf="@id/d_button"
             app:layout_constraintStart_toEndOf="@id/a_button"
             app:layout_constraintTop_toBottomOf="@id/w_button"
+            app:keyState="@{viewModel.keyStates['S']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/d_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['D'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('D')}"
             android:text="@string/d"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['D'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/x_button"
             app:layout_constraintEnd_toStartOf="@id/f_button"
             app:layout_constraintStart_toEndOf="@id/s_button"
             app:layout_constraintTop_toBottomOf="@id/e_button"
+            app:keyState="@{viewModel.keyStates['D']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/f_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['F'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('F')}"
             android:text="@string/f"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['F'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/c_button"
             app:layout_constraintEnd_toStartOf="@id/g_button"
             app:layout_constraintStart_toEndOf="@id/d_button"
             app:layout_constraintTop_toBottomOf="@id/r_button"
+            app:keyState="@{viewModel.keyStates['F']}"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/g_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['G'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('G')}"
             android:text="@string/g"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['G'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/v_button"
             app:layout_constraintEnd_toStartOf="@id/h_button"
             app:layout_constraintStart_toEndOf="@id/f_button"
             app:layout_constraintTop_toBottomOf="@id/t_button"
+            app:keyState="@{viewModel.keyStates['G']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/h_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['H'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('H')}"
             android:text="@string/h"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['H'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/b_button"
             app:layout_constraintEnd_toStartOf="@id/j_button"
             app:layout_constraintStart_toEndOf="@id/g_button"
             app:layout_constraintTop_toBottomOf="@id/y_button"
+            app:keyState="@{viewModel.keyStates['H']}"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/j_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['J'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('J')}"
             android:text="@string/j"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['J'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/n_button"
             app:layout_constraintEnd_toStartOf="@id/k_button"
             app:layout_constraintStart_toEndOf="@id/h_button"
             app:layout_constraintTop_toBottomOf="@id/u_button"
+            app:keyState="@{viewModel.keyStates['J']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/k_button"
             style="@style/Widget.Wordle.Button.Keyboard"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['K'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('K')}"
             android:text="@string/k"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['K'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/m_button"
             app:layout_constraintEnd_toStartOf="@id/l_button"
             app:layout_constraintStart_toEndOf="@id/j_button"
             app:layout_constraintTop_toBottomOf="@id/i_button"
+            app:keyState="@{viewModel.keyStates['K']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/l_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginEnd="20dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['L'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('L')}"
             android:text="@string/l"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['L'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toTopOf="@+id/delete_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/k_button"
             app:layout_constraintTop_toBottomOf="@id/o_button"
+            app:keyState="@{viewModel.keyStates['L']}"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <com.google.android.material.button.MaterialButton
@@ -714,98 +664,91 @@
             android:id="@+id/z_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['Z'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('Z')}"
             android:text="@string/z"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['Z'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/x_button"
             app:layout_constraintStart_toEndOf="@id/enter_button"
             app:layout_constraintTop_toBottomOf="@id/s_button"
+            app:keyState="@{viewModel.keyStates['Z']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/x_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['X'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('X')}"
             android:text="@string/x"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['X'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/c_button"
             app:layout_constraintStart_toEndOf="@id/z_button"
             app:layout_constraintTop_toBottomOf="@id/d_button"
+            app:keyState="@{viewModel.keyStates['X']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/c_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['C'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('C')}"
             android:text="@string/c"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['C'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/v_button"
             app:layout_constraintStart_toEndOf="@id/x_button"
             app:layout_constraintTop_toBottomOf="@id/f_button"
+            app:keyState="@{viewModel.keyStates['C']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/v_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['V'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('V')}"
             android:text="@string/v"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['V'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/b_button"
             app:layout_constraintStart_toEndOf="@id/c_button"
             app:layout_constraintTop_toBottomOf="@id/g_button"
+            app:keyState="@{viewModel.keyStates['V']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/b_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['B'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('B')}"
             android:text="@string/b"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['B'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/n_button"
             app:layout_constraintStart_toEndOf="@id/v_button"
             app:layout_constraintTop_toBottomOf="@id/h_button"
+            app:keyState="@{viewModel.keyStates['B']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/n_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['N'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('N')}"
             android:text="@string/n"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['N'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/m_button"
             app:layout_constraintStart_toEndOf="@id/b_button"
             app:layout_constraintTop_toBottomOf="@id/j_button"
+            app:keyState="@{viewModel.keyStates['N']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/m_button"
             style="@style/Widget.Wordle.Button.Keyboard"
             android:layout_marginBottom="24dp"
-            android:backgroundTint="@{ContextCompat.getColor(context, viewModel.keyColors['M'] ?? viewModel.keyColor)}"
             android:onClick="@{() -> gameFragment.setText('M')}"
             android:text="@string/m"
-            android:textColor="@{ContextCompat.getColor(context, viewModel.keyTextColors['M'] ?? viewModel.textColor)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/delete_button"
             app:layout_constraintStart_toEndOf="@id/n_button"
             app:layout_constraintTop_toBottomOf="@id/k_button"
+            app:keyState="@{viewModel.keyStates['M']}"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton

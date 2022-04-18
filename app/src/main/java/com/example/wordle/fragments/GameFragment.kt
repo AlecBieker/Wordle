@@ -16,6 +16,7 @@ import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
 import com.example.wordle.model.GameViewModel
 import android.widget.Toast
+import com.example.wordle.model.ViewState
 
 /**
  * This is the game screen of the Wordle app
@@ -192,15 +193,15 @@ class GameFragment : Fragment() {
             gameViewModel.updateTransition("flip_tiles")
             transitionToEnd {
                 gameViewModel.updateTransition(null)
-                gameViewModel.updateKeyColors(hints)
+                gameViewModel.updateKeyStates(hints)
                 isCorrect()
             }
         }
     }
 
     // rotates textViews to be right side up and sets the colors
-    private fun transform(ind: Int, hint: Int, motionLayout: MotionLayout) {
-        gameViewModel.updateBackgrounds(ind, hint)
+    private fun transform(ind: Int, hint: ViewState, motionLayout: MotionLayout) {
+        gameViewModel.updateTileStates(ind, hint)
         val textView: TextView = motionLayout[ind] as TextView
         textView.rotation = 180F
         textView.rotationY = 180F

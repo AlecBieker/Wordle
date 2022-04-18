@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogWinnerBinding
 import com.example.wordle.model.GameViewModel
+import com.example.wordle.model.ViewState
 
 /**
  * This is the dialog that displays when you win a game
@@ -66,10 +67,11 @@ class WinnerDialog : DialogFragment() {
         val size = viewModel.letters.value?.size!!.minus(1)
         for (i in 0..size) {
             if (i % 5 == 0 && i != size) gameSummary += "\n"
-            when (viewModel.backgrounds.value!![i]) {
-                R.color.green -> gameSummary += getString(R.string.green_square)
-                R.color.yellow -> gameSummary += getString(R.string.yellow_square)
-                R.color.gray -> gameSummary += getString(R.string.black_square)
+            when (viewModel.tilesStates.value!![i]) {
+                ViewState.CORRECT -> gameSummary += getString(R.string.green_square)
+                ViewState.PRESENT -> gameSummary += getString(R.string.yellow_square)
+                ViewState.ABSENT -> gameSummary += getString(R.string.black_square)
+                else -> {}
             }
         }
 

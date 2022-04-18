@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.wordle.R
 import com.example.wordle.data.wordsList1
 import com.example.wordle.data.wordsList2
+
+enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 
 /**
  * [GameViewModel] holds all the variables for reinstating a saved game as well as all the logic
@@ -31,6 +32,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         Context.MODE_PRIVATE
     )
 
+    // shared preferences handle for user settings
     val settings: SharedPreferences = getApplication<Application>().getSharedPreferences(
         "settings",
         Context.MODE_PRIVATE
@@ -44,30 +46,13 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val _letters = MutableLiveData<List<Char>>()
     val letters: LiveData<List<Char>> = _letters
 
-    // colors or drawable resources of the textView Backgrounds
-    private val _backgrounds = MutableLiveData<List<Int>>()
-    val backgrounds: LiveData<List<Int>> = _backgrounds
+    // the states of the game tiles as represented by enum class ViewState
+    private val _tileStates = MutableLiveData<List<ViewState?>>()
+    val tilesStates: LiveData<List<ViewState?>> = _tileStates
 
-    // colors of the textViews' text
-    private val _textColors = MutableLiveData<List<Int>>()
-    val textColors: LiveData<List<Int>> = _textColors
-
-    // colors of the keys
-    private val _keyColors = MutableLiveData<Map<Char, Int>>()
-    val keyColors: LiveData<Map<Char, Int>> = _keyColors
-
-    // colors of the keys' text
-    private val _keyTextColors = MutableLiveData<Map<Char, Int>>()
-    val keyTextColors: LiveData<Map<Char, Int>> = _keyTextColors
-
-    // border drawable for textViews that don't have a color set yet
-    val border = R.drawable.border
-
-    // default color value for keys that don't have a color set yet
-    val keyColor = R.color.key_color
-
-    // default color value for text that doesn't have a color set yet
-    val textColor = R.color.text_color
+    // the states of the keyboard keys
+    private val _keyStates = MutableLiveData<Map<Char, ViewState?>>()
+    val keyStates: LiveData<Map<Char, ViewState?>> = _keyStates
 
     // Last word to be guessed
     private val _currentWord = MutableLiveData<String>()
@@ -81,18 +66,18 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val _transition = MutableLiveData<String?>()
     val transition: LiveData<String?> = _transition
 
-    fun resetStats() {
-        Log.d("ViewModel", "resetStats() called")
-        stats.edit().clear().apply()
-        gameState.edit().clear().apply()
-    }
-
+    /**
+     * Sets the theme for the app
+     */
     fun setTheme(theme: Int) {
         Log.d("ViewModel", "setTheme() called")
         settings.edit().putInt("theme", theme).apply()
         AppCompatDelegate.setDefaultNightMode(theme)
     }
 
+    /**
+     * Turns hard mode on or off
+     */
     fun setHardMode(hardMode: Boolean) {
         Log.d("ViewModel", "toggleHardMode($hardMode) called")
         with(settings.edit()) {
@@ -101,12 +86,26 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /**
+     * Updates the _transition live data variable
+     */
     fun updateTransition(transition: String?) {
         Log.d("ViewModel", "updateTransition() called")
         _transition.value = transition
     }
 
-    // initiates a new game
+    /**
+     * Resets user statistics
+     */
+    fun resetStats() {
+        Log.d("ViewModel", "resetStats() called")
+        stats.edit().clear().apply()
+        gameState.edit().clear().apply()
+    }
+
+    /**
+     * Initiates a new game
+     */
     fun newGame() {
         Log.d("ViewModel", "newGame() called")
         resetVariables()
@@ -121,26 +120,30 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         stats.edit().putInt("play_count", stats.getInt("play_count", 0).plus(1)).apply()
     }
 
-    // resets all game parameters to the default values
+    /**
+     * Resets all game parameters to the default values
+     */
     private fun resetVariables() {
         Log.d("ViewModel", "resetVariables() called")
         _currentWord.value = ""
         _tries.value = 0
         _letters.value = listOf()
-        _backgrounds.value = listOf()
-        _textColors.value = listOf()
-        _keyColors.value = mapOf()
-        _keyTextColors.value = mapOf()
+        _tileStates.value = listOf()
+        _keyStates.value = mapOf()
         _transition.value = null
     }
 
-    // generates a new word at random from wordsList
+    /**
+     * Generates a new word at random from wordsList
+     */
     private fun generate(): String {
         Log.d("ViewModel", "generate() called")
         return (wordsList1 + wordsList2).random()
     }
 
-    // sets all LiveData variables using gameState shared preferences file
+    /**
+     * Sets all LiveData variables using gameState shared preferences file
+     */
     fun resumeGame() {
         resetVariables()
         _answer.value = gameState.getString("answer", "")
@@ -148,59 +151,53 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         _currentWord.value = gameState.getString("current_word", "")
         _transition.value = gameState.getString("transition", null)
         val savedLetters = gameState.getString("letters", "")!!.toList()
-        val savedBackgrounds = gameState.getString("backgrounds", "")!!.split(", ")
-        val savedTextColors = gameState.getString("text_colors", "")!!.split(", ")
-        val savedKeyColors = gameState.getStringSet("key_colors", setOf())
+        val savedTileStates = gameState.getString("tile_states", "")!!.split(", ")
+        val savedKeyStates = gameState.getStringSet("key_states", setOf())
         for (item in savedLetters) {
             _letters.value = _letters.value?.plus(item)
         }
-        if (savedBackgrounds != listOf("")) {
-            for (item in savedBackgrounds) {
-                _backgrounds.value = _backgrounds.value?.plus(item.toInt())
-            }
+        for (item in savedTileStates) {
+            _tileStates.value = _tileStates.value?.plus(item.toViewState())
         }
-        if (savedTextColors != listOf("")) {
-            for (item in savedTextColors) {
-                _textColors.value = _textColors.value?.plus(item.toInt())
-            }
+        val map: MutableMap<Char, ViewState?> = mutableMapOf()
+        for (item in savedKeyStates!!) {
+            map[item[0]] = item.drop(2).toViewState()
         }
-        val map: MutableMap<Char, Int> = mutableMapOf()
-        val textMap: MutableMap<Char, Int> = mutableMapOf()
-        for (item in savedKeyColors!!) {
-            map[item[0]] = item.drop(2).toInt()
-            textMap[item[0]] = R.color.hint_text_color
-        }
-        _keyColors.value = map.toMap()
-        _keyTextColors.value = textMap.toMap()
+        _keyStates.value = map.toMap()
     }
 
 
-    // updates the "game_state" sharedPreferences file
+    /**
+     * Updates the "game_state" sharedPreferences file
+     */
     fun updateGameState() {
         Log.d("ViewModel", "updateGameState() called")
-        val keyColorsSet: MutableSet<String> = mutableSetOf()
-        val keyTextColorsSet: MutableSet<String> = mutableSetOf()
-        for (item in _keyColors.value!!) keyColorsSet += item.toString()
-        for (item in _keyTextColors.value!!) keyTextColorsSet += item.toString()
+        val keyStatesSet: MutableSet<String> = mutableSetOf()
+        for (item in _keyStates.value!!) {
+            keyStatesSet += item.toString()
+        }
         with(gameState.edit()) {
             putInt("tries", _tries.value!!)
             putString("letters", _letters.value?.joinToString(separator = ""))
             putString("current_word", _currentWord.value)
-            putString("backgrounds", _backgrounds.value?.joinToString())
-            putString("text_colors", _textColors.value?.joinToString())
-            putStringSet("key_colors", keyColorsSet)
+            putString("tile_states", _tileStates.value?.joinToString())
+            putStringSet("key_states", keyStatesSet)
             putString("transition", _transition.value)
             apply()
         }
     }
 
-    // retrieves the win percentage
+    /**
+     * Retrieves the win percentage
+     */
     fun getWinPercentage(plays: Int): String {
         val wins = stats.getInt("win_count", 0).toDouble()
         return "%.1f".format(wins.div(plays.toDouble()).times(100))
     }
 
-    // ends the game and updates stats
+    /**
+     * Ends the game and updates stats
+     */
     fun updateStats(winner: Boolean) {
         gameState.edit().putBoolean("game_in_progress", false).apply()
         with(stats.edit()) {
@@ -226,87 +223,97 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    // updates the letters and currentWord val
+    /**
+     * Updates the letters and currentWord values
+     */
     fun updateText(char: Char) {
         Log.d("ViewModel", "setText($char) called")
         val size = _currentWord.value!!.length
         if (char == ' ' && size != 0) {
             _letters.value = _letters.value?.dropLast(1)
-            _backgrounds.value = _backgrounds.value?.dropLast(1)
+            _tileStates.value = _tileStates.value?.dropLast(1)
             _currentWord.value = _currentWord.value?.dropLast(1)
         } else if (char != ' ' && size != 5) {
             _letters.value = _letters.value?.plus(char)
-            _backgrounds.value = _backgrounds.value?.plus(R.drawable.filled_border)
+            _tileStates.value = _tileStates.value?.plus(ViewState.FILLED)
             _currentWord.value += char
         }
     }
 
-    // Clears the contents of the current row
+    /**
+     * Clears the contents of the current row
+     */
     fun clearRow(): Boolean {
         Log.d("ViewModel", "clearRow() called")
         val size = _currentWord.value!!.length
         _letters.value = _letters.value?.dropLast(size)
-        _backgrounds.value = _backgrounds.value?.dropLast(size)
+        _tileStates.value = _tileStates.value?.dropLast(size)
         _currentWord.value = ""
         return true
     }
 
-    // updates the colors liveData val to show hints
-    fun updateBackgrounds(ind: Int, hint: Int) {
-        val i: Int = _backgrounds.value!!.size.minus(5).plus(ind)
-        val mutableBackgrounds = _backgrounds.value!!.toMutableList()
-        mutableBackgrounds[i] = hint
-        _backgrounds.value = mutableBackgrounds.toList()
-        _textColors.value = _textColors.value!!.plus(R.color.hint_text_color)
+    /**
+     * Updates the _tileStates live data to show hints
+     */
+    fun updateTileStates(ind: Int, hint: ViewState) {
+        val i: Int = _tileStates.value!!.size.minus(5).plus(ind)
+        val mutableStates = _tileStates.value!!.toMutableList()
+        mutableStates[i] = hint
+        _tileStates.value = mutableStates.toList()
     }
 
-    // updates the key background and text colors
-    fun updateKeyColors(hints: List<Int>) {
-        val map = _keyColors.value!!.toMutableMap()
-        val textMap = _keyTextColors.value!!.toMutableMap()
+    /**
+     * Updates the key background and text colors
+     */
+    fun updateKeyStates(hints: List<ViewState>) {
+        val map = _keyStates.value!!.toMutableMap()
         for (i in 0..4) {
             val char = _currentWord.value!![i]
-            val color = hints[i]
-            if (color == R.color.yellow && map[char] == R.color.green) {
+            if ((hints[i] != ViewState.CORRECT) &&
+                (map[char] == ViewState.CORRECT || map[char] == ViewState.PRESENT)
+            ) {
                 continue
             } else {
-                map[char] = color
-                textMap[char] = R.color.hint_text_color
+                map[char] = hints[i]
             }
         }
-        _keyColors.value = map.toMap()
-        _keyTextColors.value = textMap.toMap()
+        _keyStates.value = map.toMap()
     }
 
-    // checks if the word uses the hints from the previous guess
+    /**
+     * Checks if the word uses the hints from the previous guess
+     */
     fun isUsingHints(): Triple<Int, Int, Char> {
         Log.d("ViewModel", "isUsingHints() called")
         val word = _currentWord.value!!
-        val index = _backgrounds.value!!.size.minus(10)
+        val index = _tileStates.value!!.size.minus(10)
         for (i in 0..4) {
             val letter = _letters.value!![index + i]
-            when (_backgrounds.value!![index + i]) {
-                R.color.gray -> continue
-                R.color.yellow -> {
+            when (_tileStates.value!![index + i]) {
+                ViewState.ABSENT -> continue
+                ViewState.PRESENT -> {
                     if (letter in word) {
                         continue
                     } else {
                         return Triple(1, 0, letter)
                     }
                 }
-                R.color.green -> {
+                ViewState.CORRECT -> {
                     if (letter == word[i]) {
                         continue
                     } else {
                         return Triple(2, i, letter)
                     }
                 }
+                else -> {}
             }
         }
         return Triple(0, 0, ' ')
     }
 
-    // checks if the word is a valid word from the list
+    /**
+     * Checks if the word is a valid word from the list
+     */
     fun isAWord(): Int {
         Log.d("ViewModel", "isAWord() called")
         return when {
@@ -316,21 +323,58 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    // checks each letter for whether it is correct, present or absent
-// and creates a list of colors representing each state
-    fun isLetterCorrect(): List<Int> {
+    /**
+     * Checks each letter for whether it is correct, present or absent
+     * and creates a list of ViewStates representing each state
+     * then removes repeat hints for the same letter if used more than is in the answer
+     */
+    fun isLetterCorrect(): List<ViewState> {
         Log.d("ViewModel", "isLetterCorrect() called")
-        val hints = mutableListOf<Int>()
-        for (i in (0..4)) {
-            when {
-                _currentWord.value!![i] == _answer.value?.get(i) -> hints.add(R.color.green)
-                _currentWord.value!![i] in _answer.value!! -> hints.add(R.color.yellow)
-                else -> hints.add(R.color.gray)
+        val hints = mutableListOf<Pair<Char, ViewState>>()
+        val charCount = mutableMapOf<Char, Int>()
+        val hintCount = mutableMapOf<Char, Int>()
+        // set initial ViewStates
+        for (i in 0..4) {
+            when (val char = _currentWord.value!![i]) {
+                _answer.value!![i] -> hints.add(Pair(char, ViewState.CORRECT))
+                in _answer.value!! -> hints.add(Pair(char, ViewState.PRESENT))
+                else -> hints.add(Pair(char, ViewState.ABSENT))
             }
         }
-        return (hints)
+        // creates a map of characters to the amount of that character that are in
+        // the current word
+        for (char in _answer.value!!) {
+            charCount[char] = (charCount[char] ?: 0).plus(1)
+        }
+        // creates a map of characters to the amount of that character that are
+        // represented by yellow or green tiles in hints
+        for (item in hints) {
+            if (item.second != ViewState.ABSENT) {
+                hintCount[item.first] = (hintCount[item.first] ?: 0).plus(1)
+            } else {
+                hintCount[item.first] = hintCount[item.first] ?: 0
+            }
+        }
+        // compares the amount of yellow and green tiles for a given letter with the amount of
+        // that letter that is in the answer and removes additional yellows until they are the same
+        for (char in _currentWord.value!!) {
+            while (hintCount[char] ?: 0 > charCount[char] ?: 0) {
+                hints[hints.lastIndexOf(Pair(char, ViewState.PRESENT))] =
+                    Pair(char, ViewState.ABSENT)
+                hintCount[char] = hintCount[char]!!.minus(1)
+            }
+        }
+        // simplifies the hints variable prior to returning it to the [GameFragment]
+        val simpleHints: MutableList<ViewState> = mutableListOf()
+        for (item in hints) {
+            simpleHints.add(item.second)
+        }
+        return simpleHints
     }
 
+    /**
+     * Checks if the input word is correct or not and returns an Int
+     */
     fun isWordCorrect(): Int {
         Log.d("ViewModel", "isCorrect() called")
         return when {
@@ -343,11 +387,26 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    // moves down a row and resets currentWord
+    /**
+     * Moves down a row, resets currentWord and saves progress
+     */
     private fun nextRow() {
         Log.d("ViewModel", "nextRow() called")
         _currentWord.value = ""
         _tries.value = _tries.value?.plus(1)
         updateGameState()
+    }
+}
+
+/**
+ * Converts Strings to ViewStates
+ */
+private fun String.toViewState(): ViewState? {
+    return when (this) {
+        "FILLED" -> ViewState.FILLED
+        "CORRECT" -> ViewState.CORRECT
+        "PRESENT" -> ViewState.PRESENT
+        "ABSENT" -> ViewState.ABSENT
+        else -> null
     }
 }
