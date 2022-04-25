@@ -12,12 +12,12 @@ import com.example.wordle.databinding.DialogResetBinding
 import com.example.wordle.model.GameViewModel
 
 /**
- * This is the dialog that displays when the user taps the new game button on the start screen
- * while a game is currently in progress
+ * This is the confirmation dialog that displays when the user taps the reset statistics button
+ * on the settings screen
  */
 class ResetDialog : DialogFragment() {
 
-    // Binding object instance corresponding to the dialog_new_game.xml layout
+    // Binding object instance corresponding to the [dialog_reset.xml] layout
     private var binding: DialogResetBinding? = null
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -47,12 +47,14 @@ class ResetDialog : DialogFragment() {
     }
 
     fun reset() {
+        Log.d("ResetDialog", "reset() called")
         viewModel.resetStats()
         Toast.makeText(context, "Statistics Reset", Toast.LENGTH_LONG).show()
         dismiss()
     }
 
     fun cancel() {
+        Log.d("ResetDialog", "cancel() called")
         dismiss()
     }
 

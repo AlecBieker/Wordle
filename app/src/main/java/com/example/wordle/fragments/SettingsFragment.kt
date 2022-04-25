@@ -33,8 +33,8 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("SettingsFragment", "onViewCreated() called")
         super.onViewCreated(view, savedInstanceState)
+        Log.d("SettingsFragment", "onViewCreated() called")
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -46,11 +46,13 @@ class SettingsFragment : Fragment() {
     }
 
     fun reset() {
+        Log.d("SettingsFragment", "reset() called")
         findNavController().navigate(R.id.action_settingsFragment_to_resetDialog)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("SettingsFragment", "onDestroyView() called")
         binding = null
     }
 }

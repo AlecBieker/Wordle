@@ -50,16 +50,19 @@ class WinnerDialog : DialogFragment() {
 
     // starts a new game and navigates back to GameFragment
     fun playAgain() {
+        Log.d("WinnerDialog", "playAgain() called")
         viewModel.newGame()
         findNavController().navigate(R.id.action_winnerDialog_to_gameFragment)
     }
 
     // navigates back to the StartFragment
     fun quitGame() {
+        Log.d("WinnerDialog", "quitGame() called")
         findNavController().navigate(R.id.action_winnerDialog_to_startFragment)
     }
 
     fun share() {
+        Log.d("WinnerDialog", "share() called")
         var gameSummary = getString(
             R.string.game_summary,
             resources.getStringArray(R.array.ordinals)[viewModel.tries.value!!]

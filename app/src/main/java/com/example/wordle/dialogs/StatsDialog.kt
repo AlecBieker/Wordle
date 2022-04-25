@@ -70,6 +70,7 @@ class StatsDialog : DialogFragment() {
     }
 
     private fun setConstraints() {
+        Log.d("StatsDialog", "setConstraints() called")
         val wins: MutableList<Float> = mutableListOf()
         val widths: MutableList<Int> = mutableListOf()
         val layout = binding!!.statsLayout

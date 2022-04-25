@@ -28,4 +28,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
     }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("MainActivity", "onPause() called")
+        viewModel.queNotifications()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("MainActivity", "onResume() called")
+        viewModel.cancelNotifications()
+    }
 }

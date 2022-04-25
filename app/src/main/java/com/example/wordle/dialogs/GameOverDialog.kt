@@ -49,12 +49,14 @@ class GameOverDialog : DialogFragment() {
 
     // starts a new game and navigates back to GameFragment
     fun tryAgain() {
+        Log.d("GameOverDialog", "tryAgain() called")
         viewModel.newGame()
         findNavController().navigate(R.id.action_gameOverDialog_to_gameFragment)
     }
 
     // navigates back to the StartFragment
     fun quitGame() {
+        Log.d("GameOverDialog", "quitGame() called")
         findNavController().navigate(R.id.action_gameOverDialog_to_startFragment)
     }
 

@@ -51,8 +51,8 @@ class HelpDialog : DialogFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("HelpDialog", "onViewCreated() called")
         super.onViewCreated(view, savedInstanceState)
+        Log.d("HelpDialog", "onViewCreated() called")
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
@@ -88,6 +88,7 @@ class HelpDialog : DialogFragment() {
     }
 
     private fun transform(textView: TextView, color: Int) {
+        Log.d("HelpDialog", "transform() called")
         textView.rotation = 180F
         textView.rotationY = 180F
         textView.setBackgroundResource(color)
@@ -95,6 +96,7 @@ class HelpDialog : DialogFragment() {
     }
 
     fun close() {
+        Log.d("HelpDialog", "close() called")
         dismiss()
     }
 

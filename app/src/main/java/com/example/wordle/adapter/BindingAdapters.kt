@@ -1,12 +1,16 @@
-package com.example.wordle.model
+package com.example.wordle.adapter
 
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import com.example.wordle.R
+import com.example.wordle.model.ViewState
 import com.google.android.material.button.MaterialButton
 
 
+/**
+ * Sets tile background and textColor attributes based on entered [ViewState]
+ */
 @BindingAdapter("tileState")
 fun bindTileState(
     tile: TextView,
@@ -38,6 +42,9 @@ fun bindTileState(
     }
 }
 
+/**
+ * Sets key background and textColor attributes based on entered [ViewState]
+ */
 @BindingAdapter("keyState")
 fun bindKeyState(
     key: MaterialButton,

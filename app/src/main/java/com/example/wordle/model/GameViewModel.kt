@@ -8,8 +8,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.wordle.data.wordsList1
 import com.example.wordle.data.wordsList2
+import com.example.wordle.worker.NotificationWorker
+import java.util.concurrent.TimeUnit
 
 enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 
@@ -37,6 +42,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         "settings",
         Context.MODE_PRIVATE
     )
+
+    private val workManager = WorkManager.getInstance(app)
 
     // Generated word to be guessed
     private val _answer = MutableLiveData<String>()
@@ -80,18 +87,56 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun setHardMode(hardMode: Boolean) {
         Log.d("ViewModel", "toggleHardMode($hardMode) called")
-        with(settings.edit()) {
-            putBoolean("hard_mode", hardMode)
-            apply()
-        }
+        settings.edit().putBoolean("hard_mode", hardMode).apply()
     }
 
     /**
-     * Updates the _transition live data variable
+     * Updates the [_transition] live data variable
      */
     fun updateTransition(transition: String?) {
         Log.d("ViewModel", "updateTransition() called")
         _transition.value = transition
+    }
+
+    /**
+     * Turns Notifications on and off
+     */
+    fun setNotifications(isChecked: Boolean) {
+        Log.d("ViewModel", "setNotifications() called")
+        settings.edit().putBoolean("notifications", isChecked).apply()
+        if (!isChecked) {
+            cancelNotifications()
+        }
+    }
+
+    /**
+     * Ques a periodicWorkRequest with [NotificationWorker]
+     */
+    fun queNotifications() {
+        Log.d("ViewModel", "queNotifications() called")
+        if (settings.getBoolean("notifications", true)) {
+            val workRequest = PeriodicWorkRequest.Builder(
+                NotificationWorker::class.java,
+                24,
+                TimeUnit.HOURS
+            )
+                .setInitialDelay(24, TimeUnit.HOURS)
+                .build()
+
+            workManager.enqueueUniquePeriodicWork(
+                "notifications",
+                ExistingPeriodicWorkPolicy.REPLACE,
+                workRequest
+            )
+        }
+    }
+
+    /**
+     * Cancels the notifications periodicWorkRequest
+     */
+    fun cancelNotifications() {
+        Log.d("ViewModel", "cancelNotifications() called")
+        workManager.cancelUniqueWork("notifications")
     }
 
     /**
@@ -134,7 +179,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Generates a new word at random from wordsList
+     * Generates a new word at random from [wordsList1] and [wordsList2]
      */
     private fun generate(): String {
         Log.d("ViewModel", "generate() called")
@@ -142,7 +187,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Sets all LiveData variables using gameState shared preferences file
+     * Sets all LiveData variables using [gameState] shared preferences file
      */
     fun resumeGame() {
         resetVariables()
@@ -168,7 +213,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
 
     /**
-     * Updates the "game_state" sharedPreferences file
+     * Updates the [gameState] sharedPreferences file
      */
     fun updateGameState() {
         Log.d("ViewModel", "updateGameState() called")
@@ -224,7 +269,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Updates the letters and currentWord values
+     * Updates the [_letters] and [_currentWord] values
      */
     fun updateText(char: Char) {
         Log.d("ViewModel", "setText($char) called")
@@ -253,7 +298,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Updates the _tileStates live data to show hints
+     * Updates the [_tileStates] live data to show hints
      */
     fun updateTileStates(ind: Int, hint: ViewState) {
         val i: Int = _tileStates.value!!.size.minus(5).plus(ind)
@@ -263,7 +308,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Updates the key background and text colors
+     * Updates the [_keyStates] live data
      */
     fun updateKeyStates(hints: List<ViewState>) {
         val map = _keyStates.value!!.toMutableMap()
@@ -281,7 +326,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Checks if the word uses the hints from the previous guess
+     * Checks if the entered word uses the hints from the previous guess
      */
     fun isUsingHints(): Triple<Int, Int, Char> {
         Log.d("ViewModel", "isUsingHints() called")
@@ -312,7 +357,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Checks if the word is a valid word from the list
+     * Checks if the word is a valid word from the lists
      */
     fun isAWord(): Int {
         Log.d("ViewModel", "isAWord() called")
@@ -325,7 +370,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /**
      * Checks each letter for whether it is correct, present or absent
-     * and creates a list of ViewStates representing each state
+     * and creates a list of [ViewState]s representing each state
      * then removes repeat hints for the same letter if used more than is in the answer
      */
     fun isLetterCorrect(): List<ViewState> {
@@ -388,7 +433,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Moves down a row, resets currentWord and saves progress
+     * Moves down a row, resets [_currentWord] and saves progress to [gameState]
      */
     private fun nextRow() {
         Log.d("ViewModel", "nextRow() called")
@@ -399,7 +444,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /**
- * Converts Strings to ViewStates
+ * Converts Strings to [ViewState]s
  */
 private fun String.toViewState(): ViewState? {
     return when (this) {

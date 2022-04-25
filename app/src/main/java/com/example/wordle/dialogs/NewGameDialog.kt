@@ -13,12 +13,12 @@ import com.example.wordle.databinding.DialogNewGameBinding
 import com.example.wordle.model.GameViewModel
 
 /**
- * This is the dialog that displays when the user taps the new game button on the start screen
- * while a game is currently in progress
+* This is the confirmation dialog that displays when the user taps the new game button 
+ * on the start screen while a game is currently in progress.
  */
 class NewGameDialog : DialogFragment() {
 
-    // Binding object instance corresponding to the dialog_new_game.xml layout
+    // Binding object instance corresponding to the [dialog_new_game.xml] layout
     private var binding: DialogNewGameBinding? = null
 
     private val viewModel: GameViewModel by activityViewModels()
@@ -48,6 +48,7 @@ class NewGameDialog : DialogFragment() {
     }
 
     fun newGame() {
+        Log.d("NewGameDialog", "newGame() called")
         viewModel.updateStats(false)
         viewModel.newGame()
 
@@ -55,6 +56,7 @@ class NewGameDialog : DialogFragment() {
     }
 
     fun cancel() {
+        Log.d("NewGameDialog", "cancel() called")
         dismiss()
     }
 

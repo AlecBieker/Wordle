@@ -21,7 +21,7 @@ import com.example.wordle.model.ViewState
 /**
  * This is the game screen of the Wordle app
  * This file coordinates event handling and the flow of information between the UI layer and the
- * viewModel using binding references to the UI layer and calls to the viewModel.
+ * [GameViewModel] using binding references to the UI layer and calls to the [GameViewModel].
  */
 class GameFragment : Fragment() {
 
