@@ -99,4 +99,6 @@
     <string name="missed_yellow_hint">Guess must contain %1$s</string>
     <string name="missed_green_hint">The %1$s letter must be %2$s</string>
     <string name="notifications">Notifications</string>
+    <string name="what_does_that_mean">What does %1$s mean?</string>
+    <string name="queryUrl">https://www.google.com/search?q=%1$s+definition</string>
 </resources>

@@ -15,6 +15,7 @@ import com.example.wordle.data.wordsList1
 import com.example.wordle.data.wordsList2
 import com.example.wordle.worker.NotificationWorker
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 
@@ -163,6 +164,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
             apply()
         }
         stats.edit().putInt("play_count", stats.getInt("play_count", 0).plus(1)).apply()
+        Log.d("ViewModel", "answer = ${answer.value}")
     }
 
     /**
@@ -183,7 +185,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
      */
     private fun generate(): String {
         Log.d("ViewModel", "generate() called")
-        return (wordsList1 + wordsList2).random()
+        val rand = Random(System.nanoTime())
+        return (wordsList1 + wordsList2).random(rand)
     }
 
     /**

@@ -45,10 +45,12 @@
         <TextView
             android:id="@+id/answer_textView"
             style="@style/Widget.Wordle.Dialog.Header"
+            android:onClick="@{() -> gameOverDialog.lookupWord()}"
             app:layout_constraintBottom_toTopOf="@id/try_again_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/the_answer_was_textView" />
+            app:layout_constraintTop_toBottomOf="@id/the_answer_was_textView"
+            tools:text="ANSWER"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/try_again_button"

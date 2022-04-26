@@ -1,5 +1,7 @@
 package com.example.wordle.dialogs
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogGameOverBinding
 import com.example.wordle.model.GameViewModel
+import java.util.*
 
 /**
  * This is the dialog that displays when the user loses a game
@@ -58,6 +61,13 @@ class GameOverDialog : DialogFragment() {
     fun quitGame() {
         Log.d("GameOverDialog", "quitGame() called")
         findNavController().navigate(R.id.action_gameOverDialog_to_startFragment)
+    }
+
+    fun lookupWord() {
+        val lowercase = viewModel.answer.value?.lowercase()
+        val queryUrl = Uri.parse(getString(R.string.queryUrl, lowercase))
+        val intent = Intent(Intent.ACTION_VIEW, queryUrl)
+        context?.startActivity(intent)
     }
 
     override fun onDestroyView() {
