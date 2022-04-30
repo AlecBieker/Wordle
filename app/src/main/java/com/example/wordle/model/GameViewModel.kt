@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -14,14 +15,15 @@ import androidx.work.WorkManager
 import com.example.wordle.data.wordsList1
 import com.example.wordle.data.wordsList2
 import com.example.wordle.worker.NotificationWorker
+import org.jetbrains.annotations.NotNull
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 
 /**
- * [GameViewModel] holds all the variables for reinstating a saved game as well as all the logic
- * deciding what will be shown on the screen as the game is played
+ * [GameViewModel] holds all the variables representing the apps current state as well as
+ * all the logic controlling how those variables are modified based on user input.
  */
 
 class GameViewModel(app: Application) : AndroidViewModel(app) {
@@ -250,14 +252,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         gameState.edit().putBoolean("game_in_progress", false).apply()
         with(stats.edit()) {
             if (winner) {
-                when (_tries.value) {
-                    0 -> putInt("wins_1", stats.getInt("wins_1", 0).plus(1))
-                    1 -> putInt("wins_2", stats.getInt("wins_2", 0).plus(1))
-                    2 -> putInt("wins_3", stats.getInt("wins_3", 0).plus(1))
-                    3 -> putInt("wins_4", stats.getInt("wins_4", 0).plus(1))
-                    4 -> putInt("wins_5", stats.getInt("wins_5", 0).plus(1))
-                    5 -> putInt("wins_6", stats.getInt("wins_6", 0).plus(1))
-                }
+                val winRow = "wins_${_tries.value?.plus(1)}"
+                putInt(winRow, stats.getInt(winRow, 0).plus(1))
                 putInt("win_count", stats.getInt("win_count", 0).plus(1))
                 putInt("current_streak", stats.getInt("current_streak", 0).plus(1))
                 apply()
@@ -373,51 +369,32 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     /**
      * Checks each letter for whether it is correct, present or absent
-     * and creates a list of [ViewState]s representing each state
-     * then removes repeat hints for the same letter if used more than is in the answer
+     * with respect to the amount of the letter in the answer
+     * and creates a list of [ViewState]s representing each state.
      */
     fun isLetterCorrect(): List<ViewState> {
         Log.d("ViewModel", "isLetterCorrect() called")
-        val hints = mutableListOf<Pair<Char, ViewState>>()
-        val charCount = mutableMapOf<Char, Int>()
-        val hintCount = mutableMapOf<Char, Int>()
-        // set initial ViewStates
+        val hints = mutableListOf<ViewState?>(null, null, null, null, null)
+        val tempWord = _answer.value!!.toMutableList()
+        // set CORRECT ViewStates
         for (i in 0..4) {
-            when (val char = _currentWord.value!![i]) {
-                _answer.value!![i] -> hints.add(Pair(char, ViewState.CORRECT))
-                in _answer.value!! -> hints.add(Pair(char, ViewState.PRESENT))
-                else -> hints.add(Pair(char, ViewState.ABSENT))
+            if (_currentWord.value!![i] == tempWord[i]) {
+                hints[i] = ViewState.CORRECT
+                tempWord[i] = '_'
             }
         }
-        // creates a map of characters to the amount of that character that are in
-        // the current word
-        for (char in _answer.value!!) {
-            charCount[char] = (charCount[char] ?: 0).plus(1)
-        }
-        // creates a map of characters to the amount of that character that are
-        // represented by yellow or green tiles in hints
-        for (item in hints) {
-            if (item.second != ViewState.ABSENT) {
-                hintCount[item.first] = (hintCount[item.first] ?: 0).plus(1)
-            } else {
-                hintCount[item.first] = hintCount[item.first] ?: 0
+        // set PRESENT and ABSENT ViewStates
+        for (i in 0..4) {
+            when {
+                hints[i] == ViewState.CORRECT -> continue
+                _currentWord.value!![i] in tempWord -> {
+                    hints[i] = ViewState.PRESENT
+                    tempWord[tempWord.indexOf(_currentWord.value!![i])] = '_'
+                }
+                else -> hints[i] = ViewState.ABSENT
             }
         }
-        // compares the amount of yellow and green tiles for a given letter with the amount of
-        // that letter that is in the answer and removes additional yellows until they are the same
-        for (char in _currentWord.value!!) {
-            while (hintCount[char] ?: 0 > charCount[char] ?: 0) {
-                hints[hints.lastIndexOf(Pair(char, ViewState.PRESENT))] =
-                    Pair(char, ViewState.ABSENT)
-                hintCount[char] = hintCount[char]!!.minus(1)
-            }
-        }
-        // simplifies the hints variable prior to returning it to the [GameFragment]
-        val simpleHints: MutableList<ViewState> = mutableListOf()
-        for (item in hints) {
-            simpleHints.add(item.second)
-        }
-        return simpleHints
+        return hints.filterNotNull()
     }
 
     /**
