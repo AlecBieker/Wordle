@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -15,7 +14,6 @@ import androidx.work.WorkManager
 import com.example.wordle.data.wordsList1
 import com.example.wordle.data.wordsList2
 import com.example.wordle.worker.NotificationWorker
-import org.jetbrains.annotations.NotNull
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
