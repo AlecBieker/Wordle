@@ -157,7 +157,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     fun newGame() {
         Log.d("ViewModel", "newGame() called")
         resetVariables()
-        _answer.value = generate()
+        _answer.value = "SAUCE"
         _transition.value = null
         with(gameState.edit()) {
             clear().apply()
