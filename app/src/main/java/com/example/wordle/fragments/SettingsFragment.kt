@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentSettingsBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.model.SettingsViewModel
 
 /**
  * Settings Fragment where user can change their preferences and reset app to default state
@@ -21,7 +21,7 @@ class SettingsFragment : Fragment() {
     private var binding: FragmentSettingsBinding? = null
 
     // reference to the viewModel
-    private val gameViewModel: GameViewModel by activityViewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class SettingsFragment : Fragment() {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
             // Assign the view model to a property in the binding class
-            viewModel = gameViewModel
+            viewModel = settingsViewModel
             // Assign the fragment
             settingsFragment = this@SettingsFragment
         }

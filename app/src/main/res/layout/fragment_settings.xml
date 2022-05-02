@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.model.SettingsViewModel" />
 
         <variable
             name="settingsFragment"

@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogStatsBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.model.SettingsViewModel
 import java.util.Collections.max
 
 /**
@@ -22,7 +22,7 @@ class StatsDialog : DialogFragment() {
 
     private var binding: DialogStatsBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val viewModel: SettingsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

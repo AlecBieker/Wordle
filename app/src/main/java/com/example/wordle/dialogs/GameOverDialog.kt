@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogGameOverBinding
 import com.example.wordle.model.GameViewModel
-import java.util.*
 
 /**
  * This is the dialog that displays when the user loses a game
