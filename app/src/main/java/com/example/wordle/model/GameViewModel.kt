@@ -1,12 +1,11 @@
 package com.example.wordle.model
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.wordle.data.SharedPrefs
 import com.example.wordle.data.WordsList1.wordsList1
 import com.example.wordle.data.WordsList2.wordsList2
 import kotlin.random.Random
@@ -20,22 +19,13 @@ enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 class GameViewModel(app: Application) : AndroidViewModel(app) {
 
     // shared preferences handle for saved game state
-    val gameState: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "game_state",
-        Context.MODE_PRIVATE
-    )
+    val gameState = SharedPrefs(getApplication()).gameState
 
     // shared preferences handle for game stats
-    val stats: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "stats",
-        Context.MODE_PRIVATE
-    )
+    val stats = SharedPrefs(getApplication()).stats
 
     // shared preferences handle for user settings
-    val settings: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "settings",
-        Context.MODE_PRIVATE
-    )
+    val settings = SharedPrefs(getApplication()).settings
 
     // Generated word to be guessed
     private val _answer = MutableLiveData<String>()

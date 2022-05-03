@@ -1,43 +1,34 @@
 package com.example.wordle.model
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import com.example.wordle.data.SharedPrefs
 import com.example.wordle.worker.NotificationWorker
 import java.util.concurrent.TimeUnit
 
 /**
  * [SettingsViewModel] controls all of the settings and holds references to
- * [SharedPreferences] for handling persistent data and acting as an access point
+ * [SharedPrefs] for handling persistent data and acting as an access point
  * for the Activity and Fragments.
  */
 class SettingsViewModel(app: Application) : AndroidViewModel(app) {
 
     // shared preferences handle for saved game state
-    val gameState: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "game_state",
-        Context.MODE_PRIVATE
-    )
+    val gameState = SharedPrefs(getApplication()).gameState
 
     // shared preferences handle for game stats
-    val stats: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "stats",
-        Context.MODE_PRIVATE
-    )
+    val stats = SharedPrefs(getApplication()).stats
 
     // shared preferences handle for user settings
-    val settings: SharedPreferences = getApplication<Application>().getSharedPreferences(
-        "settings",
-        Context.MODE_PRIVATE
-    )
+    val settings = SharedPrefs(getApplication()).settings
 
-    private val workManager = WorkManager.getInstance(app)
+    // Instance of WorkManager for notifications
+    private val workManager = WorkManager.getInstance(getApplication())
 
     /**
      * Sets the theme for the app
