@@ -81,7 +81,8 @@ class GameFragment : Fragment() {
 
     // sets the motionLayout corresponding to the currently active row to currentRow
     private fun setCurrentRow() {
-        currentRow = binding!!.gameLayout[gameViewModel.tries.value!!.plus(3)] as MotionLayout
+        currentRow =
+            binding!!.gameLayout[(gameViewModel.tries.value ?: 0).plus(3)] as MotionLayout
     }
 
     // retrieves the currently active tile or the last in the row if it is full

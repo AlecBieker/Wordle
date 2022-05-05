@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.wordle.data.SharedPrefs
 import com.example.wordle.data.WordsList1.wordsList1
 import com.example.wordle.data.WordsList2.wordsList2
+import org.jetbrains.annotations.TestOnly
 import kotlin.random.Random
 
 enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
@@ -324,6 +325,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         _currentWord.value = ""
         _tries.value = _tries.value?.plus(1)
         updateGameState()
+    }
+
+    /**
+     * Changes the answer for testing purposes
+     */
+    @TestOnly
+    fun changeAnswer(word: String) {
+        _answer.value = word
     }
 }
 

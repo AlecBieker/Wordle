@@ -51,7 +51,6 @@ class NewGameDialog : DialogFragment() {
         Log.d("NewGameDialog", "newGame() called")
         viewModel.updateStats(false)
         viewModel.newGame()
-
         findNavController().navigate(R.id.action_newGameDialog_to_gameFragment)
     }
 

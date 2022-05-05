@@ -116,7 +116,6 @@ class StartFragment : Fragment() {
 
     // runs the "type" transition, sets the name and calls flipTilesTransition() when its done
     private fun typeTransition() {
-        Log.d("StartFragment", "typeTransition() called")
         with(binding!!.motionLayout) {
             setTransition(R.id.type)
             transitionName = "type"
@@ -126,7 +125,6 @@ class StartFragment : Fragment() {
 
     // runs the "flip_tiles" transition, sets the name and calls bounceTransition() when its done
     private fun flipTilesTransition() {
-        Log.d("StartFragment", "flipTilesTransition() called")
         with(binding!!.motionLayout) {
             setTransition(R.id.flip_tiles)
             transitionName = "flip_tiles"
@@ -136,7 +134,6 @@ class StartFragment : Fragment() {
 
     // runs the "bounce" transition, sets the name and resets the transition variables when its done
     private fun bounceTransition() {
-        Log.d("StartFragment", "bounceTransition() called")
         with(binding!!.motionLayout) {
             setTransition(R.id.bounce)
             transitionName = "bounce"
@@ -149,14 +146,12 @@ class StartFragment : Fragment() {
 
     // input the "WORDLE" letters into the header textViews
     private fun type(letter: String, textView: TextView) {
-        Log.d("StartFragment", "type() called")
         textView.text = letter
         textView.setBackgroundResource(R.drawable.filled_border)
     }
 
     // Set the header textViews to be right side up and with the correct text color and background
     private fun transform(textView: TextView) {
-        Log.d("StartFragment", "transform() called")
         textView.rotation = 180F
         textView.rotationY = 180F
         textView.setBackgroundResource(R.color.green)
