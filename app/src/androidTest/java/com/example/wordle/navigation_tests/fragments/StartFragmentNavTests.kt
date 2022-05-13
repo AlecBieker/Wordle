@@ -1,6 +1,5 @@
 package com.example.wordle.navigation_tests.fragments
 
-import android.content.SharedPreferences
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.Navigation
@@ -11,8 +10,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.wordle.R
-import com.example.wordle.data.SharedPrefs
-import com.example.wordle.fragments.StartFragment
+import com.example.wordle.ui.fragments.StartFragment
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -26,8 +24,8 @@ class StartFragmentNavTests {
 
     private lateinit var navController: TestNavHostController
     private lateinit var startScenario: FragmentScenario<StartFragment>
-    private val gameState: SharedPreferences =
-        SharedPrefs(getApplicationContext()).gameState
+    private val gameState: android.content.SharedPreferences =
+        com.example.wordle.data.SharedPreferences(getApplicationContext()).gameState
     private val gameInProgress: Boolean = gameState.getBoolean("game_in_progress", false)
 
     @Before

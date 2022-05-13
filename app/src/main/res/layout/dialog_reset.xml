@@ -3,17 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.ResetDialog">
+    tools:context=".ui.dialogs.ResetDialog">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.SettingsViewModel" />
+            type="com.example.wordle.ui.model.SettingsViewModel" />
 
         <variable
             name="resetDialog"
-            type="com.example.wordle.dialogs.ResetDialog" />
+            type="com.example.wordle.ui.dialogs.ResetDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

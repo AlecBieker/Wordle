@@ -1,4 +1,4 @@
-package com.example.wordle.dialogs
+package com.example.wordle.ui.dialogs
 
 import android.content.Intent
 import android.net.Uri
@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogGameOverBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.ui.model.GameViewModel
 
 /**
  * This is the dialog that displays when the user loses a game
@@ -22,7 +22,7 @@ class GameOverDialog : DialogFragment() {
     // Binding object instance corresponding to the dialog_game_over.xml layout
     private var binding: DialogGameOverBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,18 +41,17 @@ class GameOverDialog : DialogFragment() {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = gameViewModel
 
             // Assign the fragment
             gameOverDialog = this@GameOverDialog
         }
-        binding!!.answerTextView.text = viewModel.answer.value
     }
 
     // starts a new game and navigates back to GameFragment
     fun tryAgain() {
         Log.d("GameOverDialog", "tryAgain() called")
-        viewModel.newGame()
+        gameViewModel.newGame()
         findNavController().navigate(R.id.action_gameOverDialog_to_gameFragment)
     }
 
@@ -63,7 +62,7 @@ class GameOverDialog : DialogFragment() {
     }
 
     fun lookupWord() {
-        val lowercase = viewModel.answer.value?.lowercase()
+        val lowercase = gameViewModel.answer.value?.lowercase()
         val queryUrl = Uri.parse(getString(R.string.queryUrl, lowercase))
         val intent = Intent(Intent.ACTION_VIEW, queryUrl)
         context?.startActivity(intent)

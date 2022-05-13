@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.StartFragment">
+    tools:context=".ui.fragments.StartFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.ui.model.GameViewModel" />
 
         <variable
             name="startFragment"
-            type="com.example.wordle.fragments.StartFragment" />
+            type="com.example.wordle.ui.fragments.StartFragment" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -80,6 +80,7 @@
             android:layout_margin="16dp"
             android:onClick="@{() -> startFragment.resumeGame()}"
             android:text="@string/resume"
+            android:enabled="@{viewModel.gameInProgress}"
             app:layout_constraintBottom_toTopOf="@id/new_game_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

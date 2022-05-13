@@ -1,4 +1,4 @@
-package com.example.wordle.fragments
+package com.example.wordle.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentSettingsBinding
-import com.example.wordle.model.SettingsViewModel
+import com.example.wordle.ui.model.SettingsViewModel
 
 /**
  * Settings Fragment where user can change their preferences and reset app to default state

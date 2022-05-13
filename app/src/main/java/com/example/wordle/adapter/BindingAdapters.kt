@@ -1,10 +1,12 @@
 package com.example.wordle.adapter
 
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import com.example.wordle.R
-import com.example.wordle.model.ViewState
+import com.example.wordle.ui.model.ViewState
 import com.google.android.material.button.MaterialButton
 
 
@@ -70,5 +72,25 @@ fun bindKeyState(
             }
             else -> {}
         }
+    }
+}
+
+/**
+ * Binds the bar width to the Int calculated in StatsViewModel
+ */
+@BindingAdapter("barWidths")
+fun bindBarWidths(
+    layout: ConstraintLayout,
+    widths: List<Int>
+) {
+    ConstraintSet().apply {
+        clone(layout)
+        constrainWidth(R.id.bar_one, widths[0])
+        constrainWidth(R.id.bar_two, widths[1])
+        constrainWidth(R.id.bar_three, widths[2])
+        constrainWidth(R.id.bar_four, widths[3])
+        constrainWidth(R.id.bar_five, widths[4])
+        constrainWidth(R.id.bar_six, widths[5])
+        applyTo(layout)
     }
 }

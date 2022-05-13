@@ -13,7 +13,7 @@ import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.wordle.R
-import com.example.wordle.dialogs.StatsDialog
+import com.example.wordle.ui.dialogs.StatsDialog
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,4 +1,4 @@
-package com.example.wordle.dialogs
+package com.example.wordle.ui.dialogs
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogWinnerBinding
-import com.example.wordle.model.GameViewModel
-import com.example.wordle.model.ViewState
+import com.example.wordle.ui.model.GameViewModel
+import com.example.wordle.ui.model.ViewState
 
 /**
  * This is the dialog that displays when you win a game
@@ -22,7 +22,7 @@ class WinnerDialog : DialogFragment() {
     // Binding object instance corresponding to the dialog_winner.xml layout
     private var binding: DialogWinnerBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,7 @@ class WinnerDialog : DialogFragment() {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = gameViewModel
 
             // Assign the fragment
             winnerDialog = this@WinnerDialog
@@ -51,7 +51,7 @@ class WinnerDialog : DialogFragment() {
     // starts a new game and navigates back to GameFragment
     fun playAgain() {
         Log.d("WinnerDialog", "playAgain() called")
-        viewModel.newGame()
+        gameViewModel.newGame()
         findNavController().navigate(R.id.action_winnerDialog_to_gameFragment)
     }
 
@@ -65,12 +65,12 @@ class WinnerDialog : DialogFragment() {
         Log.d("WinnerDialog", "share() called")
         var gameSummary = getString(
             R.string.game_summary,
-            resources.getStringArray(R.array.ordinals)[viewModel.tries.value!!]
+            resources.getStringArray(R.array.ordinals)[gameViewModel.tries.value!!]
         )
-        val size = viewModel.letters.value?.size!!.minus(1)
+        val size = gameViewModel.letters.value?.size!!.minus(1)
         for (i in 0..size) {
             if (i % 5 == 0 && i != size) gameSummary += "\n"
-            when (viewModel.tilesStates.value!![i]) {
+            when (gameViewModel.tileStates.value!![i]) {
                 ViewState.CORRECT -> gameSummary += getString(R.string.green_square)
                 ViewState.PRESENT -> gameSummary += getString(R.string.yellow_square)
                 ViewState.ABSENT -> gameSummary += getString(R.string.black_square)

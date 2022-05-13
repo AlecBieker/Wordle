@@ -1,4 +1,4 @@
-package com.example.wordle.dialogs
+package com.example.wordle.ui.dialogs
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.DialogNewGameBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.ui.model.GameViewModel
 
 /**
 * This is the confirmation dialog that displays when the user taps the new game button 
@@ -21,7 +21,7 @@ class NewGameDialog : DialogFragment() {
     // Binding object instance corresponding to the [dialog_new_game.xml] layout
     private var binding: DialogNewGameBinding? = null
 
-    private val viewModel: GameViewModel by activityViewModels()
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +40,7 @@ class NewGameDialog : DialogFragment() {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = gameViewModel
 
             // Assign the fragment
             newGameDialog = this@NewGameDialog
@@ -49,8 +49,8 @@ class NewGameDialog : DialogFragment() {
 
     fun newGame() {
         Log.d("NewGameDialog", "newGame() called")
-        viewModel.updateStats(false)
-        viewModel.newGame()
+        gameViewModel.endGame(false)
+        gameViewModel.newGame()
         findNavController().navigate(R.id.action_newGameDialog_to_gameFragment)
     }
 

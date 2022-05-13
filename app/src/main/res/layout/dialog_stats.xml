@@ -2,23 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.StatsDialog">
+    tools:context=".ui.dialogs.StatsDialog">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.ui.model.StatsViewModel" />
 
         <variable
             name="statsDialog"
-            type="com.example.wordle.dialogs.StatsDialog" />
+            type="com.example.wordle.ui.dialogs.StatsDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/stats_layout"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        app:barWidths="@{viewModel.widths}">
 
         <TextView
             android:id="@+id/stats_header"
@@ -31,6 +32,7 @@
         <TextView
             android:id="@+id/play_count_value"
             style="@style/Widget.Wordle.Stats.Value"
+            android:text="@{viewModel.playCount.toString()}"
             app:layout_constraintEnd_toStartOf="@id/win_percentage_value"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +42,7 @@
         <TextView
             android:id="@+id/win_percentage_value"
             style="@style/Widget.Wordle.Stats.Value"
+            android:text="@{viewModel.winPercent}"
             app:layout_constraintEnd_toStartOf="@id/current_streak_value"
             app:layout_constraintStart_toEndOf="@id/play_count_value"
             app:layout_constraintTop_toBottomOf="@id/stats_header"
@@ -48,6 +51,7 @@
         <TextView
             android:id="@+id/current_streak_value"
             style="@style/Widget.Wordle.Stats.Value"
+            android:text="@{viewModel.currentStreak.toString()}"
             app:layout_constraintEnd_toStartOf="@id/max_streak_value"
             app:layout_constraintStart_toEndOf="@id/win_percentage_value"
             app:layout_constraintTop_toBottomOf="@id/stats_header"
@@ -56,6 +60,7 @@
         <TextView
             android:id="@+id/max_streak_value"
             style="@style/Widget.Wordle.Stats.Value"
+            android:text="@{viewModel.maxStreak.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/current_streak_value"
             app:layout_constraintTop_toBottomOf="@id/stats_header"
@@ -154,6 +159,7 @@
         <TextView
             android:id="@+id/bar_one"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[0].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/one"
             app:layout_constraintStart_toEndOf="@id/one"
             app:layout_constraintTop_toTopOf="@id/one"
@@ -162,6 +168,7 @@
         <TextView
             android:id="@+id/bar_two"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[1].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/two"
             app:layout_constraintStart_toEndOf="@id/two"
             app:layout_constraintTop_toTopOf="@id/two"
@@ -170,6 +177,7 @@
         <TextView
             android:id="@+id/bar_three"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[2].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/three"
             app:layout_constraintStart_toEndOf="@id/three"
             app:layout_constraintTop_toTopOf="@id/three"
@@ -178,6 +186,7 @@
         <TextView
             android:id="@+id/bar_four"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[3].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/four"
             app:layout_constraintStart_toEndOf="@id/four"
             app:layout_constraintTop_toTopOf="@id/four"
@@ -186,6 +195,7 @@
         <TextView
             android:id="@+id/bar_five"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[4].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/five"
             app:layout_constraintStart_toEndOf="@id/five"
             app:layout_constraintTop_toTopOf="@id/five"
@@ -194,6 +204,7 @@
         <TextView
             android:id="@+id/bar_six"
             style="@style/Widget.Wordle.Stats.BarGraph"
+            android:text="@{viewModel.wins[5].toString()}"
             app:layout_constraintBottom_toBottomOf="@id/six"
             app:layout_constraintStart_toEndOf="@id/six"
             app:layout_constraintTop_toTopOf="@id/six"

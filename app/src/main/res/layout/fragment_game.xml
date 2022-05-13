@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.GameFragment">
+    tools:context=".ui.fragments.GameFragment">
 
     <data>
 
@@ -10,15 +10,13 @@
 
         <import type="java.util.Map" />
 
-        <import type="androidx.core.content.ContextCompat" />
-
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.ui.model.GameViewModel" />
 
         <variable
             name="gameFragment"
-            type="com.example.wordle.fragments.GameFragment" />
+            type="com.example.wordle.ui.fragments.GameFragment" />
     </data>
 
 
@@ -84,7 +82,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_1B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[0]}" />
+                app:tileState="@{viewModel.tileStates[0]}" />
 
             <TextView
                 android:id="@+id/textView_1B"
@@ -93,7 +91,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1C"
                 app:layout_constraintStart_toEndOf="@id/textView_1A"
-                app:tileState="@{viewModel.tilesStates[1]}" />
+                app:tileState="@{viewModel.tileStates[1]}" />
 
             <TextView
                 android:id="@+id/textView_1C"
@@ -102,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1D"
                 app:layout_constraintStart_toEndOf="@id/textView_1B"
-                app:tileState="@{viewModel.tilesStates[2]}" />
+                app:tileState="@{viewModel.tileStates[2]}" />
 
             <TextView
                 android:id="@+id/textView_1D"
@@ -111,7 +109,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_1E"
                 app:layout_constraintStart_toEndOf="@id/textView_1C"
-                app:tileState="@{viewModel.tilesStates[3]}" />
+                app:tileState="@{viewModel.tileStates[3]}" />
 
             <TextView
                 android:id="@+id/textView_1E"
@@ -120,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_1D"
-                app:tileState="@{viewModel.tilesStates[4]}" />
+                app:tileState="@{viewModel.tileStates[4]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -140,7 +138,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_2B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[5]}" />
+                app:tileState="@{viewModel.tileStates[5]}" />
 
             <TextView
                 android:id="@+id/textView_2B"
@@ -149,7 +147,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2C"
                 app:layout_constraintStart_toEndOf="@id/textView_2A"
-                app:tileState="@{viewModel.tilesStates[6]}" />
+                app:tileState="@{viewModel.tileStates[6]}" />
 
             <TextView
                 android:id="@+id/textView_2C"
@@ -158,7 +156,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2D"
                 app:layout_constraintStart_toEndOf="@id/textView_2B"
-                app:tileState="@{viewModel.tilesStates[7]}" />
+                app:tileState="@{viewModel.tileStates[7]}" />
 
             <TextView
                 android:id="@+id/textView_2D"
@@ -167,7 +165,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_2E"
                 app:layout_constraintStart_toEndOf="@id/textView_2C"
-                app:tileState="@{viewModel.tilesStates[8]}" />
+                app:tileState="@{viewModel.tileStates[8]}" />
 
             <TextView
                 android:id="@+id/textView_2E"
@@ -176,7 +174,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_2D"
-                app:tileState="@{viewModel.tilesStates[9]}" />
+                app:tileState="@{viewModel.tileStates[9]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -196,7 +194,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_3B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[10]}" />
+                app:tileState="@{viewModel.tileStates[10]}" />
 
             <TextView
                 android:id="@+id/textView_3B"
@@ -205,7 +203,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3C"
                 app:layout_constraintStart_toEndOf="@id/textView_3A"
-                app:tileState="@{viewModel.tilesStates[11]}" />
+                app:tileState="@{viewModel.tileStates[11]}" />
 
             <TextView
                 android:id="@+id/textView_3C"
@@ -214,7 +212,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3D"
                 app:layout_constraintStart_toEndOf="@id/textView_3B"
-                app:tileState="@{viewModel.tilesStates[12]}" />
+                app:tileState="@{viewModel.tileStates[12]}" />
 
             <TextView
                 android:id="@+id/textView_3D"
@@ -223,7 +221,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_3E"
                 app:layout_constraintStart_toEndOf="@id/textView_3C"
-                app:tileState="@{viewModel.tilesStates[13]}" />
+                app:tileState="@{viewModel.tileStates[13]}" />
 
             <TextView
                 android:id="@+id/textView_3E"
@@ -232,7 +230,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_3D"
-                app:tileState="@{viewModel.tilesStates[14]}" />
+                app:tileState="@{viewModel.tileStates[14]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -252,7 +250,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_4B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[15]}" />
+                app:tileState="@{viewModel.tileStates[15]}" />
 
             <TextView
                 android:id="@+id/textView_4B"
@@ -261,7 +259,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4C"
                 app:layout_constraintStart_toEndOf="@id/textView_4A"
-                app:tileState="@{viewModel.tilesStates[16]}" />
+                app:tileState="@{viewModel.tileStates[16]}" />
 
             <TextView
                 android:id="@+id/textView_4C"
@@ -270,7 +268,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4D"
                 app:layout_constraintStart_toEndOf="@id/textView_4B"
-                app:tileState="@{viewModel.tilesStates[17]}" />
+                app:tileState="@{viewModel.tileStates[17]}" />
 
             <TextView
                 android:id="@+id/textView_4D"
@@ -279,7 +277,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_4E"
                 app:layout_constraintStart_toEndOf="@id/textView_4C"
-                app:tileState="@{viewModel.tilesStates[18]}" />
+                app:tileState="@{viewModel.tileStates[18]}" />
 
             <TextView
                 android:id="@+id/textView_4E"
@@ -288,7 +286,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_4D"
-                app:tileState="@{viewModel.tilesStates[19]}" />
+                app:tileState="@{viewModel.tileStates[19]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -308,7 +306,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_5B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[20]}" />
+                app:tileState="@{viewModel.tileStates[20]}" />
 
             <TextView
                 android:id="@+id/textView_5B"
@@ -317,7 +315,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5C"
                 app:layout_constraintStart_toEndOf="@id/textView_5A"
-                app:tileState="@{viewModel.tilesStates[21]}" />
+                app:tileState="@{viewModel.tileStates[21]}" />
 
             <TextView
                 android:id="@+id/textView_5C"
@@ -326,7 +324,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5D"
                 app:layout_constraintStart_toEndOf="@id/textView_5B"
-                app:tileState="@{viewModel.tilesStates[22]}" />
+                app:tileState="@{viewModel.tileStates[22]}" />
 
             <TextView
                 android:id="@+id/textView_5D"
@@ -335,7 +333,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_5E"
                 app:layout_constraintStart_toEndOf="@id/textView_5C"
-                app:tileState="@{viewModel.tilesStates[23]}" />
+                app:tileState="@{viewModel.tileStates[23]}" />
 
             <TextView
                 android:id="@+id/textView_5E"
@@ -344,7 +342,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_5D"
-                app:tileState="@{viewModel.tilesStates[24]}" />
+                app:tileState="@{viewModel.tileStates[24]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 
@@ -364,7 +362,7 @@
                 app:layout_constraintEnd_toStartOf="@id/textView_6B"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tileState="@{viewModel.tilesStates[25]}" />
+                app:tileState="@{viewModel.tileStates[25]}" />
 
             <TextView
                 android:id="@+id/textView_6B"
@@ -373,7 +371,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6C"
                 app:layout_constraintStart_toEndOf="@id/textView_6A"
-                app:tileState="@{viewModel.tilesStates[26]}" />
+                app:tileState="@{viewModel.tileStates[26]}" />
 
             <TextView
                 android:id="@+id/textView_6C"
@@ -382,7 +380,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6D"
                 app:layout_constraintStart_toEndOf="@id/textView_6B"
-                app:tileState="@{viewModel.tilesStates[27]}" />
+                app:tileState="@{viewModel.tileStates[27]}" />
 
             <TextView
                 android:id="@+id/textView_6D"
@@ -391,7 +389,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView_6E"
                 app:layout_constraintStart_toEndOf="@id/textView_6C"
-                app:tileState="@{viewModel.tilesStates[28]}" />
+                app:tileState="@{viewModel.tileStates[28]}" />
 
             <TextView
                 android:id="@+id/textView_6E"
@@ -400,7 +398,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/textView_6D"
-                app:tileState="@{viewModel.tilesStates[29]}" />
+                app:tileState="@{viewModel.tileStates[29]}" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
 

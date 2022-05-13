@@ -3,17 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.WinnerDialog">
+    tools:context=".ui.dialogs.WinnerDialog">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.ui.model.GameViewModel" />
 
         <variable
             name="winnerDialog"
-            type="com.example.wordle.dialogs.WinnerDialog" />
+            type="com.example.wordle.ui.dialogs.WinnerDialog" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

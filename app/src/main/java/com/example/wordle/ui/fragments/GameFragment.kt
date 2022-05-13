@@ -1,4 +1,4 @@
-package com.example.wordle.fragments
+package com.example.wordle.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,20 +10,20 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentGameBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.ui.model.GameViewModel
 import android.widget.Toast
-import com.example.wordle.model.ViewState
+import androidx.fragment.app.activityViewModels
+import com.example.wordle.ui.model.ViewState
 
 /**
  * This is the game screen of the Wordle app
  * This file coordinates event handling and the flow of information between the UI layer and the
  * [GameViewModel] using binding references to the UI layer and calls to the [GameViewModel].
  */
-class GameFragment : Fragment() {
+class GameFragment() : Fragment() {
 
     // Binding object instance corresponding to the fragment_game.xml layout
     private var binding: FragmentGameBinding? = null
@@ -123,7 +123,7 @@ class GameFragment : Fragment() {
         when (gameViewModel.isAWord()) {
             0 -> tooShort()
             1 -> {
-                if (gameViewModel.settings.getBoolean("hard_mode", false) && gameViewModel.tries.value!! >= 1) {
+                if (gameViewModel.hardMode.value!! && gameViewModel.tries.value!! >= 1) {
                     hardMode()
                 }
                 else revealHints()
@@ -256,7 +256,7 @@ class GameFragment : Fragment() {
     // updates stats then calls bounce
     private fun winner() {
         Log.d("GameFragment", "winner() called")
-        gameViewModel.updateStats(true)
+        gameViewModel.endGame(true)
         bounce()
     }
 
@@ -275,7 +275,7 @@ class GameFragment : Fragment() {
     // navigates to the GameOver dialog
     private fun gameOver() {
         Log.d("GameFragment", "gameOver() called")
-        gameViewModel.updateStats(false)
+        gameViewModel.endGame(false)
         findNavController().navigate(R.id.action_gameFragment_to_gameOverDialog)
     }
 

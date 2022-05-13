@@ -2,17 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".dialogs.GameOverDialog">
+    tools:context=".ui.dialogs.GameOverDialog">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.GameViewModel" />
+            type="com.example.wordle.ui.model.GameViewModel" />
 
         <variable
             name="helpDialog"
-            type="com.example.wordle.dialogs.HelpDialog" />
+            type="com.example.wordle.ui.dialogs.HelpDialog" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout

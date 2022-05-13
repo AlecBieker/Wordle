@@ -4,7 +4,10 @@ package com.example.wordle.data
 import android.content.Context
 import android.content.SharedPreferences
 
-data class SharedPrefs(val context: Context) {
+/**
+ * Class responsible for holding references to [SharedPreferences]
+ */
+data class SharedPreferences(val context: Context) {
 
     /**
      * [SharedPreferences] handle for saved game state

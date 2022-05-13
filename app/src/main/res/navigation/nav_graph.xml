@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.wordle.fragments.StartFragment"
+        android:name="com.example.wordle.ui.fragments.StartFragment"
         android:label="StartFragment"
         tools:layout="@layout/fragment_start" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.wordle.fragments.GameFragment"
+        android:name="com.example.wordle.ui.fragments.GameFragment"
         android:label="GameFragment"
         tools:layout="@layout/fragment_game">
         <action
@@ -47,7 +47,7 @@
 
     <dialog
         android:id="@+id/gameOverDialog"
-        android:name="com.example.wordle.dialogs.GameOverDialog"
+        android:name="com.example.wordle.ui.dialogs.GameOverDialog"
         android:label="GameOverDialog"
         tools:layout="@layout/dialog_game_over">
         <action
@@ -64,7 +64,7 @@
 
     <dialog
         android:id="@+id/winnerDialog"
-        android:name="com.example.wordle.dialogs.WinnerDialog"
+        android:name="com.example.wordle.ui.dialogs.WinnerDialog"
         android:label="WinnerDialog"
         tools:layout="@layout/dialog_winner">
         <action
@@ -80,7 +80,7 @@
     </dialog>
     <dialog
         android:id="@+id/newGameDialog"
-        android:name="com.example.wordle.dialogs.NewGameDialog"
+        android:name="com.example.wordle.ui.dialogs.NewGameDialog"
         android:label="NewGameDialog"
         tools:layout="@layout/dialog_new_game">
         <action
@@ -89,17 +89,17 @@
     </dialog>
     <dialog
         android:id="@+id/statsDialog"
-        android:name="com.example.wordle.dialogs.StatsDialog"
+        android:name="com.example.wordle.ui.dialogs.StatsDialog"
         android:label="StatsDialog"
         tools:layout="@layout/dialog_stats"/>
     <dialog
         android:id="@+id/helpDialog"
-        android:name="com.example.wordle.dialogs.HelpDialog"
+        android:name="com.example.wordle.ui.dialogs.HelpDialog"
         android:label="HelpDialog"
         tools:layout="@layout/dialog_help"/>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.wordle.fragments.SettingsFragment"
+        android:name="com.example.wordle.ui.fragments.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings">
         <action
@@ -108,7 +108,7 @@
     </fragment>
     <dialog
         android:id="@+id/resetDialog"
-        android:name="com.example.wordle.dialogs.ResetDialog"
+        android:name="com.example.wordle.ui.dialogs.ResetDialog"
         android:label="dialog_reset"
         tools:layout="@layout/dialog_reset" />
 </navigation>

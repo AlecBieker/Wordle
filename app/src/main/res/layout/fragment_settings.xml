@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.example.wordle.model.SettingsViewModel" />
+            type="com.example.wordle.ui.model.SettingsViewModel" />
 
         <variable
             name="settingsFragment"
-            type="com.example.wordle.fragments.SettingsFragment" />
+            type="com.example.wordle.ui.fragments.SettingsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:checked='@{viewModel.settings.getBoolean("hard_mode", false)}'
+            android:checked="@{viewModel.hardMode}"
             android:onCheckedChanged="@{(switch, isChecked) -> viewModel.setHardMode(isChecked)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/hard_mode"
@@ -82,7 +82,7 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/system_default"
                 android:onClick="@{() -> viewModel.setTheme(-1)}"
-                android:checked='@{viewModel.settings.getInt("theme", -1) == -1}'/>
+                android:checked="@{viewModel.theme == -1}"/>
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/light_radioButton"
@@ -92,7 +92,7 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/light"
                 android:onClick="@{() -> viewModel.setTheme(1)}"
-                android:checked='@{viewModel.settings.getInt("theme", -1) == 1}' />
+                android:checked="@{viewModel.theme == 1}" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/dark_radioButton"
@@ -102,7 +102,7 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/dark"
                 android:onClick="@{() -> viewModel.setTheme(2)}"
-                android:checked='@{viewModel.settings.getInt("theme", -1) == 2}'/>
+                android:checked="@{viewModel.theme == 2}"/>
         </RadioGroup>
 
         <com.google.android.material.divider.MaterialDivider
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:checked='@{viewModel.settings.getBoolean("notifications", true)}'
+            android:checked="@{viewModel.notifications}"
             android:onCheckedChanged="@{(switch, isChecked) -> viewModel.setNotifications(isChecked)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/notifications"

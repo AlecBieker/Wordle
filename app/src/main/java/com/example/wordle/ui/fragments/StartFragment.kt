@@ -1,4 +1,4 @@
-package com.example.wordle.fragments
+package com.example.wordle.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.wordle.R
 import com.example.wordle.databinding.FragmentStartBinding
-import com.example.wordle.model.GameViewModel
+import com.example.wordle.ui.model.GameViewModel
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -38,8 +38,7 @@ class StartFragment : Fragment() {
     ): View {
         Log.d("StartFragment", "onCreateView() called")
         binding = FragmentStartBinding.inflate(inflater, container, false)
-        binding!!.resumeButton.isEnabled =
-            gameViewModel.gameState.getBoolean("game_in_progress", false)
+        gameViewModel.updateGameInProgress()
         binding!!.motionLayout.addTransitionListener(
             object : TransitionAdapter() {
                 override fun onTransitionTrigger(
@@ -161,12 +160,11 @@ class StartFragment : Fragment() {
     // starts a new game or shows the new game dialog if one is already in progress
     fun newGame() {
         Log.d("StartFragment", "newGame() called")
-        when (gameViewModel.gameState.getBoolean("game_in_progress", false)) {
-            true -> findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
-            false -> {
-                gameViewModel.newGame()
-                findNavController().navigate(R.id.action_startFragment_to_gameFragment)
-            }
+        if (gameViewModel.gameInProgress.value!!) {
+            findNavController().navigate(R.id.action_startFragment_to_newGameDialog)
+        } else {
+            gameViewModel.newGame()
+            findNavController().navigate(R.id.action_startFragment_to_gameFragment)
         }
     }
 
@@ -174,8 +172,6 @@ class StartFragment : Fragment() {
     fun resumeGame() {
         Log.d("StartFragment", "resumeGame() called")
         gameViewModel.resumeGame()
-
-        // Navigate the the game screen
         findNavController().navigate(R.id.action_startFragment_to_gameFragment)
     }
 

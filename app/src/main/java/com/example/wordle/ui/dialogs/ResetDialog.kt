@@ -1,4 +1,4 @@
-package com.example.wordle.dialogs
+package com.example.wordle.ui.dialogs
 
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.example.wordle.databinding.DialogResetBinding
-import com.example.wordle.model.SettingsViewModel
+import com.example.wordle.ui.model.SettingsViewModel
 
 /**
  * This is the confirmation dialog that displays when the user taps the reset statistics button
@@ -20,7 +21,7 @@ class ResetDialog : DialogFragment() {
     // Binding object instance corresponding to the [dialog_reset.xml] layout
     private var binding: DialogResetBinding? = null
 
-    private val viewModel: SettingsViewModel by activityViewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +40,7 @@ class ResetDialog : DialogFragment() {
             lifecycleOwner = viewLifecycleOwner
 
             // Assign the view model to a property in the binding class
-            viewModel = viewModel
+            viewModel = settingsViewModel
 
             // Assign the fragment
             resetDialog = this@ResetDialog
@@ -48,7 +49,7 @@ class ResetDialog : DialogFragment() {
 
     fun reset() {
         Log.d("ResetDialog", "reset() called")
-        viewModel.resetStats()
+        settingsViewModel.reset()
         Toast.makeText(context, "Statistics Reset", Toast.LENGTH_LONG).show()
         dismiss()
     }

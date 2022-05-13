@@ -1,11 +1,13 @@
-package com.example.wordle.model
+package com.example.wordle.ui.model
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.wordle.data.SharedPrefs
+import com.example.wordle.data.GameStateRepository
+import com.example.wordle.data.SettingsRepository
+import com.example.wordle.data.StatsRepository
 import com.example.wordle.data.WordsList1.wordsList1
 import com.example.wordle.data.WordsList2.wordsList2
 import org.jetbrains.annotations.TestOnly
@@ -14,19 +16,17 @@ import kotlin.random.Random
 enum class ViewState { FILLED, CORRECT, PRESENT, ABSENT }
 
 /**
- * [GameViewModel] holds all the variables representing the apps current state as well as
+ * [GameViewModel] holds variables representing the games current state as well as
  * all the logic controlling how those variables are modified based on user input.
  */
 class GameViewModel(app: Application) : AndroidViewModel(app) {
 
-    // shared preferences handle for saved game state
-    val gameState = SharedPrefs(getApplication()).gameState
+    // handle to the SharedPrefsRepository
+    private val gameStateRepo = GameStateRepository(getApplication())
 
-    // shared preferences handle for game stats
-    val stats = SharedPrefs(getApplication()).stats
+    private val settingsRepo = SettingsRepository(getApplication())
 
-    // shared preferences handle for user settings
-    val settings = SharedPrefs(getApplication()).settings
+    private val statsRepo = StatsRepository(getApplication())
 
     // Generated word to be guessed
     private val _answer = MutableLiveData<String>()
@@ -37,8 +37,8 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     val letters: LiveData<List<Char>> = _letters
 
     // the states of the game tiles as represented by enum class ViewState
-    private val _tileStates = MutableLiveData<List<ViewState?>>()
-    val tilesStates: LiveData<List<ViewState?>> = _tileStates
+    private val _tileStates = MutableLiveData<List<ViewState>>()
+    val tileStates: LiveData<List<ViewState>> = _tileStates
 
     // the states of the keyboard keys
     private val _keyStates = MutableLiveData<Map<Char, ViewState?>>()
@@ -56,13 +56,13 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     private val _transition = MutableLiveData<String?>()
     val transition: LiveData<String?> = _transition
 
-    /**
-     * Updates the [_transition] live data variable
-     */
-    fun updateTransition(transition: String?) {
-        Log.d("GameViewModel", "updateTransition() called")
-        _transition.value = transition
-    }
+    // Whether hard mode is on or not
+    private val _hardMode = MutableLiveData<Boolean>()
+    val hardMode: LiveData<Boolean> = _hardMode
+
+    // Whether a game is currently in progress or not
+    private val _gameInProgress = MutableLiveData(gameStateRepo.getGameInProgress())
+    val gameInProgress: LiveData<Boolean> = _gameInProgress
 
     /**
      * Initiates a new game
@@ -72,13 +72,10 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         resetVariables()
         _answer.value = generate()
         _transition.value = null
-        with(gameState.edit()) {
-            clear().apply()
-            putString("answer", _answer.value)
-            putBoolean("game_in_progress", true)
-            apply()
-        }
-        stats.edit().putInt("play_count", stats.getInt("play_count", 0).plus(1)).apply()
+        _hardMode.value = settingsRepo.getHardMode()
+        _gameInProgress.value = true
+        gameStateRepo.newGame(answer.value!!)
+        statsRepo.setPlayCount()
         Log.d("GameViewModel", "answer = ${answer.value}")
     }
 
@@ -105,75 +102,54 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Sets all LiveData variables using [gameState] shared preferences file
+     * Sets all LiveData variables using [GameStateRepository]
      */
     fun resumeGame() {
+        Log.d("GameViewModel", "resumeGame() called")
         resetVariables()
-        _answer.value = gameState.getString("answer", "")
-        _tries.value = gameState.getInt("tries", 0)
-        _currentWord.value = gameState.getString("current_word", "")
-        _transition.value = gameState.getString("transition", null)
-        val savedLetters = gameState.getString("letters", "")!!.toList()
-        val savedTileStates = gameState.getString("tile_states", "")!!.split(", ")
-        val savedKeyStates = gameState.getStringSet("key_states", setOf())
-        for (item in savedLetters) {
-            _letters.value = _letters.value?.plus(item)
-        }
-        for (item in savedTileStates) {
-            _tileStates.value = _tileStates.value?.plus(item.toViewState())
-        }
-        val map: MutableMap<Char, ViewState?> = mutableMapOf()
-        for (item in savedKeyStates!!) {
-            map[item[0]] = item.drop(2).toViewState()
-        }
-        _keyStates.value = map.toMap()
+        _answer.value = gameStateRepo.getAnswer()
+        _tries.value = gameStateRepo.getTries()
+        _currentWord.value = gameStateRepo.getCurrentWord()
+        _transition.value = gameStateRepo.getTransition()
+        _letters.value = gameStateRepo.getLetters()
+        _tileStates.value = gameStateRepo.getTileStates()
+        _keyStates.value = gameStateRepo.getKeyStates()
+        _hardMode.value = settingsRepo.getHardMode()
     }
 
-
     /**
-     * Updates the [gameState] sharedPreferences file
+     * Updates the gameState SharedPreferences with [GameStateRepository]
      */
     fun updateGameState() {
         Log.d("GameViewModel", "updateGameState() called")
-        val keyStatesSet: MutableSet<String> = mutableSetOf()
-        for (item in _keyStates.value!!) {
-            keyStatesSet += item.toString()
-        }
-        with(gameState.edit()) {
-            putInt("tries", _tries.value!!)
-            putString("letters", _letters.value?.joinToString(separator = ""))
-            putString("current_word", _currentWord.value)
-            putString("tile_states", _tileStates.value?.joinToString())
-            putStringSet("key_states", keyStatesSet)
-            putString("transition", _transition.value)
-            apply()
-        }
+        gameStateRepo.updateGameState(
+            tries = tries.value ?: 0,
+            letters = letters.value,
+            currentWord = currentWord.value,
+            tileStates = tileStates.value,
+            keyStates = keyStates.value ?: mapOf(),
+            transition = transition.value
+        )
     }
 
     /**
-     * Ends the game and updates stats
+     * Updates the [_gameInProgress] LiveData
      */
-    fun updateStats(winner: Boolean) {
-        gameState.edit().putBoolean("game_in_progress", false).apply()
-        with(stats.edit()) {
-            if (winner) {
-                val winRow = "wins_${_tries.value?.plus(1)}"
-                putInt(winRow, stats.getInt(winRow, 0).plus(1))
-                putInt("win_count", stats.getInt("win_count", 0).plus(1))
-                putInt("current_streak", stats.getInt("current_streak", 0).plus(1))
-                apply()
-                if (stats.getInt("current_streak", 0) > stats.getInt("max_streak", 0)) {
-                    putInt("max_streak", stats.getInt("current_streak", 0))
-                }
-            } else {
-                putInt("current_streak", 0)
-            }
-            apply()
-        }
+    fun updateGameInProgress() {
+        _gameInProgress.value = gameStateRepo.getGameInProgress()
     }
 
     /**
-     * Updates the [_letters] and [_currentWord] values
+     * Ends the game and updates stats SharedPreferences with [GameStateRepository]
+     */
+    fun endGame(winner: Boolean) {
+        gameStateRepo.setGameInProgress(false)
+        _gameInProgress.value = false
+        statsRepo.updateStats(winner, (tries.value ?: 0).plus(1))
+    }
+
+    /**
+     * Updates the [_letters], [_currentWord], and [_tileStates] values using keyboard input
      */
     fun updateText(char: Char) {
         Log.d("GameViewModel", "setText($char) called")
@@ -199,6 +175,14 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
         _tileStates.value = _tileStates.value?.dropLast(size)
         _currentWord.value = ""
         return true
+    }
+
+    /**
+     * Updates the [_transition] live data variable
+     */
+    fun updateTransition(transition: String?) {
+        Log.d("GameViewModel", "updateTransition() called")
+        _transition.value = transition
     }
 
     /**
@@ -318,7 +302,7 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Moves down a row, resets [_currentWord] and saves progress to [gameState]
+     * Moves down a row, resets [_currentWord] and saves progress to [gameStateRepo]
      */
     private fun nextRow() {
         Log.d("GameViewModel", "nextRow() called")
@@ -333,18 +317,5 @@ class GameViewModel(app: Application) : AndroidViewModel(app) {
     @TestOnly
     fun changeAnswer(word: String) {
         _answer.value = word
-    }
-}
-
-/**
- * Converts Strings to [ViewState]s
- */
-private fun String.toViewState(): ViewState? {
-    return when (this) {
-        "FILLED" -> ViewState.FILLED
-        "CORRECT" -> ViewState.CORRECT
-        "PRESENT" -> ViewState.PRESENT
-        "ABSENT" -> ViewState.ABSENT
-        else -> null
     }
 }

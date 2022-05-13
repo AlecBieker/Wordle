@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.wordle.model.SettingsViewModel
+import com.example.wordle.ui.model.SettingsViewModel
 
 /**
  * This is the activity that all of the apps fragments take place inside
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("MainActivity", "onCreate() called")
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(viewModel.settings.getInt("theme", -1))
+        AppCompatDelegate.setDefaultNightMode(viewModel.theme.value ?: -1)
 
         // Retrieve NavController from the NavHostFragment
         val navHostFragment = supportFragmentManager

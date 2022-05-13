@@ -1,4 +1,4 @@
-package com.example.wordle.dialogs
+package com.example.wordle.ui.dialogs
 
 import android.os.Bundle
 import android.util.Log
@@ -56,9 +56,6 @@ class HelpDialog : DialogFragment() {
         binding?.apply {
             // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
-            // Assign the view model to a property in the binding class
-            viewModel = viewModel
 
             // Assign the fragment
             helpDialog = this@HelpDialog
